@@ -9,3 +9,10 @@ El curso XS-0100 Fundamentos de la Teoría Estadística, es un curso de servicio
 
 [Carta al
 estudiante](Programa%20XS-0100%20Fundamentos%20de%20la%20Teor%C3%ADa%20Estad%C3%ADstica%20I-2026.pdf)
+
+
+## Presentaciones
+
+| Tema                                                                                  | Clase    |
+|---------------------------------------------------------------------------------------|----------|
+| Repaso (Variable Aleatoria, Función de Densidad y Distribución, Esperanza, etc)       | [Clase 1](XS-0100_01.html)    |
