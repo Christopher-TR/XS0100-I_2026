@@ -1,0 +1,963 @@
+---
+title: "Variable Aleatoria"
+subtitle: " [XS-0122 Fundamentos de Teoría Estadística - I Semestre 2026](https://christopher-tr.github.io/XS0100-I_2026/)"
+format: clean-revealjs
+html-math-method:
+  method: mathjax
+  url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+
+
+
+author:
+  - name: Christopher Torres Rojas
+    url: https://christopher-tr.github.io/
+    email: christopher.torres@ucr.ac.cr
+    affiliations: 
+    - name: Escuela de Estadística, Universidad de Costa Rica
+      url: https://www.estadistica.ucr.ac.cr/
+#date: last-modified
+lang: es  # español
+---
+
+## Variable Aleatoria
+
+### Definición:
+
+Sea $(\Omega, \mathcal{A}, P),$ un espacio de probabilidad, se define una variable aleatoria $X$ como una función con dominio $\Omega$ y codominio al conjunto de $\mathbb{R}$, es decir,
+
+$$
+X:\Omega \rightarrow \mathbb{R}
+$$
+
+Se dice que la variable $X$ es aleatoria debido a que involucra la probabilidad de los resultado del espacio muestral $\Omega$, y esta es una función definida sobre dicho espacio muestral, de manera que transforma a todos los posibles resultados de $\Omega$ en cantidad numéricas.
+
+## Variable Aleatoria
+
+Por ejemplo suponga que se tienen 3 bolas en una caja (2 Azules, 1 Roja, 1 Verde) y se extraen sin reemplazo 2 bolas de esa caja (sin importar el orden).
+
+Podríamos definir $X = \text{El número de bolas Rojas Extraídas}$.
+
+Ahora bien. Definamos el espacio $\small \Omega = \{  (Azul_1, Azul_2), (Azul_1, Roja), (Azul_1, Verde), (Roja, Verde), (Azul_2, Roja), (Azul_2, Verde) \}$
+
+Cuáles valores puede tomar $X$ ?.
+
+$x = 0  : \small\{(Roja, Verde)\}$.
+
+$x = 1  : \small\{(Azul_1, Roja), (Azul_2, Roja), (Azul_1, Verde), (Azul_2, Verde)\}$.
+
+$x = 2  : \small\{(Azul_1, Azul_2)\}$.
+
+$x = 3  : \small\emptyset$.
+
+Note como $X$ es una función de $\Omega \rightarrow \mathbb{R}$
+
+## Variable Aleatoria
+
+Cada valor posible de una variable aleatoria hace una correspondencia con un o una colección de resultados posibles del espacio muestral.
+
+Cada resultado de una variable aleatoria está asociado a mínimo algún evento del espacio muestral.
+
+**Note que la variable aleatoria no es una función de probabilidad.**
+
+Ahora bien dada la variable aleatoria y suponiendo que cada resultado presenta la misma probabilidad se puede definir la siguientes probabilidades para los distintos valores de $X$.
+
+$$
+P(X=x) =\begin{cases}\frac{1}{6}, & \text{si } x = 0. \\ \frac{4}{6}, & \text{si } x = 1. \\ \frac{1}{6}, & \text{si } x = 2. \\ 0, & \text{en otro caso }.  \end{cases}
+$$
+
+## Variable Aleatoria
+
+### Conjunto Numerable (Definición):
+
+Un conjunto es *numerable* si es finito, es decir, sus elementos se pueden enumerar. O bien, *infinitamente numerable* si se pueden hacer corresponder sus elementos uno a uno con el conjunto de números naturales.
+
+### Variable Aleatoria Discreta (Definición):
+
+Si el rango de una variable aleatoria $X$ es numerable, entonces $X$ es una **variable aleatoria discreta.**
+
+#### Ejemplos de Variable Aleatoria Discreta:
+
+-   Seleccionar diez estudiantes de un grupo y aplicarles un examen corto sorpresa, donde la variable aleatoria X es: número de estudiantes que aprueban el examen.
+-   Observar en una estación de peaje y definir la variable aleatoria Z como: el número de vehículos que pasan por la estación de peaje en un período de una hora.
+
+## Variable Aleatoria
+
+### Función de Probabilidad (Definición):
+
+Sea $X,$ una variable aleatoria discreta con espacio muestral $\Omega$ y sea $P$ una probabilidad sobre $\Omega$. La función $f_x: R_x \rightarrow \mathbb{R}$, definida como:
+
+$$
+f_x(x) = P(X=x)
+$$
+
+recibe el nombre de **función de probabilidad o distribución de probabilidad.**
+
+## Variable Aleatoria
+
+Si se tienen dos eventos disjuntos $X=a$ y $X=b$, entonces:\
+\
+$P(X=a \cup X=b)= P(X=a) + P(X=b)$
+
+También, es importante definir el evento $X \leq a$ de modo que:\
+\
+$P(X\leq a)= P(X < a \cup X=a) =  P(X<a) + P(X=a)$
+
+De este modo, si una variable aleatoria toma valores de $\{0,1,2\}$, entonces:
+
+$P(X\leq 2)= P(X < 2 \cup X=2) =  P(X<2) + P(X=2)$
+
+Mientras que:
+
+$P(X< 2)=   P(X=0) + P(X=1)$
+
+## Variable Aleatoria
+
+Considere el experimento que consiste en lanzar tres veces una moneda equilibrada al aire. Se define la variable aleatoria $X$: número de escudos obtenidos, entonces, el espacio muestral es
+
+$\Omega = \{CCC, CCE, CEC, ECC, EEC, ECE, CEE, EEE\}$ y $X$ puede asumir los valores 0,1,2 y 3. Estos valores se asocian con probabilidades de la siguiente manera:
+
+$P(X=0) = P(\{C,C,C\}) = \tfrac{1}{8}$
+
+$P(X=1) = P(\{C,C,E\} \cup \{C,E,C\} \cup \{E,C,C\}) = \tfrac{1}{8} + \tfrac{1}{8} + \tfrac{1}{8} = \tfrac{3}{8}$
+
+$P(X=2) = P(\{E,E,C\} \cup \{E,C,E\} \cup \{C,E,E\})= \tfrac{1}{8} + \tfrac{1}{8} + \tfrac{1}{8} = \tfrac{3}{8}$
+
+$P(X=3) = P(\{E,E,E\}) = \tfrac{1}{8}$
+
+## Variable Aleatoria
+
+::::: columns
+::: {.column width="50%"}
+Por ende la función de probabilidad es:\
+\
+$$
+P(X=x) =\begin{cases}\frac{1}{8}, & \text{si } x = 0. \\ \frac{3}{8}, & \text{si } x = 1. \\ \frac{3}{8}, & \text{si } x = 2.\\ \frac{1}{8}, & \text{si } x = 3. \\ 0, & \text{en otro caso }.  \end{cases}
+$$
+:::
+
+::: {.column width="50%"}
+```{r}
+library(ggplot2)
+
+# Definir los valores y probabilidades
+df <- data.frame(
+  x = 0:3,
+  prob = c(1/8, 3/8, 3/8, 1/8)
+)
+
+# Graficar
+ggplot(df, aes(x = x, y = prob)) +
+  geom_segment(aes(xend = x, yend = 0), color = "skyblue", size = 1.2) +
+  geom_point(size = 3, color = "black") +
+  geom_text(aes(label = round(prob, 3)), vjust = -1, size = 4) +
+  scale_x_continuous(breaks = 0:3) +
+  scale_x_continuous(breaks = 0:3) +
+  scale_y_continuous(limits = c(0,1), breaks = seq(0,1,0.2)) +
+  labs(
+    title = "Función de probabilidad de X",
+    x = "x",
+    y = "P(X = x)"
+  ) +
+  theme_classic(base_size = 12)
+```
+:::
+:::::
+
+## Función de Probabilidad
+
+**Definición:** Una función $f_X: R_X \rightarrow \mathbb{R}$ es una función de probabilidad de una variable $X$ si y solo si se cumple con las siguientes propiedades:
+
+1.  $f_X(x) = P(X = x) \geq 0, \; \forall x \in R_X$
+
+2.  $\sum_{x \in R_X} f_X(x) = 1$
+
+Para la primera condición, es evidente por ser una probabilidad. En el caso de la segunda propiedad:
+
+$$
+\sum_{x \in R_X} f_X(x) 
+= \sum_{x \in R_X} P(X = x) 
+= P\left( \bigcup_{x \in R_X} (X = x) \right) 
+= P(\Omega) = 1
+$$
+
+## Función de Probabilidad
+
+```{r}
+#| fig-align: center
+library(ggplot2)
+
+# Definir los valores y probabilidades
+df <- data.frame(
+  x = 0:3,
+  prob = c(1/8, 3/8, 3/8, 1/8)
+)
+
+# Graficar
+ggplot(df, aes(x = x, y = prob)) +
+  geom_segment(aes(xend = x, yend = 0), color = "skyblue", size = 1.2) +
+  geom_point(size = 3, color = "black") +
+  geom_text(aes(label = round(prob, 3)), vjust = -1, size = 4) +
+  scale_x_continuous(breaks = 0:3) +
+  scale_x_continuous(breaks = 0:3) +
+  scale_y_continuous(limits = c(0,1), breaks = seq(0,1,0.2)) +
+  labs(
+    title = "Función de probabilidad de X",
+    x = "x",
+    y = "P(X = x)"
+  ) +
+  theme_classic(base_size = 12)
+```
+
+$$
+\sum_{x \in R_X} f_X(x) 
+= \frac{1}{8}+\frac{3}{8}+\frac{3}{8}+\frac{1}{8} = 1
+$$\
+
+## Función de distribución acumulada
+
+El caso de ir acumulando las probabilidades, ya hemos estudiado cuando determinamos la probabilidad de ocurrencia de los eventos del tipo $\{X\leq x\}$. La función de distribución acumulada de probabilidad se define de la siguiente forma:
+
+**Definición:** Sea $X$ una variable aleatoria con función de probabilidad $f_X$. A la función definida en $f_X: R_X \rightarrow \mathbb{R}$, dada por:
+
+$$
+F_X(x) = P(X \leq x) = \sum_{k \in R_X, \; k \leq x} P(X = k)
+$$ Se le llama **función de distribución acumulada** de $X$
+
+## Función de distribución acumulada
+
+Además, si $X$ sólo toma un número finito de valores $x_1, x_2, \cdots, x_n$, entonces la función de distribución está dada por:
+
+$$
+F_X(x) =
+\begin{cases}
+0, & \text{si } x < x_1 \\
+f(x_1), & \text{si } x_1 \leq x < x_2 \\
+f(x_1) + f(x_2), & \text{si } x_2 \leq x < x_3 \\
+\vdots & \\
+f(x_1) + \cdots + f(x_n) = 1, & \text{si } x \geq x_n
+\end{cases}
+$$
+
+## Función de distribución acumulada
+
+Continuando con el experimento anterior. La función de distribución acumulada de $X$ es en trozos:
+
+Si $x < 0$, entonces $\small F_X(x) = 0$.
+
+Si $0 \leq x < 1$, entonces $\small F_X(x) = f_X(0) = \tfrac{1}{8}$.
+
+Si $1 \leq x < 2$, entonces $\small F_X(x) = f_X(0) + f_X(1) = \tfrac{1}{8} + \tfrac{3}{8} = \tfrac{1}{2}$
+
+Si $2 \leq x < 3$, entonces $\small F_X(x) = f_X(0) + f_X(1) + f_X(2) = \tfrac{1}{8} + \tfrac{3}{8} + \tfrac{3}{8} = \tfrac{7}{8}$.
+
+Si $x \geq 3$, entonces $\small F_X(x) = f_X(0) + f_X(1) + f_X(2) + f_X(3) = \tfrac{1}{8} + \tfrac{3}{8} + \tfrac{3}{8} + \tfrac{1}{8} = 1$
+
+$$
+\small
+F_X(x) =
+\begin{cases}
+0, & \text{si } x < 0 \\
+\frac{1}{8}, & \text{si } 0 \leq x < 1 \\
+\frac{1}{2}, & \text{si } 1 \leq x < 2 \\
+\frac{7}{8}, & \text{si } 2 \leq x < 3 \\
+1, & \text{si } x \geq 3
+\end{cases}
+$$
+
+## Función de distribución acumulada
+
+```{r}
+#| fig-align: center
+library(ggplot2)
+
+# Definimos los puntos de la CDF
+df <- data.frame(
+  x = c(0, 1, 2, 3),
+  Fx = c(1/8, 1/2, 7/8, 1)
+)
+
+# Graficar con escalones
+ggplot(df, aes(x, Fx)) +
+  geom_step(direction = "hv", linewidth = 0.6, color = "blue") +  # escalones
+  geom_point(size = 2, color = "black") +                         # puntos en los saltos
+  scale_x_continuous(breaks = 0:4, limits = c(0, 4.5)) +
+  scale_y_continuous(breaks = seq(0,1,0.2), limits = c(0,1.05)) +
+  labs(x = "x", y = expression(F[X](x)),
+       title = "Función de distribución acumulada (CDF)") +
+  theme_classic(base_size = 12)
+
+
+
+```
+
+La función de distribución en este caso para valores menores a cero es cero, y para valores mayores o iguales a 4 es 1
+
+## Función de distribución acumulada
+
+### Ejemplo
+
+**1.**Considere el experimento de lanzar dos dados al aire y sea $X$ la suma de ambos.
+
+Encuentre $f_X \text{ y } F_X$
+
+**2.**Se selecciona una muestra aleatoria de 3 personas del padrón de votantes de la última elección. Sea $X$ el número de personas que votaron por el partido Acción Ciudadana (PAC). Suponga que la probabilidad de que una persona del padrón vote por el PAC es de 0,40, además suponga que la selección de los tres votantes son pruebas independientes.
+
+## Función de distribución acumulada
+
+### Ejemplo
+
+Se sabe que de un grupo de cuatro componentes electrónicos dos son defectuosos. Un inspector prueba los componentes uno por uno hasta encontrar los dos componentes en mal estado, tome en cuenta que una vez que el inspector encuentre el segundo componente defectuoso las pruebas concluyen. Sea $X$ el número de pruebas realizadas hasta encontrar el segundo componente defectuoso. Establezca una distribución de probabilidad y distribución acumulada para la variable $X$.
+
+$X: \Omega= \{(1,1) , (0,1,1) , (1,0,1) , (0,0,1,1) , (0,1,0,1) , (1,0,0,1)\}$
+
+$X: \{2,3,4\}$
+
+::::: columns
+::: {.column width="50%"}
+$$
+\small
+f_X(x) =\begin{cases}\frac{1}{6}, & \text{si } x = 2. \\ \frac{1}{3}, & \text{si } x = 2. \\ \frac{1}{2}, & \text{si } x = 3. \\ 0, & \text{en otro caso }.  \end{cases}
+$$
+:::
+
+::: {.column width="50%"}
+$$
+\small
+F_X(x) =
+\begin{cases}
+0, & \text{si } x < 2 \\
+\frac{1}{6}, & \text{si } 2 \leq x < 3 \\
+\frac{1}{2}, & \text{si } 3 \leq x < 4 \\
+1, & \text{si } x \geq 4
+\end{cases}
+$$
+:::
+:::::
+
+## Función de distribución acumulada
+
+Sea $X$ una variable aleatoria discreta con función de distribución acumulada de probabilidad $F_X$.
+
+Entonces, esta función cumple con las siguientes propiedades:
+
+1.  $F_X(x) \geq 0, \ \forall x \in \mathbb{R}.$
+
+2.  Si $x \leq y$, entonces $F_X(x) \leq F_X(y)$ (es creciente).
+
+3.  $P(X > x) = 1 - F_X(x), \ \forall x \in \mathbb{R}.$
+
+4.  $P(a < X \leq b) = F_X(b) - F_X(a) \quad \text{para cualesquiera } a \text{ y } b \text{ reales tales que } a < b.$
+
+5.  $\lim_{x \to -\infty} F_X(x) = 0 \quad \text{y} \quad \lim_{x \to +\infty} F_X(x) = 1.$
+
+## Función de distribución acumulada
+
+Sea $X$ una variable aleatoria discreta que toma los valores $x_1, x_2, x_3, \dots$ tales que $x_i \neq x_j$ para todo $i \neq j$.\
+A la función $f_X$ sobre $\mathbb{R}$ definida por:
+
+$$
+f_X(x) =
+\begin{cases}
+P(X = x_i), & x \in \{x_1, x_2, \dots\} \\
+0, & \text{en otro caso}
+\end{cases}
+$$
+
+se le llama ***función de densidad*** de la variable aleatoria discreta $X$.
+
+**Ejemplo:** En un experimento donde se lanza un dado equilibrado una vez, se define $X$ como la variable aleatoria que indica el resultado obtenido. En este caso se tiene que los posibles valores de $X$ son $1,2,\dots,6$.
+
+La función de densidad de $X$ está dada por:
+
+$$
+f_X(x) =
+\begin{cases}
+\dfrac{1}{6}, & x \in \{1,2,\dots,6\} \\
+0, & \text{en otro caso}
+\end{cases}
+$$
+
+## Valor Esperado
+
+Sea $X$ una variable aleatoria discreta con función de probabilidad $f_X$, tal que $\sum_{x_i \in R_X} |x_i| f_X(x_i)$ es absolutamente convergente, entonces se define la esperanza o valor esperado de $X$ por:
+
+$$
+E(X) = \sum_{x_i \in R_X} x_i f_X(x_i) 
+     = \sum_{x_i \in R_X} x_i P(X = x_i)
+$$
+
+Usualmente, el valor esperado se denota por: $E(X), \ \mu_X$. En general, si $\sum_{x_i \in R_X} |g(x_i)| f_X(x_i)$
+
+converge, entonces:
+
+$$
+E(g(X)) = \sum_{x_i \in R_X} g(x_i) f_X(x_i)
+$$
+
+## Valor Esperado
+
+Considere el experimento que consiste en lanzar tres veces una moneda equilibrada al aire.\
+Se define la variable aleatoria $X$: número de escudos obtenidos.\
+Entonces, la función de probabilidad para esta variable aleatoria discreta es:
+
+$$ \small
+P(X = x) =
+\begin{cases}
+\dfrac{1}{8}, & \text{si } x = 0 \\
+\dfrac{3}{8}, & \text{si } x = 1 \\
+\dfrac{3}{8}, & \text{si } x = 2 \\
+\dfrac{1}{8}, & \text{si } x = 3
+\end{cases}
+$$
+
+El valor esperado o esperanza de $X$ está determinado por:
+
+$$
+\small E(X) = \sum_{x_i \in R_X} x_i f_X(x_i)  =
+     0 \cdot \tfrac{1}{8} 
+     + 1 \cdot \tfrac{3}{8} 
+     + 2 \cdot \tfrac{3}{8} 
+     + 3 \cdot \tfrac{1}{8} 
+     = \tfrac{3}{2}
+$$
+
+Del resultado anterior se concluye que el valor promedio o esperado de escudos, al lanzar tres veces una moneda, es: $\frac{3}{2}$
+
+## Valor Esperado
+
+También, si se desea determinar $E(X^2)$ se procede de la siguiente forma:
+
+$$
+E(X^2) = 0^2 \cdot \tfrac{1}{8} 
+       + 1^2 \cdot \tfrac{3}{8} 
+       + 2^2 \cdot \tfrac{3}{8} 
+       + 3^2 \cdot \tfrac{1}{8} 
+       = 3
+$$
+
+El $3$ obtenido anteriormente es el valor esperado de la variable aleatoria $X^2$;\
+esta variable se utilizará más adelante para determinar la varianza.
+
+Note que aquí estamos usando la anterior definición:
+
+$$
+E(g(X)) = \sum_{x_i \in R_X} g(x_i) f_X(x_i)
+$$
+
+## Propiedades de la esperanza
+
+Si $X$ corresponde a una variable aleatoria discreta, para la cual existe su valor esperado $E(X)$, y sean $a$ y $b$ constantes, entonces:
+
+1.  $E(aX + b) = aE(X) + b$
+
+2.  $E\big(g(X) + h(Y)\big) = E(g(X)) + E(h(Y))$
+
+**Demostraciones: (Ejercicios).**
+
+## Varianza
+
+**Definición:**
+
+Sea $X$ una variable aleatoria discreta con función de probabilidad $f_X$ y valor esperado $E(X) = \mu_X$, se define la varianza o variancia de $X$ por:
+
+$$
+\operatorname{Var}(X) = \sum_{x_i \in R_X} (x_i - \mu_X)^2 f_X(x_i) 
+= E\!\left[(X - \mu_X)^2\right]
+$$
+
+Usualmente, se denota por: $Var(X)$, $\sigma_X^2$.
+
+En general, si $g(X)$ es una función de la variable aleatoria $X$, entonces:
+
+$$
+Var(X) = 
+E\!\left[\big(g(X) - \mu_{g(X)}\big)^2\right]
+$$
+
+## Varianza
+
+**Colorario:**
+
+Sea $X$ una variable aleatoria discreta para la cual existen los valores esperados $E(X)$ y $E(X^2)$, entonces:
+
+$$
+Var(X) = E(X^2) - \big(E(X)\big)^2
+$$
+
+**Demostración:**
+
+Partiendo de la definición de varianza, se tiene que:
+
+$$
+\begin{aligned}
+E\!\left[(X - \mu_X)^2\right] 
+&= E\!\left[X^2 - 2X\mu_X + \mu_X^2\right] \\
+&= E[X^2] - 2\mu_X E[X] + \mu_X^2 \\
+&= E[X^2] - 2\mu_X^2 + \mu_X^2 \\
+&= E[X^2] - \mu_X^2 \\
+&= E(X^2) - \big(E(X)\big)^2
+\end{aligned}
+$$
+
+## Varianza
+
+**Ejemplo:**
+
+Sea $X$ una variable aleatoria, con la siguiente función de densidad:
+
+$$
+f_X(x) =
+\begin{cases}
+\dfrac{1}{6}, & x \in \{1,2,\ldots,6\} \\
+0, & \text{en otro caso}
+\end{cases}
+$$
+
+La varianza o variancia de $X$ está determinada, por:
+
+$E(X) = 1 \cdot \tfrac{1}{6} + 2 \cdot \tfrac{1}{6} + 3 \cdot \tfrac{1}{6}
+      + 4 \cdot \tfrac{1}{6} + 5 \cdot \tfrac{1}{6} + 6 \cdot \tfrac{1}{6}
+      = \tfrac{7}{2}$
+
+$E(X^2) = 1^2 \cdot \tfrac{1}{6} + 2^2 \cdot \tfrac{1}{6} + 3^2 \cdot \tfrac{1}{6}
+       + 4^2 \cdot \tfrac{1}{6} + 5^2 \cdot \tfrac{1}{6} + 6^2 \cdot \tfrac{1}{6}
+       = \tfrac{91}{6}$
+
+$Var(X) = E(X^2) - \big(E(X)\big)^2
+= \tfrac{91}{6} - \left(\tfrac{7}{2}\right)^2
+= \tfrac{35}{12}$
+
+Del resultado anterior, los datos varían en promedio $\tfrac{35}{12}$ alrededor del valor esperado.
+
+## Desviación Estándar
+
+Sea $X$ una variable aleatoria discreta, se define la desviación estándar o típica de $X$ por:
+
+$$
+\sigma_X = \sqrt{\operatorname{Var}(X)}
+$$
+
+**Ejemplo**
+
+En el ejemplo anterior, se determinó la varianza de una variable aleatoria $X$, la cual es:
+
+$$
+\operatorname{Var}(X) = \tfrac{35}{12} 
+\;\;\Rightarrow\;\; 
+\sigma_X = \sqrt{\tfrac{35}{12}}
+$$
+
+## Propiedades de la Varianza
+
+Sean $X$ e $Y$ dos variables aleatorias y sea $c$ una constante, entonces:
+
+1.  $Var(c) = 0$
+
+2.  $Var(X + c) = Var(X)$
+
+3.  $Var(cX) = c^2 Var(X)$
+
+4.  *Si* $X$ e $Y$ son variables aleatorias independientes, entonces:
+
+$$
+Var(X + Y) = Var(X) + Var(Y)
+$$
+
+5.  En general para dos variables aleatorias se tiene que:
+
+    $$Var(aX + bY) = a^2Var(X) + b^2Var(Y)+2ab\cdot Cov(X,Y)$$
+
+    $\small \text{donde:} \quad Cov(X,Y) = E\{[X-E(X)]\cdot [Y-E(Y)]\}$
+
+
+## Variable Aleatoria continua
+
+**Definición.**\
+$X$ es una variable aleatoria continua si posee una función no negativa $f_X:R \Rightarrow R$ definida e integrable en $R$, tal que para cualesquiera $a,b\in R$ se cumple:
+
+$$
+P(a \le X \le b)=\int_{a}^{b} f_X(x)\,dx
+$$
+
+$$
+P(X \le b)=\int_{-\infty}^{b} f_X(x)\,dx
+$$
+
+$$
+P(X \ge a)=\int_{a}^{+\infty} f_X(x)\,dx
+$$
+
+Usualmente a $f_X$ se le llama **función de densidad de probabilidad** de $X$.
+
+## Variable Aleatoria continua
+
+### **Propiedades de la densidad**
+
+Sea $f_X:R\to R$. Es una **densidad** de una v.a. continua $X$ si y solo si:
+
+1.  $$f_X(x)\ge 0,\ \forall x\in R$$
+
+2.  $$\int_{-\infty}^{+\infty} f_X(x)\,dx = 1$$
+
+## Variable Aleatoria continua
+
+### Función de distribución acumulada (\*\*)
+
+Sea $X$ una v.a.c. con densidad $f_X$. La función $F_X:R \Rightarrow R$ dada por
+
+$$
+F_X(x)=P(X\le x)=\int_{-\infty}^{x} f_X(t)\,dt
+$$
+
+se llama **función de distribución acumulada** (o simplemente **función de distribución**).
+
+## Variable Aleatoria continua
+
+Una variable aleatoria $Y$ con función de distribución $F(y)$ se dice que es continua si $F(y)$ es continua, para $- \infty < y  < \infty$
+
+```{r}
+#| fig-align: "center"
+#| #| fig-width: 6
+#| fig-height: 4
+library(ggplot2)
+
+# Datos
+x <- seq(-7, 7, length.out = 800)
+df <- data.frame(x = x, Fx = pnorm(x, mean = 0, sd = 1))
+
+# Gráfico
+ggplot(df, aes(x = x, y = Fx)) +
+  geom_line(size = 1.2, color = "blue") +
+  labs(
+    title = "Función de distribución acumulada - Normal(0,1)",
+    x = "x",
+    y = "F(x)"
+  ) +
+  theme_classic()
+```
+
+## Variable Aleatoria continua
+
+### Propiedades de la función de distribución:
+
+1.  $F_X(x)\ge 0,\ \forall x\in R$\
+2.  Si $x\le y$, entonces $F_X(x)\le F_X(y)$ (es creciente).\
+3.  $P(X> x)=1-P(X\le x),\quad \forall x\in R$
+4.  $P(a\le X\le b)=\int_{a}^{b} f_X(x)\,dx$
+5.  $\lim_{x\to -\infty}F_X(x)=0,\quad \lim_{x\to +\infty}F_X(x)=1$
+
+## Variable aleatoria continua
+
+La f**unción de distribución** $F(y)$ evaluada en un punto $y_o$ equivale al **área de la función de densidad** $f(y)$ hasta el punto $y_o$.
+
+Para el caso de una función de densidad exponencial con $\lambda = 1$. Se tiene que $F(y=2)$ es la siguiente área sombreada.
+
+```{r}
+#| fig-align: "center"
+#| #| fig-width: 6
+#| fig-height: 4
+library(ggplot2)
+
+# Datos
+x <- seq(0, 6, length.out = 400)
+df <- data.frame(x = x, fx = dexp(x, rate = 1))
+
+# Gráfico
+ggplot(df, aes(x, fx)) +
+  # Área sombreada hasta x=2
+  geom_area(data = subset(df, x <= 2),
+            aes(y = fx), fill = "skyblue", alpha = 0.5) +
+  # Curva de densidad
+  geom_line(size = 1.2, color = "blue") +
+  labs(
+    title = "Función de densidad Exponencial(λ = 1)",
+    x = "x",
+    y = "f(x)"
+  ) +
+  theme_classic()
+```
+
+## Variable aleatoria continua
+
+**Definición función de densidad:**
+
+\
+Sea $F(y)$ la función de distribución para una variable aleatoria continua $Y$.\
+Entonces la función **densidad** $f(y)$, dada por
+
+$$
+f(y)=\frac{dF(y)}{dy}=F'(y),
+$$
+
+siempre que exista la derivada, se denomina función de densidad de probabilidad para la variable aleatoria $Y$.
+
+Se deduce que $F(y)$ se puede escribir como
+
+$$
+F(y)=\int_{-\infty}^{y} f(t)\,dt,
+$$
+
+donde $f(\cdot)$ es la función de densidad de probabilidad y $t$ se usa como la variable de integración.
+
+## Variable aleatoria continua
+
+### Ejemplo: Función de densidad y distribución
+
+Sea $Y$ una variable aleatoria continua con función de densidad de probabilidad dada por
+
+$$
+f(y)=
+\begin{cases}
+3y^2, & 0 \le y \le 1, \\
+0, & \text{en otro caso}.
+\end{cases}
+$$
+
+**Ejercicios:**
+
+1\. Encuentre $F(y)$.\
+
+2\. Grafique $f(y)$ y $F(y)$.
+
+## Variable aleatoria continua
+
+Ahora que conocemos la definición de $f(x)$ y $F(x)$, podemos estudiar otras maneras de describir la función, como por ejemplo las medidas de centralidad: moda, mediana y media, además de otros percentiles.
+
+**Valor Esperado de VA. Continua:**\
+El valor esperado de una variable aleatoria continua $Y$ es
+
+$$
+E(Y) = \int_{-\infty}^{\infty} y f(y)\,dy,
+$$
+
+siempre que exista la integral.
+
+Técnicamente, se dice que $E(Y)$ existe si
+
+$$
+E(Y) = \int_{-\infty}^{\infty} |y| f(y)\,dy < \infty.
+$$
+
+## Variable aleatoria continua
+
+**Teorema: Esperanza de una Transformación**\
+Sea $g(Y)$ una función de $Y$; entonces el valor esperado de $g(Y)$ está dado por
+
+$$
+E[g(Y)] = \int_{-\infty}^{\infty} g(y)\, f(y)\,dy < \infty,
+$$
+
+siempre que exista la integral.
+
+## Variable aleatoria continua
+
+**Propiedades de la Esperanza\***\
+Sea $c$ una constante y sean $g(Y),\, g_1(Y),\, g_2(Y),\,\ldots,\, g_k(Y)$ funciones de una variable aleatoria continua $Y$.\
+Entonces se cumplen los siguientes resultados:
+
+-   $E(c) = c$
+-   $E \left [ g(Y) \right ] = c\,E[g(Y)]$
+-   $E \left [g_1(Y) + g_2(Y) + \cdots + g_k(Y) \right ]  = E[g_1(Y)] + E[g_2(Y)] + \cdots + E[g_k(Y)]$
+
+\*se emplea para determinar $E[g(X)]$ de una v.a. $X$ cuando se conoce la **distribución de** $X$, pero no se conoce la de $g(X)$.
+
+## Variable aleatoria continua
+
+### Varianza
+
+Usando los teoremas anteriores, ¿cómo definimos la varianza?
+
+$$
+\operatorname{Var}(Y) = E[(Y-\mu)^2]
+= E(Y^2 - 2Y\mu + \mu^2)
+= E(Y^2) - 2\mu E(Y) + \mu^2
+$$
+
+$$
+\operatorname{Var}(Y) = E(Y^2) - \mu^2
+$$
+
+## Variable aleatoria continua
+
+**Ejemplo:** Supongamos que
+
+$$
+f(y) = 
+\begin{cases}
+\frac{3}{8} y^2, & 0 \leq y \leq 2, \\
+0, & \text{en otro caso},
+\end{cases}
+$$
+
+es una función de densidad válida.\
+Si la variable aleatoria $Y$ tiene esta densidad, encuentre:
+
+1.  $E(Y)$
+2.  $\operatorname{Var}(Y)$.
+
+## Variable aleatoria continua
+
+### Cálculo de $E(Y)$
+
+$$
+E(Y) = \int_{-\infty}^{\infty} y f(y)\,dy 
+= \int_0^2 y \,\frac{3}{8} y^2 \, dy
+= \int_0^2 \frac{3}{8} y^3 \, dy
+= \frac{3}{8} \left[\frac{y^4}{4}\right]_0^2
+= 1.5
+$$
+
+### Cálculo de $E(Y^2)$
+
+$$
+E(Y^2) = \int_{-\infty}^{\infty} y^2 f(y)\,dy
+= \int_0^2 y^2 \,\frac{3}{8} y^2 \, dy
+= \int_0^2 \frac{3}{8} y^4 \, dy
+= \frac{3}{8} \left[\frac{y^5}{5}\right]_0^2
+= 2.4
+$$
+
+### Cálculo de la varianza
+
+$$
+\operatorname{Var}(Y) = E(Y^2) - \mu^2
+= 2.4 - (1.5)^2
+= 0.15
+$$
+
+## Variable aleatoria continua
+
+Denotemos con $Y$ cualquier variable aleatoria continua.\
+Si $0 < p < 1$, la mediana es el $0.50$-ésimo cuantil de $Y$, denotado por $\varphi_{0.5}$, y es el mínimo valor tal que
+
+$$
+F(\varphi_{0.5}) = P(Y \leq \varphi_{0.5}) = 0.5.
+$$
+
+Algunos prefieren llamar $\varphi_{0.5}$ al 50-ésimo percentil de $Y$.
+
+## Variable aleatoria continua
+
+Supongamos la misma función
+
+$$
+f(y) = 
+\begin{cases}
+\frac{3}{8} y^2, & 0 \leq y \leq 2, \\
+0, & \text{en otro caso}.
+\end{cases}
+$$
+
+Si la variable aleatoria $Y$ tiene esta densidad, encuentre $F(\varphi_{0.5})$.
+
+**Desarrollo**
+
+$$
+F(\varphi_{0.5}) = P(Y \leq \varphi_{0.5}) = 0.50
+$$
+
+$$
+P(Y \leq \varphi_{0.5}) = \int_{-\infty}^{\varphi_{0.5}} f(y)\,dy
+= \int_0^{\varphi_{0.5}} \frac{3}{8} y^2 \, dy
+= \frac{3}{8}\left[\frac{y^3}{3}\right]_0^{\varphi_{0.5}}
+= \frac{(\varphi_{0.5})^3}{8}
+$$
+
+**Resultado**
+
+$$
+(\varphi_{0.5})^3 = 8 \cdot 0.50
+\Rightarrow
+\varphi_{0.5} = \sqrt[3]{8 \cdot 0.50} \approx 1.5874
+$$
+
+## Ejercicio
+
+Sea $X$ una variable aleatoria con densidad
+
+$$
+\small f_X(x)=
+\begin{cases}
+\frac{k}{9}, & 1\le x\le 2,\\\\
+\frac{kx}{6}-1, & 2< x\le 3,\\\\
+0, & \text{en otro caso.}
+\end{cases}
+$$
+
+**a)** Determine el valor de $k$.
+
+**b)** Calcule $\small P\!\left(\dfrac{3}{2} < X < \dfrac{5}{2}\right)$.
+
+**c)** Obtenga $\small F_X(x)$.
+
+**d)** Calcule $\small E(X)$ y $\small \operatorname{Var}(X)$.
+
+**e)** Determine el cuantil $\small \varphi_{0.75}$.
+
+## Ejercicio
+
+Sea $X$ una v.a. con función de distribución acumulada
+
+$$
+\small F_X(x)=
+\begin{cases}
+0, & x<0,\\\\
+\frac{x^2}{2}, & 0\le x\le 1,\\\\
+-\dfrac{x^2}{2}+2x-1, & 1< x\le 2,\\\\
+1, & x>2.
+\end{cases}
+$$
+
+**a)** Encuentre la densidad $\small f_X(x)$.
+
+**b)** Calcule $\small P\!\left(\frac{3}{4}<X<\frac{5}{3}\right)$.
+
+**c)** Calcule $\small E(X)$ y $\small \operatorname{Var}(X)$.
+
+**d)** Determine el cuantil $\small \varphi_{0.65}$.
+
+## Variable aleatoria continua
+
+Sea $Y$ una variable aleatoria continua con función de densidad
+
+$$
+f(y)=
+\begin{cases}
+k\,y(1-y), & 0 \le y \le 1,\\
+0, & \text{en otro caso}.
+\end{cases}
+$$
+
+**Responda:**
+
+a)  Encuentre el valor de $k$ que hace a $f(y)$ una densidad de probabilidad.
+
+b)  Calcule $P(0.4 \le Y \le 1)$.
+
+c)  Calcule $P(0.4 \le Y < 1)$.
+
+d)  Calcule $P(Y \le 0.4 \mid Y \le 0.8)$.
+
+e)  Calcule $P(Y < 0.4 \mid Y < 0.8)$.
+
+f)  Encuentre el cuantil 95, es decir, $\varphi_{0.95}$.
+
+## Variable aleatoria continua
+
+Suponga que $Y$ posee la función de densidad
+
+$$
+f(y)=
+\begin{cases}
+c\,y, & 0 \le y \le 2,\\
+0, & \text{en otro caso}.
+\end{cases}
+$$
+
+**Responda:**
+
+a)  Encuentre el valor de $c$ que hace a $f(y)$ una función de densidad de probabilidad.
+
+b)  Encuentre $F(y)$.
+
+c)  Grafique $f(y)$ y $F(y)$.
