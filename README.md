@@ -17,4 +17,4 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 |---------------------------------------------------------------------------------------|----------|
 | Repaso (Variable Aleatoria, Función de Densidad y Distribución, Esperanza, etc)       | [Clase 1](XS-0100_01.html)    |
 | Repaso (Función Generadora de Momentos y Función de Verosimilitud)       | [Clase 2](XS-0100_02.html)    |
-| Propiedades de la Media y Varianza Muestral / Estadísticos de Orden       | [Clase 3](XS-0100_02.html)    |
+| Propiedades de la Media y Varianza Muestral / Estadísticos de Orden       | [Clase 3](XS-0100_03.html)    |
