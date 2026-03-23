@@ -150,19 +150,21 @@ Christopher Torres
 <section id="distribución-gamma" class="slide level2">
 <h2>Distribución Gamma</h2>
 <div class="columns">
-<div class="column" style="width:55%;">
+<div class="column" style="width:57%;">
 <p><strong>Definición:</strong> Sea <span class="math inline">\(X \sim \text{Gamma}(\alpha, \beta)\)</span></p>
 <p><span class="math display">\[
-f(x) = \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha - 1} e^{-x/\beta}, \quad x &gt; 0
+\small f(x) = \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha - 1} e^{-x/\beta}, \quad x &gt; 0
 \]</span></p>
 <ul>
-<li><span class="math inline">\(\alpha &gt; 0\)</span>: parámetro de forma</li>
-<li><span class="math inline">\(\beta &gt; 0\)</span>: parámetro de escala</li>
+<li><span class="math inline">\(\small \alpha &gt; 0\)</span>: parámetro de forma</li>
+<li><span class="math inline">\(\small \beta &gt; 0\)</span>: parámetro de escala</li>
 </ul>
-<p><strong>Propiedades</strong></p>
-<p><strong>Esperanza:</strong> <span class="math inline">\(\mathbb{E}(X) = \alpha \beta\)</span></p>
-<p><strong>Varianza:</strong> <span class="math inline">\(\mathrm{Var}(X) = \alpha \beta^2\)</span></p>
-</div><div class="column" style="width:45%;">
+<p><strong>Propiedades:</strong></p>
+<p><strong>Esperanza:</strong> <span class="math inline">\(\small \mathbb{E}(X) = \alpha \beta\)</span></p>
+<p><strong>Varianza:</strong> <span class="math inline">\(\small \mathrm{Var}(X) = \alpha \beta^2\)</span></p>
+<p>Si <span class="math inline">\(\small X \sim \text{Gamma}(\alpha, \beta) \Leftrightarrow  \frac{1}{c}X \sim \text{Gamma}(\alpha, \frac{\beta}{c})\)</span></p>
+<p>Si <span class="math inline">\(\small Y \sim \text{Gamma}(\delta, \beta) \Leftrightarrow  X+Y \sim \text{Gamma}(\alpha+\delta, \beta)\)</span></p>
+</div><div class="column" style="width:43%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -183,11 +185,11 @@ f(x) = \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha - 1} e^{-x/\beta}, \quad x
 \chi^2_k \sim \text{Gamma}\left(\frac{k}{2}, 2\right)
 \]</span></p>
 <p><strong>Relación con la Normal Estándar:</strong></p>
-<p>Si <span class="math inline">\(Z \sim \mathcal{N}(0,1)\)</span>, entonces:</p>
+<p>Si <span class="math inline">\(\small Z \sim \mathcal{N}(0,1)\)</span>, entonces:</p>
 <p><span class="math display">\[
 Z^2 \sim \chi^2_1
 \]</span></p>
-<p><strong>Propiedad:</strong> Si <span class="math inline">\(X \sim \chi^2_n\)</span> y <span class="math inline">\(Y \sim \chi^2_m\)</span> entonces:</p>
+<p><strong>Propiedad:</strong> Si <span class="math inline">\(\small X \sim \chi^2_n\)</span> y <span class="math inline">\(\small Y \sim \chi^2_m\)</span> entonces:</p>
 <p><span class="math display">\[
 X+Y \sim \chi^2_{n+m}
 \]</span></p>
@@ -201,7 +203,8 @@ X+Y \sim \chi^2_{n+m}
 </div>
 </div>
 </div>
-<p><strong>Esperanza:</strong> <span class="math inline">\(\small \mathbb{E}(X) = k\)</span> <strong>Varianza:</strong> <span class="math inline">\(\small \mathrm{Var}(X) = 2k\)</span></p>
+<p><strong>Esperanza:</strong> <span class="math inline">\(\small \mathbb{E}(X) = k\)</span></p>
+<p><strong>Varianza:</strong> <span class="math inline">\(\small \mathrm{Var}(X) = 2k\)</span></p>
 </div></div>
 </section>
 <section id="distribución-t-de-student" class="slide level2">
