@@ -23,5 +23,5 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 | Estimación Puntual - Consistencia y Suficiencia    | [Clase 5](XS-0100_05.html)   |
 |   |   |
 
-[Videos Sobre Estimación Puntual](https://youtube.com/playlist?list=PLEKgCCvVCJrajctal2BDIAamutPahONiD&si=mwUNj_i14A17JX1a)
+[Algunos Ejemplos Sobre Estimación Puntual](https://youtube.com/playlist?list=PLEKgCCvVCJrajctal2BDIAamutPahONiD&si=mwUNj_i14A17JX1a)
 
