@@ -21,7 +21,7 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 | Distribuciones Especiales - Gamma, Chi, T, F, Exp, Beta    | [Clase 4.1](XS-0100_001_Anexo.html)   |
 | Estimación Puntual - Insesgamiento     | [Clase 4.2](XS-0100_04.html)   |
 | Estimación Puntual - Consistencia y Suficiencia    | [Clase 5](XS-0100_05.html)   |
-|   |   |
+| Estimación Puntual - Suficiencia, Rao Blackwell y Lehmann Scheffé  | [Clase 6](XS-0100_06.html)   |
 
 [Algunos Ejemplos Sobre Estimación Puntual](https://youtube.com/playlist?list=PLEKgCCvVCJrajctal2BDIAamutPahONiD&si=mwUNj_i14A17JX1a)
 
