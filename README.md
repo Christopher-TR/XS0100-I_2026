@@ -27,7 +27,12 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 
 ## Videos
 
-
+| Tema     | Enlace  |
+|----------|-------------|
+| Ejemplos - Estimación Puntual | [Enlace](https://youtube.com/playlist?list=PLEKgCCvVCJrajctal2BDIAamutPahONiD&si=mwUNj_i14A17JX1a)|
+| Teoría - Estimación Puntual | [Enlace](https://youtube.com/playlist?list=PLqFZp4O1OEOW_KbJQntn6dYFJD3GYpw2L&si=uQcro8X2QCIxOEuz)|
+| Teoría - Estimación Intervalo | [Enlace](https://youtube.com/playlist?list=PLqFZp4O1OEOXiXMIhFPK5J-4b-rdSive4&si=-3ISdIobb71OJubT)|
+| Teoría - Contraste Hipótesis | [Enlace](https://youtube.com/playlist?list=PLqFZp4O1OEOXrvJcKIA5LwlF8hrVdWsPB&si=KyEAKfZk3NUmfyUg)|
 
 
 
