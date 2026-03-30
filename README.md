@@ -24,6 +24,10 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 | Estimación Puntual - Suficiencia, Rao Blackwell y Lehmann Scheffé  | [Clase 6](XS-0100_06.html)   |
 
 [Algunos Ejemplos Sobre Estimación Puntual](https://youtube.com/playlist?list=PLEKgCCvVCJrajctal2BDIAamutPahONiD&si=mwUNj_i14A17JX1a)
+
 [Algunos Videos Teóricos - Estimación Puntual](https://youtube.com/playlist?list=PLqFZp4O1OEOW_KbJQntn6dYFJD3GYpw2L&si=uQcro8X2QCIxOEuz)
+
 [Algunos Videos Teóricos - Estimación Intervalo](https://youtube.com/playlist?list=PLqFZp4O1OEOXiXMIhFPK5J-4b-rdSive4&si=-3ISdIobb71OJubT)
+
 [Algunos Videos Teóricos - Contraste de Hipótesis](https://youtube.com/playlist?list=PLqFZp4O1OEOXrvJcKIA5LwlF8hrVdWsPB&si=KyEAKfZk3NUmfyUg)
+
