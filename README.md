@@ -23,7 +23,7 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 | Estimación Puntual - Consistencia y Suficiencia    | [Clase 5](XS-0100_05.html)   |
 | Estimación Puntual - Suficiencia, Rao Blackwell y Lehmann Scheffé  | [Clase 6](XS-0100_06.html)   |
 | Estimación Puntual - Estimadores de Momentos, Máxima Verosimilitud y Principio de Invariancia  | [Clase 7](XS-0100_07.html)   |
-
+| Estimación por Intervalo - Método Pivotal  | [Clase 8](XS-0100_08.html)   |
 
 ## Videos
 
