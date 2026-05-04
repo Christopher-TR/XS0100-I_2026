@@ -26,7 +26,7 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 | Clase Grabada - Simulación Lab 1  | [Enlace](https://6f33fa7f78ea46e2aaca-my.sharepoint.com/:v:/g/personal/christopher_torres_ucr_ac_cr/IQA-5Wpe3vSgQ6S1aRAtf6qtAZGpDlDc_76JYpjal8r6GXs?e=EleeKs&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D) - [Archivo R](lab01.qmd) - [Archivo Excel](Lab1.xlsx) |
 | Estimación por Intervalo - Método Pivotal  | [Clase 8](XS-0100_08.html)   |
 | Estimación por Intervalo - Intervalos Clásicos (Población Normal) | [Clase 9](XS-0100_09.html)   |
-| Estimación por Intervalo - Método Delta e Intervalos Asintóticos | [Clase 10]   |
+| Estimación por Intervalo - Método Delta e Intervalos Asintóticos | [Clase 10](XS-0100_10.html)  |
 
 
 ## Videos
