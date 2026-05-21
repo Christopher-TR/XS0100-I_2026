@@ -28,8 +28,8 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 | Estimación por Intervalo - Intervalos Clásicos (Población Normal) | [Clase 9](XS-0100_09.html)   |
 | Estimación por Intervalo - Método Delta e Intervalos Asintóticos | [Clase 10](XS-0100_10.html)  |
 | Contraste de Hipótesis - Introducción | [Clase 11](XS-0100_11.html)  |
-| Contraste de Hipótesis - P-Value | [Clase 11](XS-0100_12.html)  |
-| Contraste de Hipótesis - Lema de Neyman Pearson | [Clase 11](XS-0100_13.html)  |
+| Contraste de Hipótesis - P-Value | [Clase 12](XS-0100_12.html)  |
+| Contraste de Hipótesis - Lema de Neyman Pearson | [Clase 13](XS-0100_13.html)  |
 
 ## Videos
 
