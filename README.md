@@ -31,6 +31,8 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 | Contraste de Hipótesis - P-Value | [Clase 12](XS-0100_12.html)  |
 | Contraste de Hipótesis - Lema de Neyman Pearson | [Clase 13](XS-0100_13.html)  |
 | Contraste de Hipótesis - Contraste de Verosimilitud y Wald | [Clase 14](XS-0100_14.html)  |
+| Introducción a la estadística Bayesiana - Probabilidad Condicional | [Clase 15](XS-0100_15.html)  |
+
 
 ## Videos
 
