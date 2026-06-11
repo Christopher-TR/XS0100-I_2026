@@ -153,12 +153,11 @@ Christopher Torres Rojas
 <section id="qué-vamos-a-discutir-hoy" class="slide level2">
 <h2>¿Qué vamos a discutir hoy?</h2>
 <ul>
-<li>El Paradigma Bayesiano: Previa y Posterior</li>
-<li>Familias Conjugadas</li>
-<li>Previas Informativas vs.&nbsp;No Informativas</li>
-<li>Invarianza y la Previa de Jeffreys</li>
-<li>Intervalos de Credibilidad y de Alta Densidad (HDI)</li>
-<li>Comparación de Modelos: Factor de Bayes</li>
+<li><p>Previa y Posterior</p></li>
+<li><p>Familias Conjugadas</p></li>
+<li><p>Previas Informativas vs.&nbsp;No Informativas</p></li>
+<li><p>Previa de Jeffreys</p></li>
+<li><p>Intervalos de Credibilidad</p></li>
 </ul>
 </section>
 <section id="enfoque-bayesiano" class="slide level2">
@@ -177,8 +176,8 @@ Por lo tanto, la esencia del enfoque bayesiado radica en actualizar nuestra ince
 </section>
 <section id="ejemplo" class="slide level2">
 <h2>Ejemplo:</h2>
-<p>Queremos estimar la proporción <span class="math inline">\(p\)</span> de éxito de una nueva terapia. Si <span class="math inline">\(Y\)</span> es el número de pacientes que responden en una muestra de tamaño <span class="math inline">\(n\)</span>, asumimos una verosimilitud <strong>Binomial</strong>: <span class="math display">\[Y \mid p \sim \text{Binomial}(n, p)\]</span></p>
-<p>Para incorporar la información previa sobre la eficacia del tratamiento, suponga que <span class="math inline">\(p\)</span> sigue una distribución <strong>Beta</strong>: <span class="math display">\[p \sim \text{Beta}(\alpha, \beta)\]</span></p>
+<p>Queremos estimar la proporción <span class="math inline">\(p\)</span> de éxito de una nueva terapia. Si <span class="math inline">\(Y\)</span> es el número de pacientes que responden en una muestra de tamaño <span class="math inline">\(n\)</span>, asumimos una verosimilitud Binomial: <span class="math display">\[Y \mid p \sim \text{Binomial}(n, p)\]</span></p>
+<p>Para incorporar la información previa sobre la eficacia del tratamiento, suponga que <span class="math inline">\(p\)</span> sigue una distribución Beta: <span class="math display">\[p \sim \text{Beta}(\alpha, \beta)\]</span></p>
 <p>Obtenga la distribución condicional:</p>
 <p><span class="math display">\[f(p\mid Y)\]</span></p>
 </section>
@@ -201,9 +200,9 @@ f(p \mid Y) &amp;\propto p^Y (1-p)^{n-Y} \cdot p^{\alpha-1} (1-p)^{\beta-1} \\
 <p><span class="math display">\[p(\theta \mid y_1, y_2, \cdots, y_n) = \frac{p(y_1, y_2, \cdots, y_n \mid \theta) \pi(\theta)}{p(y_1, y_2, \cdots, y_n)} \propto L(\mathbf{y} \mid \theta) \pi(\theta)\]</span></p>
 <p>Donde:</p>
 <ul>
-<li><span class="math inline">\(\pi(\theta)\)</span> es la <strong>distribución previa</strong>.</li>
-<li><span class="math inline">\(L(\mathbf{y} \mid \theta)\)</span> es la <strong>verosimilitud</strong>.</li>
-<li><span class="math inline">\(p(\theta \mid y_1, y_2, \cdots, y_n)\)</span> es la <strong>distribución posterior</strong>.</li>
+<li><span class="math inline">\(\pi(\theta)\)</span> es la distribución previa.</li>
+<li><span class="math inline">\(L(\mathbf{y} \mid \theta)\)</span> es la verosimilitud.</li>
+<li><span class="math inline">\(p(\theta \mid y_1, y_2, \cdots, y_n)\)</span> es la distribución posterior.</li>
 </ul>
 </section>
 <section id="ejemplo-1" class="slide level2">
