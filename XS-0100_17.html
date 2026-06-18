@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<script src="XS-0100_17_files/libs/clipboard/clipboard.min.js"></script>
+<script src="XS-0100_17_files/libs/quarto-html/tabby.min.js"></script>
+<script src="XS-0100_17_files/libs/quarto-html/popper.min.js"></script>
+<script src="XS-0100_17_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="XS-0100_17_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="XS-0100_17_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="XS-0100_17_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
+
+  <meta name="author" content="Christopher Torres Rojas">
+  <title>Modelos de Regresión Lineal</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="XS-0100_17_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="XS-0100_17_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="XS-0100_17_files/libs/revealjs/dist/theme/quarto-9eb768afb8c6a1b6b3ca03240ed62dd7.css">
+  <link href="XS-0100_17_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="XS-0100_17_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="XS-0100_17_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="XS-0100_17_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="XS-0100_17_files/libs/kePrint-0.0.1/kePrint.js"></script>
+
+  <link href="XS-0100_17_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="XS-0100_17_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+  <script src="XS-0100_17_files/libs/plotly-binding-4.12.0/plotly.js"></script>
+
+  <script src="XS-0100_17_files/libs/typedarray-0.1/typedarray.min.js"></script>
+
+  <script src="XS-0100_17_files/libs/jquery-3.5.1/jquery.min.js"></script>
+
+  <link href="XS-0100_17_files/libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+
+  <script src="XS-0100_17_files/libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+
+  <link href="XS-0100_17_files/libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
+
+  <script src="XS-0100_17_files/libs/plotly-main-2.25.2/plotly-latest.min.js"></script>
+
+  <link href="XS-0100_17_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Modelos de Regresión Lineal</h1>
+  <p class="subtitle"><a href="https://christopher-tr.github.io/XS0100-I_2026/">XS-0122 Fundamentos de Teoría Estadística - I Semestre 2026</a></p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Christopher Torres Rojas 
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:christopher.torres@ucr.ac.cr">christopher.torres@ucr.ac.cr</a>
+</div>
+        <p class="quarto-title-affiliation">
+            <a href="https://www.estadistica.ucr.ac.cr/">
+            Escuela de Estadística, Universidad de Costa Rica
+            </a>
+          </p>
+    </div>
+</div>
+
+</section>
+<section id="qué-vamos-a-discutir-hoy" class="slide level2">
+<h2>¿Qué vamos a discutir hoy?</h2>
+<ul>
+<li>Regresión Lineal Simple</li>
+<li>Regresión Lineal Múltiple</li>
+<li>El Paradigma de Proyecciones</li>
+<li>Bondad de Ajuste: <span class="math inline">\(R^2\)</span> y <span class="math inline">\(R^2\)</span> Ajustado.</li>
+<li>Variables Cualitativas (Incorporación de factores - variables dummy).</li>
+</ul>
+</section>
+<section id="regresión-lineal-simple" class="slide level2">
+<h2>Regresión Lineal Simple</h2>
+<p>La idea general consiste en predecir una variable <span class="math inline">\(Y\)</span> cuantitativa por medio de una covariable <span class="math inline">\(X\)</span> (variable predictora) también cuantitativa por medio de una recta.</p>
+<p>Aunque en un inicio puede parecer un enfoque sencillo, sienta las bases para métodos más complejos.</p>
+<h4 id="el-modelo-poblacional">El Modelo Poblacional</h4>
+<p>Se asume que en la población existe una relación lineal entre la variable respuesta <span class="math inline">\(Y_i\)</span> y la covariable <span class="math inline">\(X_i\)</span>:</p>
+<p><span class="math display">\[Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i, \quad \text{donde } \varepsilon_i \overset{i.i.d.}{\sim} N(0, \sigma^2)\]</span></p>
+<p>Donde</p>
+<ul>
+<li><span class="math inline">\(\beta_0, \beta_1\)</span>: Coeficientes estructurales fijos pero desconocidos.</li>
+<li><span class="math inline">\(\varepsilon_i\)</span>: El error aleatorio poblacional (no observable).</li>
+</ul>
+</section>
+<section id="regresión-lineal-simple-1" class="slide level2">
+<h2>Regresión Lineal Simple</h2>
+<h4 id="el-modelo-muestral">El Modelo Muestral</h4>
+<p>Para una muestra aleatoria de tamaño <span class="math inline">\(n\)</span> dada por <span class="math inline">\(\{(X_1, Y_1), (X_2, Y_2), \dots, (X_n, Y_n)\}\)</span>, el modelo estimado (<em>usando Mínimos Cuadrados Ordinarios</em>) se expresa como:</p>
+<p><span class="math display">\[\hat{Y}_i = \hat{\beta_0} + \hat{\beta_1} X_i\]</span></p>
+<p>o</p>
+<p><span class="math display">\[Y_i = \hat{\beta_0} + \hat{\beta_1} X_{1} +e_i\]</span></p>
+<p>Donde <span class="math inline">\(e_i = Y_i - \hat{Y}_i\)</span> es el residuo observable, el cual actúa como la estimación muestral del error poblacional <span class="math inline">\(\varepsilon_i\)</span>.</p>
+<p><strong>Comprensión del Error</strong></p>
+<p>El error captura todo aquello que altera a <span class="math inline">\(Y\)</span> y que no es explicado por <span class="math inline">\(X\)</span> (variables omitidas, ruido de medición, aleatoriedad intrínseca).</p>
+</section>
+<section id="estimación-de-coeficientes-en-rls" class="slide level2">
+<h2>Estimación de Coeficientes en RLS</h2>
+<p>Para hallar los estimadores del modelo <span class="math inline">\(\beta_0, \beta_1\)</span> (mediante mínimos cuadrados), se busca aquellos coeficientes que minimicen el error, esto se hace minimizando la suma de cuadrados de los residuos:<br>
+</p>
+<p><span class="math display">\[SCR = \sum_{i=1}^n(Y_i - \hat{Y}_i)^2 = \sum_{i=1}^n (Y_i - \beta_0 - \beta_1 X_i)^2\]</span></p>
+<p>Derivando parcialmente e igualando a cero obtenemos las ecuaciones:</p>
+<p><span class="math display">\[\frac{\partial SCR}{\partial B_0}= -2\sum_{i=1}^n (Y_i - \beta_0 - \beta_1 X_i) = 0\]</span></p>
+<p><span class="math display">\[\Rightarrow \sum_{i=1}^n Y_i - n\beta_0 - \beta_1 \sum_{i=1}^nX_i=0\]</span></p>
+<p><span class="math display">\[\Rightarrow \hat{\beta_0} = \hat{Y} - \hat{\beta_1} \hat{X}\]</span></p>
+</section>
+<section id="estimación-de-coeficientes-en-rls-1" class="slide level2">
+<h2>Estimación de Coeficientes en RLS</h2>
+<p><span class="math display">\[\frac{\partial SCR}{\partial B_1}= -2\sum_{i=1}^n (Y_i - \beta_0 - \beta_1 X_i)\cdot X_i = 0\]</span></p>
+<p><span class="math display">\[\Rightarrow \sum_{i=1}^n Y_iX_i - \beta_0\sum_{i=1}^nX_i - \beta_1 \sum_{i=1}^nX_i^2 = 0\]</span></p>
+<p><span class="math display">\[\Rightarrow \sum_{i=1}^n X_i Y_i - (\bar{Y} - \hat{\beta}_1 \bar{X})(n\bar{X}) - \hat{\beta}_1 \sum_{i=1}^n X_i^2 = 0 \]</span></p>
+<p><span class="math display">\[\Rightarrow \hat{\beta}_1 = \frac{\sum_{i=1}^n X_i Y_i - n\bar{X}\bar{Y}}{\sum_{i=1}^n X_i^2 - n\bar{X}^2}\]</span></p>
+<p><span class="math display">\[\hat{\beta}_1 = \frac{\sum_{i=1}^n (X_i - \bar{X})(Y_i - \bar{Y})}{\sum_{i=1}^n (X_i - \bar{X})^2} = \frac{\text{Covarianza(X,Y)}}{\text{Varianza(X)}}\]</span></p>
+<p><span style="font-size:70%; color:#475569;">Los estimadores <span class="math inline">\(\hat{\beta}_0\)</span> y <span class="math inline">\(\hat{\beta}_1\)</span> son los estimadores lineales insesgados de mínima varianza (ELIM / MVUE) bajo los supuestos clásicos de Gauss-Markov.</span></p>
+</section>
+<section id="ejemplo-data-set-cars" class="slide level2">
+<h2>Ejemplo: Data set <code>cars</code></h2>
+<p>El conjunto de datos “Cars” muestran la velocidad de los automóviles y las distancias necesarias para que los carros de detengan (este conjunto de datos fue recolectado en 1920).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top" style="font-size: 14px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Velocidad (mph)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Distancia de frenado (ft)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">16</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">18</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">26</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">34</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">17</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">28</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">28</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-data-set-cars-1" class="slide level2">
+<h2>Ejemplo: Data set <code>cars</code></h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a><span class="co"># Modelo</span></span>
+<span id="cb1-4"><a href=""></a>regresion_simple <span class="ot">&lt;-</span> <span class="fu">lm</span>(dist <span class="sc">~</span> speed, <span class="at">data =</span> cars)</span>
+<span id="cb1-5"><a href=""></a>cars<span class="sc">$</span>prediccion <span class="ot">&lt;-</span> <span class="fu">predict</span>(regresion_simple)</span>
+<span id="cb1-6"><a href=""></a></span>
+<span id="cb1-7"><a href=""></a><span class="co"># Gráfico</span></span>
+<span id="cb1-8"><a href=""></a><span class="fu">plot_ly</span>(<span class="at">data =</span> cars, <span class="at">height =</span> <span class="dv">500</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-9"><a href=""></a>  <span class="co">#Agregar residuales</span></span>
+<span id="cb1-10"><a href=""></a>  <span class="fu">add_segments</span>(<span class="at">x =</span> <span class="sc">~</span>speed, <span class="at">xend =</span> <span class="sc">~</span>speed, <span class="at">y =</span> <span class="sc">~</span>dist, <span class="at">yend =</span> <span class="sc">~</span>prediccion,</span>
+<span id="cb1-11"><a href=""></a>               <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">dash =</span> <span class="st">"dash"</span>),</span>
+<span id="cb1-12"><a href=""></a>               <span class="at">name =</span> <span class="st">"Residuos"</span>, <span class="at">hoverinfo =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-13"><a href=""></a>  <span class="co">#Puntos Observados</span></span>
+<span id="cb1-14"><a href=""></a>  <span class="fu">add_markers</span>(<span class="at">x =</span> <span class="sc">~</span>speed, <span class="at">y =</span> <span class="sc">~</span>dist,</span>
+<span id="cb1-15"><a href=""></a>              <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"darkgray"</span>, <span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb1-16"><a href=""></a>              <span class="at">name =</span> <span class="st">"Observaciones"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-17"><a href=""></a>  <span class="co">#Recta</span></span>
+<span id="cb1-18"><a href=""></a>  <span class="fu">add_lines</span>(<span class="at">x =</span> <span class="sc">~</span>speed, <span class="at">y =</span> <span class="sc">~</span>prediccion,</span>
+<span id="cb1-19"><a href=""></a>            <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">width =</span> <span class="dv">3</span>),</span>
+<span id="cb1-20"><a href=""></a>            <span class="at">name =</span> <span class="st">"Recta MCO"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-21"><a href=""></a>  <span class="co">#Diseño</span></span>
+<span id="cb1-22"><a href=""></a>  <span class="fu">layout</span>(<span class="at">title =</span> <span class="st">"Regresión Lineal Simple"</span>,</span>
+<span id="cb1-23"><a href=""></a>         <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Velocidad (mph)"</span>),</span>
+<span id="cb1-24"><a href=""></a>         <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Distancia (ft)"</span>),</span>
+<span id="cb1-25"><a href=""></a>         <span class="at">showlegend =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-26"><a href=""></a>         <span class="at">hovermode =</span> <span class="st">"closest"</span>,</span>
+<span id="cb1-27"><a href=""></a>         <span class="at">autosize =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="htmlwidget-f8e99543653cd4b59ddd" style="width:100%;height:500px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f8e99543653cd4b59ddd">{"x":{"visdat":{"65104e470a3":["function () ","plotlyVisDat"]},"cur_data":"65104e470a3","attrs":{"65104e470a3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"xend":{},"yend":{},"type":"scatter","mode":"lines","line":{"color":"red","dash":"dash"},"name":"Residuos","hoverinfo":"none","inherit":true},"65104e470a3.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"markers","marker":{"color":"darkgray","size":8},"name":"Observaciones","inherit":true},"65104e470a3.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"type":"scatter","mode":"lines","line":{"color":"blue","width":3},"name":"Recta MCO","inherit":true}},"layout":{"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Regresión Lineal Simple","xaxis":{"domain":[0,1],"automargin":true,"title":"Velocidad (mph)"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Distancia (ft)"},"showlegend":true,"hovermode":"closest","autosize":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[4,4,null,4,4,null,7,7,null,7,7,null,8,8,null,9,9,null,10,10,null,10,10,null,10,10,null,11,11,null,11,11,null,12,12,null,12,12,null,12,12,null,12,12,null,13,13,null,13,13,null,13,13,null,13,13,null,14,14,null,14,14,null,14,14,null,14,14,null,15,15,null,15,15,null,15,15,null,16,16,null,16,16,null,17,17,null,17,17,null,17,17,null,18,18,null,18,18,null,18,18,null,18,18,null,19,19,null,19,19,null,19,19,null,20,20,null,20,20,null,20,20,null,20,20,null,20,20,null,22,22,null,23,23,null,24,24,null,24,24,null,24,24,null,24,24,null,25,25],"y":[2,-1.8494598540145528,null,10,-1.8494598540145528,null,4,9.9477664233577023,null,22,9.9477664233577023,null,16,13.880175182481789,null,10,17.812583941605872,null,18,21.744992700729959,null,26,21.744992700729959,null,34,21.744992700729959,null,17,25.677401459854046,null,28,25.677401459854046,null,14,29.609810218978133,null,20,29.609810218978133,null,24,29.609810218978133,null,28,29.609810218978133,null,26,33.54221897810222,null,34,33.54221897810222,null,34,33.54221897810222,null,46,33.54221897810222,null,26,37.474627737226299,null,36,37.474627737226299,null,60,37.474627737226299,null,80,37.474627737226299,null,20,41.407036496350386,null,26,41.407036496350386,null,54,41.407036496350386,null,32,45.339445255474473,null,40,45.339445255474473,null,32,49.271854014598553,null,40,49.271854014598553,null,50,49.271854014598553,null,42,53.20426277372264,null,56,53.20426277372264,null,76,53.20426277372264,null,84,53.20426277372264,null,36,57.136671532846727,null,46,57.136671532846727,null,68,57.136671532846727,null,32,61.069080291970813,null,48,61.069080291970813,null,52,61.069080291970813,null,56,61.069080291970813,null,64,61.069080291970813,null,66,68.93389781021898,null,54,72.866306569343067,null,70,76.798715328467154,null,92,76.798715328467154,null,93,76.798715328467154,null,120,76.798715328467154,null,85,80.73112408759124],"type":"scatter","mode":"lines","line":{"color":"red","dash":"dash"},"name":"Residuos","hoverinfo":["none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none",null,"none","none"],"marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],"y":[2,10,4,22,16,10,18,26,34,17,28,14,20,24,28,26,34,34,46,26,36,60,80,20,26,54,32,40,32,40,50,42,56,76,84,36,46,68,32,48,52,56,64,66,54,70,92,93,120,85],"type":"scatter","mode":"markers","marker":{"color":"darkgray","size":8,"line":{"color":"rgba(255,127,14,1)"}},"name":"Observaciones","error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[4,4,7,7,8,9,10,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,16,16,17,17,17,18,18,18,18,19,19,19,20,20,20,20,20,22,23,24,24,24,24,25],"y":[-1.8494598540145528,-1.8494598540145528,9.9477664233577023,9.9477664233577023,13.880175182481789,17.812583941605872,21.744992700729959,21.744992700729959,21.744992700729959,25.677401459854046,25.677401459854046,29.609810218978133,29.609810218978133,29.609810218978133,29.609810218978133,33.54221897810222,33.54221897810222,33.54221897810222,33.54221897810222,37.474627737226299,37.474627737226299,37.474627737226299,37.474627737226299,41.407036496350386,41.407036496350386,41.407036496350386,45.339445255474473,45.339445255474473,49.271854014598553,49.271854014598553,49.271854014598553,53.20426277372264,53.20426277372264,53.20426277372264,53.20426277372264,57.136671532846727,57.136671532846727,57.136671532846727,61.069080291970813,61.069080291970813,61.069080291970813,61.069080291970813,61.069080291970813,68.93389781021898,72.866306569343067,76.798715328467154,76.798715328467154,76.798715328467154,76.798715328467154,80.73112408759124],"type":"scatter","mode":"lines","line":{"color":"blue","width":3},"name":"Recta MCO","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="ejemplo-data-set-cars-2" class="slide level2">
+<h2>Ejemplo: Data set <code>cars</code></h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">summary</span>(regresion_simple)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = dist ~ speed, data = cars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-29.069  -9.525  -2.272   9.215  43.201 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+speed         3.9324     0.4155   9.464 1.49e-12 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 15.38 on 48 degrees of freedom
+Multiple R-squared:  0.6511,    Adjusted R-squared:  0.6438 
+F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong></p>
+<ul>
+<li><p><span class="math inline">\(\hat{\beta}_0\)</span>: Si la velocidad del auto es nula, la distancia estimada para detenerse es de -17.57 pies (en algunos casos carece de sentido lógico).</p></li>
+<li><p><span class="math inline">\(\hat{\beta}_1\)</span>: Por cada aumento de 1 mph en la velocidad del auto, se requerirán en promedio 3.93 pies adicionales para detenerse.</p></li>
+</ul>
+</section>
+<section id="regresión-lineal-múltiple" class="slide level2">
+<h2>Regresión Lineal Múltiple</h2>
+<p>En la práctica usualmente tenemos más de una covariable <span class="math inline">\(\small X_1, X_2, \cdots, X_p\)</span>, por ende generalizamos el resultado anterior para <span class="math inline">\(p\)</span> covariables es decir, para una muestra aleatoria de tamaño <span class="math inline">\(n\)</span> dada por <span class="math inline">\(\tiny \{(X_{1,1},X_{1,2},\cdots,X_{1,p}, Y_1), (X_{2,1},X_{2,2},\cdots,X_{2,p}, Y_2), \dots, (X_{n,1},X_{n,2},\cdots,X_{n,p}, Y_n)\}\)</span>, el modelo muestral estimado (<em>usando Mínimos Cuadrados Ordinarios</em>) se expresa como:</p>
+<p><span class="math display">\[\hat{Y}_i = \hat{\beta_0} + \hat{\beta_1} X_{i,1} + \hat{\beta_2} X_{i,2}+\cdots+\hat{\beta_p} X_{i,p}\]</span></p>
+<p>o</p>
+<p><span class="math display">\[Y_i = \hat{\beta_0} + \hat{\beta_1} X_{i,1} + \hat{\beta_2} X_{i,2}+\cdots+\hat{\beta_p} X_{i,p}+e_i\]</span></p>
+<p>Donde <span class="math inline">\(e_i = Y_i - \hat{Y}_i\)</span> es el residuo observable, el cual actúa como la estimación muestral del error poblacional <span class="math inline">\(\varepsilon_i\)</span>.</p>
+<p>Desde un enfoque matricial esta ecuación puede verse como:</p>
+<p><span class="math display">\[\mathbf{Y} = \mathbf{X}\hat{\boldsymbol{\beta}} + \mathbf{e}\]</span></p>
+</section>
+<section id="regresión-lineal-múltiple-idea-visual" class="slide level2">
+<h2>Regresión Lineal Múltiple (Idea Visual)</h2>
+<p>(Data set mtcars): Los datos fueron extraídos de la revista estadounidense Motor Trend de 1974, y comprenden el consumo de combustible y 10 aspectos del diseño y rendimiento automotriz para 32 automóviles (modelos de 1973–74). <span style="font-size:70%; color:#475569;">Para efectos de la presentación solo se tomaron las variables mpg (Rendimiento), hp (Potencia), wt (Peso).</span></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed caption-top" style="font-size: 14px; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Y = Rendimiento (mpg)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">X1 = Potencia (hp)</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">X2 = Peso (1000 lbs)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mazda RX4</td>
+<td style="text-align: center;">21.0</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">16.46</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mazda RX4 Wag</td>
+<td style="text-align: center;">21.0</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">17.02</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Datsun 710</td>
+<td style="text-align: center;">22.8</td>
+<td style="text-align: center;">93</td>
+<td style="text-align: center;">18.61</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hornet 4 Drive</td>
+<td style="text-align: center;">21.4</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">19.44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hornet Sportabout</td>
+<td style="text-align: center;">18.7</td>
+<td style="text-align: center;">175</td>
+<td style="text-align: center;">17.02</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valiant</td>
+<td style="text-align: center;">18.1</td>
+<td style="text-align: center;">105</td>
+<td style="text-align: center;">20.22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Duster 360</td>
+<td style="text-align: center;">14.3</td>
+<td style="text-align: center;">245</td>
+<td style="text-align: center;">15.84</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Merc 240D</td>
+<td style="text-align: center;">24.4</td>
+<td style="text-align: center;">62</td>
+<td style="text-align: center;">20.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Merc 230</td>
+<td style="text-align: center;">22.8</td>
+<td style="text-align: center;">95</td>
+<td style="text-align: center;">22.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Merc 280</td>
+<td style="text-align: center;">19.2</td>
+<td style="text-align: center;">123</td>
+<td style="text-align: center;">18.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Merc 280C</td>
+<td style="text-align: center;">17.8</td>
+<td style="text-align: center;">123</td>
+<td style="text-align: center;">18.90</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Merc 450SE</td>
+<td style="text-align: center;">16.4</td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">17.40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Merc 450SL</td>
+<td style="text-align: center;">17.3</td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">17.60</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Merc 450SLC</td>
+<td style="text-align: center;">15.2</td>
+<td style="text-align: center;">180</td>
+<td style="text-align: center;">18.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cadillac Fleetwood</td>
+<td style="text-align: center;">10.4</td>
+<td style="text-align: center;">205</td>
+<td style="text-align: center;">17.98</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="regresión-lineal-múltiple-1" class="slide level2">
+<h2>Regresión Lineal Múltiple</h2>
+<p><span class="math display">\[\mathbf{\hat{Y}} = \mathbf{X}\hat{\boldsymbol{\beta}} + \mathbf{e}\]</span></p>
+<p><span class="math display">\[\underbrace{
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n
+\end{bmatrix}
+}_{\mathbf{Y}_{(n \times 1)}}
+=
+\underbrace{
+\begin{bmatrix}
+1 &amp; x_{1,1} &amp; x_{1,2} &amp; \cdots &amp; x_{1,p} \\
+1 &amp; x_{2,1} &amp; x_{2,2} &amp; \cdots &amp; x_{2,p} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x_{n,1} &amp; x_{n,2} &amp; \cdots &amp; x_{n,p}
+\end{bmatrix}
+}_{\mathbf{X}_{n \times (p+1)}}
+\underbrace{
+\begin{bmatrix}
+\hat{\beta}_0 \\
+\hat{\beta}_1 \\
+\hat{\beta}_2 \\
+\vdots \\
+\hat{\beta}_p
+\end{bmatrix}
+}_{\boldsymbol{\hat{\beta}}_{(p+1) \times 1}}
++
+\underbrace{
+\begin{bmatrix}
+e_1 \\
+e_2 \\
+\vdots \\
+e_n
+\end{bmatrix}
+}_{\boldsymbol{e}_{(n \times 1)}}\]</span></p>
+<p>De manera análoga la idea es encontrar el vector <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> que minimiza la suma de cuadrados residual.</p>
+<p><span class="math display">\[SCR = \sum_{i=1}^n(Y_i - \hat{Y}_i)^2 = \sum_{i=1}^n(Y_i - \sum_{j=1}^pX_{i,j}\beta_j)^2 \]</span></p>
+</section>
+<section id="regresión-lineal-múltiple-2" class="slide level2">
+<h2>Regresión Lineal Múltiple</h2>
+<p>Se puede demostrar que</p>
+<p><span class="math display">\[SCR = (\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})^t(\mathbf{Y} - \mathbf{X}\boldsymbol{\beta})\]</span></p>
+<p><span class="math display">\[\Rightarrow \frac{\partial SCR}{\partial \boldsymbol{\beta}} = -2\mathbf{X}^t(\mathbf{Y}-\mathbf{X}\boldsymbol{\beta}) = 0\]</span></p>
+<p><span class="math display">\[\Rightarrow \frac{\partial SCR}{\partial \boldsymbol{\beta}} = \mathbf{X}^t(\mathbf{Y}-\mathbf{X}\boldsymbol{\beta}) = 0\]</span></p>
+<p><span class="math display">\[  \boldsymbol{\hat{\beta}} = (\mathbf{X}^t\mathbf{X})^{-1}\mathbf{X}^t\mathbf{Y}\]</span></p>
+</section>
+<section id="el-espacio-vectorial-de-la-regresión" class="slide level2">
+<h2>El Espacio Vectorial de la Regresión</h2>
+<p>En el paradigma geométrico de los modelos lineales, no observamos variables aisladas, sino vectores en un espacio de alta dimensionalidad.</p>
+<p>En el espacio de las variables <span class="math inline">\(\mathbb{R}^n\)</span> están las columnas de la matriz de diseño <span class="math inline">\(X\)</span>, denotadas por:</p>
+<p><span class="math display">\[X_1, X_2, \dots, X_p\]</span></p>
+<p>También están en este mismo espacio vectorial:</p>
+<ul>
+<li><p>El vector de respuestas observadas <span class="math inline">\(\mathbf{Y}\)</span>.</p></li>
+<li><p>El vector de errores <span class="math inline">\(\mathbf{e}\)</span></p></li>
+</ul>
+</section>
+<section id="el-espacio-vectorial-de-la-regresión-1" class="slide level2">
+<h2>El Espacio Vectorial de la Regresión</h2>
+<h4 id="teorema"><strong>Teorema</strong></h4>
+<p>Encontrar los parámetros <span class="math inline">\(\beta_1, \beta_2, \dots, \beta_m\)</span> de tal manera que la suma de cuadrados residual sea mínima es equivalente a proyectar ortogonalmente el vector <span class="math inline">\(Y\)</span> sobre el espacio generado por <span class="math inline">\(X_1, X_2, \dots, X_p\)</span>.</p>
+<p><span class="math display">\[\mathcal{B} = \{X_1, X_2, \dots, X_p\} \mapsto \{v_1, v_2, \dots, v_p\} \text{ ortonormal}\]</span></p>
+<p><span class="math display">\[ X\beta = \langle Y, v_1 \rangle v_1 + \langle Y, v_2 \rangle v_2 + \dots + \langle Y, v_m \rangle v_m\]</span></p>
+<p><span class="math display">\[ X\hat{\beta} = X(X^t X)^{-1} X^t Y\]</span></p>
+</section>
+<section id="el-espacio-vectorial-de-la-regresión-2" class="slide level2">
+<h2>El Espacio Vectorial de la Regresión</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">library</span>(plotly)</span>
+<span id="cb4-2"><a href=""></a></span>
+<span id="cb4-3"><a href=""></a><span class="co"># Coordenadas conceptuales para replicar la imagen</span></span>
+<span id="cb4-4"><a href=""></a>orig <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb4-5"><a href=""></a>x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb4-6"><a href=""></a>x2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">0</span>)</span>
+<span id="cb4-7"><a href=""></a>y_real <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>)    <span class="co"># Vector Y (Rojo)</span></span>
+<span id="cb4-8"><a href=""></a>y_hat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">0</span>)     <span class="co"># Vector proyección (plano Z=0)</span></span>
+<span id="cb4-9"><a href=""></a></span>
+<span id="cb4-10"><a href=""></a><span class="fu">plot_ly</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href=""></a>  <span class="co"># 1. El hiperplano generado por X1 y X2 (Amarillo, Z=0)</span></span>
+<span id="cb4-12"><a href=""></a>  <span class="fu">add_trace</span>(<span class="at">type =</span> <span class="st">"mesh3d"</span>,</span>
+<span id="cb4-13"><a href=""></a>            <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">0</span>), </span>
+<span id="cb4-14"><a href=""></a>            <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">5</span>), </span>
+<span id="cb4-15"><a href=""></a>            <span class="at">z =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb4-16"><a href=""></a>            <span class="at">i =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="at">j =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">k =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb4-17"><a href=""></a>            <span class="at">opacity =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="fu">I</span>(<span class="st">"yellow"</span>), <span class="at">name =</span> <span class="st">"Espacio Col(X)"</span>, <span class="at">hoverinfo=</span><span class="st">"none"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href=""></a>  </span>
+<span id="cb4-19"><a href=""></a>  <span class="co"># 2. Vector Y (Rojo, hacia arriba)</span></span>
+<span id="cb4-20"><a href=""></a>  <span class="fu">add_paths</span>(<span class="at">x =</span> <span class="fu">c</span>(orig[<span class="dv">1</span>], y_real[<span class="dv">1</span>]), <span class="at">y =</span> <span class="fu">c</span>(orig[<span class="dv">2</span>], y_real[<span class="dv">2</span>]), <span class="at">z =</span> <span class="fu">c</span>(orig[<span class="dv">3</span>], y_real[<span class="dv">3</span>]),</span>
+<span id="cb4-21"><a href=""></a>            <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">width =</span> <span class="dv">5</span>), <span class="at">name =</span> <span class="st">"Vector Y"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-22"><a href=""></a>  </span>
+<span id="cb4-23"><a href=""></a>  <span class="co"># 3. Vector de proyección Y_hat (Azul en el plano)</span></span>
+<span id="cb4-24"><a href=""></a>  <span class="fu">add_paths</span>(<span class="at">x =</span> <span class="fu">c</span>(orig[<span class="dv">1</span>], y_hat[<span class="dv">1</span>]), <span class="at">y =</span> <span class="fu">c</span>(orig[<span class="dv">2</span>], y_hat[<span class="dv">2</span>]), <span class="at">z =</span> <span class="fu">c</span>(orig[<span class="dv">3</span>], y_hat[<span class="dv">3</span>]),</span>
+<span id="cb4-25"><a href=""></a>            <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">width =</span> <span class="dv">4</span>), <span class="at">name =</span> <span class="st">"Proyección Y"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-26"><a href=""></a>  </span>
+<span id="cb4-27"><a href=""></a>  <span class="co"># 4. Error ortogonal (Línea roja punteada)</span></span>
+<span id="cb4-28"><a href=""></a>  <span class="fu">add_paths</span>(<span class="at">x =</span> <span class="fu">c</span>(y_hat[<span class="dv">1</span>], y_real[<span class="dv">1</span>]), <span class="at">y =</span> <span class="fu">c</span>(y_hat[<span class="dv">2</span>], y_real[<span class="dv">2</span>]), <span class="at">z =</span> <span class="fu">c</span>(y_hat[<span class="dv">3</span>], y_real[<span class="dv">3</span>]),</span>
+<span id="cb4-29"><a href=""></a>            <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">dash =</span> <span class="st">"dash"</span>, <span class="at">width =</span> <span class="dv">4</span>), <span class="at">name =</span> <span class="st">"Error (e)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-30"><a href=""></a>  </span>
+<span id="cb4-31"><a href=""></a>  <span class="co"># 5. Vectores de la base X1 y X2 (Negros en el plano)</span></span>
+<span id="cb4-32"><a href=""></a>  <span class="fu">add_paths</span>(<span class="at">x =</span> <span class="fu">c</span>(orig[<span class="dv">1</span>], x1[<span class="dv">1</span>]), <span class="at">y =</span> <span class="fu">c</span>(orig[<span class="dv">2</span>], x1[<span class="dv">2</span>]), <span class="at">z =</span> <span class="fu">c</span>(orig[<span class="dv">3</span>], x1[<span class="dv">3</span>]),</span>
+<span id="cb4-33"><a href=""></a>            <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">width =</span> <span class="dv">3</span>), <span class="at">name =</span> <span class="st">"X1"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-34"><a href=""></a>  <span class="fu">add_paths</span>(<span class="at">x =</span> <span class="fu">c</span>(orig[<span class="dv">1</span>], x2[<span class="dv">1</span>]), <span class="at">y =</span> <span class="fu">c</span>(orig[<span class="dv">2</span>], x2[<span class="dv">2</span>]), <span class="at">z =</span> <span class="fu">c</span>(orig[<span class="dv">3</span>], x2[<span class="dv">3</span>]),</span>
+<span id="cb4-35"><a href=""></a>            <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">width =</span> <span class="dv">3</span>), <span class="at">name =</span> <span class="st">"X2"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-36"><a href=""></a>  </span>
+<span id="cb4-37"><a href=""></a>  <span class="co"># Añadir etiquetas de texto a los vectores</span></span>
+<span id="cb4-38"><a href=""></a>  <span class="fu">add_text</span>(<span class="at">x =</span> <span class="fu">c</span>(y_real[<span class="dv">1</span>], y_hat[<span class="dv">1</span>], x1[<span class="dv">1</span>], x2[<span class="dv">1</span>]), </span>
+<span id="cb4-39"><a href=""></a>           <span class="at">y =</span> <span class="fu">c</span>(y_real[<span class="dv">2</span>], y_hat[<span class="dv">2</span>], x1[<span class="dv">2</span>], x2[<span class="dv">2</span>]), </span>
+<span id="cb4-40"><a href=""></a>           <span class="at">z =</span> <span class="fu">c</span>(y_real[<span class="dv">3</span>]<span class="sc">+</span><span class="fl">0.5</span>, y_hat[<span class="dv">3</span>]<span class="sc">-</span><span class="fl">0.5</span>, x1[<span class="dv">3</span>], x2[<span class="dv">3</span>]),</span>
+<span id="cb4-41"><a href=""></a>           <span class="at">text =</span> <span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"Proyección"</span>, <span class="st">"X1"</span>, <span class="st">"X2"</span>), </span>
+<span id="cb4-42"><a href=""></a>           <span class="at">textfont =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">16</span>), <span class="at">showlegend =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-43"><a href=""></a>  </span>
+<span id="cb4-44"><a href=""></a>  <span class="fu">layout</span>(<span class="at">scene =</span> <span class="fu">list</span>(</span>
+<span id="cb4-45"><a href=""></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">""</span>, <span class="at">showgrid =</span> <span class="cn">FALSE</span>, <span class="at">zeroline=</span><span class="cn">FALSE</span>, <span class="at">showticklabels=</span><span class="cn">FALSE</span>),</span>
+<span id="cb4-46"><a href=""></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">""</span>, <span class="at">showgrid =</span> <span class="cn">FALSE</span>, <span class="at">zeroline=</span><span class="cn">FALSE</span>, <span class="at">showticklabels=</span><span class="cn">FALSE</span>),</span>
+<span id="cb4-47"><a href=""></a>    <span class="at">zaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">""</span>, <span class="at">showgrid =</span> <span class="cn">FALSE</span>, <span class="at">zeroline=</span><span class="cn">FALSE</span>, <span class="at">showticklabels=</span><span class="cn">FALSE</span>),</span>
+<span id="cb4-48"><a href=""></a>    <span class="at">camera =</span> <span class="fu">list</span>(<span class="at">eye =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">z =</span> <span class="fl">0.5</span>))</span>
+<span id="cb4-49"><a href=""></a>  ),</span>
+<span id="cb4-50"><a href=""></a>  <span class="at">title =</span> <span class="st">"Interpretación Geométrica"</span>,</span>
+<span id="cb4-51"><a href=""></a>  <span class="at">margin =</span> <span class="fu">list</span>(<span class="at">l=</span><span class="dv">0</span>, <span class="at">r=</span><span class="dv">0</span>, <span class="at">b=</span><span class="dv">0</span>, <span class="at">t=</span><span class="dv">50</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-e65e3e1ac60c2f4744ae" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-e65e3e1ac60c2f4744ae">{"x":{"visdat":{"651017aa7a6a":["function () ","plotlyVisDat"]},"cur_data":"651017aa7a6a","attrs":{"651017aa7a6a":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"mesh3d","x":[0,6,6,0],"y":[0,0,5,5],"z":[0,0,0,0],"i":[0,0],"j":[1,2],"k":[2,3],"opacity":0.5,"color":["yellow"],"name":"Espacio Col(X)","hoverinfo":"none","inherit":true},"651017aa7a6a.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[0,4],"y":[0,3],"z":[0,5],"type":"scatter3d","mode":"lines","line":{"color":"red","width":5},"name":"Vector Y","inherit":true},"651017aa7a6a.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[0,4],"y":[0,3],"z":[0,0],"type":"scatter3d","mode":"lines","line":{"color":"blue","width":4},"name":"Proyección Y","inherit":true},"651017aa7a6a.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[4,4],"y":[3,3],"z":[0,5],"type":"scatter3d","mode":"lines","line":{"color":"red","dash":"dash","width":4},"name":"Error (e)","inherit":true},"651017aa7a6a.4":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[0,5],"y":[0,1],"z":[0,0],"type":"scatter3d","mode":"lines","line":{"color":"black","width":3},"name":"X1","inherit":true},"651017aa7a6a.5":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[0,1],"y":[0,4],"z":[0,0],"type":"scatter3d","mode":"lines","line":{"color":"black","width":3},"name":"X2","inherit":true},"651017aa7a6a.6":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[4,4,5,1],"y":[3,3,1,4],"z":[5.5,-0.5,0,0],"text":["Y","Proyección","X1","X2"],"type":"scatter3d","mode":"text","textfont":{"color":"black","size":16},"showlegend":false,"inherit":true}},"layout":{"margin":{"b":0,"l":0,"t":50,"r":0},"scene":{"xaxis":{"title":"","showgrid":false,"zeroline":false,"showticklabels":false},"yaxis":{"title":"","showgrid":false,"zeroline":false,"showticklabels":false},"zaxis":{"title":"","showgrid":false,"zeroline":false,"showticklabels":false},"camera":{"eye":{"x":1.5,"y":-1.5,"z":0.5}}},"title":"Interpretación Geométrica","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"type":"mesh3d","x":[0,6,6,0],"y":[0,0,5,5],"z":[0,0,0,0],"i":[0,0],"j":[1,2],"k":[2,3],"opacity":0.5,"name":"Espacio Col(X)","hoverinfo":"none","frame":null},{"x":[0,4],"y":[0,3],"z":[0,5],"type":"scatter3d","mode":"lines","line":{"color":"red","width":5},"name":"Vector Y","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[0,4],"y":[0,3],"z":[0,0],"type":"scatter3d","mode":"lines","line":{"color":"blue","width":4},"name":"Proyección Y","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[4,4],"y":[3,3],"z":[0,5],"type":"scatter3d","mode":"lines","line":{"color":"red","dash":"dash","width":4},"name":"Error (e)","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[0,5],"y":[0,1],"z":[0,0],"type":"scatter3d","mode":"lines","line":{"color":"black","width":3},"name":"X1","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[0,1],"y":[0,4],"z":[0,0],"type":"scatter3d","mode":"lines","line":{"color":"black","width":3},"name":"X2","marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null},{"x":[4,4,5,1],"y":[3,3,1,4],"z":[5.5,-0.5,0,0],"text":["Y","Proyección","X1","X2"],"type":"scatter3d","mode":"text","textfont":{"color":"black","size":16},"showlegend":false,"marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"line":{"color":"rgba(227,119,194,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="coeficiente-de-determinación" class="slide level2">
+<h2>Coeficiente de Determinación</h2>
+<p>Es una medida de bondad de ajuste, que indica que tan bien ajusta el modelo a los datos utilizados para estimar los coeficientes.</p>
+<p><span class="math display">\[R^2 = 1-\dfrac{SCR}{SCT}\]</span></p>
+<p>donde <span class="math inline">\(SCT = \sum_{i=1}^n(Y_i-\bar{Y})^2\)</span>.</p>
+<p>Esta medida se interpreta como la proporción de la varianza de la variable respuesta <span class="math inline">\(Y\)</span> que está siendo explicada por las covariables y el modelo lineal utilizado.</p>
+</section>
+<section id="regresión-lineal-múltiple-ejemplo-mtcars" class="slide level2">
+<h2>Regresión Lineal Múltiple (Ejemplo mtcars)</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co">#Modelo</span></span>
+<span id="cb5-2"><a href=""></a>modelo_multi <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>hp<span class="sc">+</span>wt, <span class="at">data=</span>mtcars)</span>
+<span id="cb5-3"><a href=""></a><span class="co">#Plano</span></span>
+<span id="cb5-4"><a href=""></a>eje_x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(mtcars<span class="sc">$</span>hp), <span class="fu">max</span>(mtcars<span class="sc">$</span>hp), <span class="at">length.out =</span> <span class="dv">20</span>)</span>
+<span id="cb5-5"><a href=""></a>eje_y <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(mtcars<span class="sc">$</span>wt), <span class="fu">max</span>(mtcars<span class="sc">$</span>wt), <span class="at">length.out =</span> <span class="dv">20</span>)</span>
+<span id="cb5-6"><a href=""></a>plano_grid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">hp =</span> eje_x, <span class="at">wt =</span> eje_y)</span>
+<span id="cb5-7"><a href=""></a>plano_grid<span class="sc">$</span>mpg <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_multi, <span class="at">newdata =</span> plano_grid) <span class="co">#Prediccion (hiperplano)</span></span>
+<span id="cb5-8"><a href=""></a></span>
+<span id="cb5-9"><a href=""></a><span class="co">#Respuesta</span></span>
+<span id="cb5-10"><a href=""></a>matriz_z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(plano_grid<span class="sc">$</span>mpg, <span class="at">nrow =</span> <span class="fu">length</span>(eje_x), <span class="at">ncol =</span> <span class="fu">length</span>(eje_y))</span>
+<span id="cb5-11"><a href=""></a></span>
+<span id="cb5-12"><a href=""></a><span class="co"># Ajustes</span></span>
+<span id="cb5-13"><a href=""></a>residuos_x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rbind</span>(mtcars<span class="sc">$</span>hp, mtcars<span class="sc">$</span>hp, <span class="cn">NA</span>))</span>
+<span id="cb5-14"><a href=""></a>residuos_y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rbind</span>(mtcars<span class="sc">$</span>wt, mtcars<span class="sc">$</span>wt, <span class="cn">NA</span>))</span>
+<span id="cb5-15"><a href=""></a>residuos_z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rbind</span>(mtcars<span class="sc">$</span>mpg, <span class="fu">fitted</span>(modelo_multi), <span class="cn">NA</span>))</span>
+<span id="cb5-16"><a href=""></a></span>
+<span id="cb5-17"><a href=""></a><span class="co">#Grafico 3d</span></span>
+<span id="cb5-18"><a href=""></a>figura_3d <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-19"><a href=""></a>  <span class="co">#Agregar Hiperplano</span></span>
+<span id="cb5-20"><a href=""></a>  <span class="fu">add_surface</span>(<span class="at">x =</span> <span class="sc">~</span>eje_x, <span class="at">y =</span> <span class="sc">~</span>eje_y, <span class="at">z =</span> <span class="sc">~</span><span class="fu">t</span>(matriz_z),</span>
+<span id="cb5-21"><a href=""></a>              <span class="at">opacity =</span> <span class="fl">0.5</span>, <span class="at">colorscale =</span> <span class="st">"Blues"</span>, <span class="at">showscale =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb5-22"><a href=""></a>              <span class="at">name =</span> <span class="st">"Plano MCO"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-23"><a href=""></a>  </span>
+<span id="cb5-24"><a href=""></a>  <span class="co">#Agregar los puntos</span></span>
+<span id="cb5-25"><a href=""></a>  <span class="fu">add_markers</span>(<span class="at">x =</span> <span class="sc">~</span>mtcars<span class="sc">$</span>hp, <span class="at">y =</span> <span class="sc">~</span>mtcars<span class="sc">$</span>wt, <span class="at">z =</span> <span class="sc">~</span>mtcars<span class="sc">$</span>mpg,</span>
+<span id="cb5-26"><a href=""></a>              <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">4</span>), </span>
+<span id="cb5-27"><a href=""></a>              <span class="at">name =</span> <span class="st">"Observaciones"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-28"><a href=""></a>  </span>
+<span id="cb5-29"><a href=""></a>  <span class="co">#Graficar los residuos</span></span>
+<span id="cb5-30"><a href=""></a>  <span class="fu">add_paths</span>(<span class="at">x =</span> <span class="sc">~</span>residuos_x, <span class="at">y =</span> <span class="sc">~</span>residuos_y, <span class="at">z =</span> <span class="sc">~</span>residuos_z,</span>
+<span id="cb5-31"><a href=""></a>            <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"red"</span>, <span class="at">dash =</span> <span class="st">"dot"</span>, <span class="at">width =</span> <span class="dv">3</span>), </span>
+<span id="cb5-32"><a href=""></a>            <span class="at">name =</span> <span class="st">"Residuos"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-33"><a href=""></a>  </span>
+<span id="cb5-34"><a href=""></a>  <span class="co">#Configurar los ejes</span></span>
+<span id="cb5-35"><a href=""></a>  <span class="fu">layout</span>(</span>
+<span id="cb5-36"><a href=""></a>    <span class="at">scene =</span> <span class="fu">list</span>(</span>
+<span id="cb5-37"><a href=""></a>      <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Potencia (hp)"</span>),</span>
+<span id="cb5-38"><a href=""></a>      <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Peso (wt)"</span>),</span>
+<span id="cb5-39"><a href=""></a>      <span class="at">zaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Rendimiento (mpg)"</span>),</span>
+<span id="cb5-40"><a href=""></a>      <span class="at">camera =</span> <span class="fu">list</span>(</span>
+<span id="cb5-41"><a href=""></a>        <span class="at">eye =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fl">1.75</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">1.95</span>, <span class="at">z =</span> <span class="fl">1.15</span>) <span class="co"># &lt;-- Ángulo </span></span>
+<span id="cb5-42"><a href=""></a>      )</span>
+<span id="cb5-43"><a href=""></a>    ), </span>
+<span id="cb5-44"><a href=""></a>    <span class="at">title =</span> <span class="st">"Regresión Múltiple"</span></span>
+<span id="cb5-45"><a href=""></a>  )</span>
+<span id="cb5-46"><a href=""></a></span>
+<span id="cb5-47"><a href=""></a><span class="co"># Mostrar figura</span></span>
+<span id="cb5-48"><a href=""></a>figura_3d</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-ca763cedccae7175e787" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-ca763cedccae7175e787">{"x":{"visdat":{"651063fc583c":["function () ","plotlyVisDat"]},"cur_data":"651063fc583c","attrs":{"651063fc583c":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":{},"type":"surface","x":{},"y":{},"opacity":0.5,"colorscale":"Blues","showscale":false,"name":"Plano MCO","inherit":true},"651063fc583c.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","marker":{"color":"black","size":4},"name":"Observaciones","inherit":true},"651063fc583c.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"lines","line":{"color":"red","dash":"dot","width":3},"name":"Residuos","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Potencia (hp)"},"yaxis":{"title":"Peso (wt)"},"zaxis":{"title":"Rendimiento (mpg)"},"camera":{"eye":{"x":1.75,"y":-1.95,"z":1.1499999999999999}}},"title":"Regresión Múltiple","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"t(matriz_z)<br />mtcars$mpg<br />residuos_z","ticklen":2},"colorscale":"Blues","showscale":false,"z":[[29.70791896011654,29.234669276119089,28.761419592121637,28.288169908124186,27.814920224126734,27.341670540129282,26.868420856131831,26.395171172134386,25.921921488136935,25.448671804139483,24.975422120142031,24.50217243614458,24.028922752147128,23.55567306814968,23.082423384152229,22.609173700154781,22.135924016157329,21.662674332159877,21.189424648162426,20.716174964164978],[28.909698116245767,28.436448432248316,27.963198748250864,27.489949064253413,27.016699380255961,26.543449696258509,26.070200012261058,25.596950328263613,25.123700644266162,24.65045096026871,24.177201276271258,23.703951592273807,23.230701908276355,22.757452224278907,22.284202540281456,21.810952856284008,21.337703172286556,20.864453488289104,20.391203804291653,19.917954120294205],[28.111477272374991,27.638227588377539,27.164977904380088,26.691728220382636,26.218478536385184,25.745228852387733,25.271979168390281,24.798729484392837,24.325479800395385,23.852230116397934,23.378980432400482,22.90573074840303,22.432481064405579,21.959231380408134,21.485981696410683,21.012732012413231,20.539482328415779,20.066232644418328,19.592982960420876,19.119733276423432],[27.313256428504218,26.840006744506766,26.366757060509315,25.893507376511863,25.420257692514411,24.94700800851696,24.473758324519508,24.000508640522064,23.527258956524612,23.054009272527161,22.580759588529709,22.107509904532257,21.634260220534806,21.161010536537361,20.68776085253991,20.214511168542458,19.741261484545007,19.268011800547555,18.794762116550103,18.321512432552659],[26.515035584633445,26.041785900635993,25.568536216638542,25.09528653264109,24.622036848643639,24.148787164646187,23.675537480648735,23.202287796651291,22.729038112653839,22.255788428656388,21.782538744658936,21.309289060661484,20.836039376664033,20.362789692666585,19.889540008669133,19.416290324671685,18.943040640674234,18.469790956676782,17.99654127267933,17.523291588681882],[25.716814740762672,25.24356505676522,24.770315372767769,24.297065688770317,23.823816004772866,23.350566320775414,22.877316636777962,22.404066952780518,21.930817268783066,21.457567584785615,20.984317900788163,20.511068216790711,20.03781853279326,19.564568848795812,19.09131916479836,18.618069480800912,18.144819796803461,17.671570112806009,17.198320428808557,16.725070744811109],[24.918593896891899,24.445344212894447,23.972094528896996,23.498844844899544,23.025595160902093,22.552345476904641,22.079095792907189,21.605846108909745,21.132596424912293,20.659346740914842,20.18609705691739,19.712847372919938,19.239597688922487,18.766348004925035,18.293098320927584,17.819848636930139,17.346598952932688,16.873349268935236,16.400099584937784,15.926849900940335],[24.120373053021122,23.647123369023671,23.173873685026219,22.700624001028768,22.227374317031316,21.754124633033864,21.280874949036413,20.807625265038968,20.334375581041517,19.861125897044065,19.387876213046614,18.914626529049162,18.44137684505171,17.968127161054262,17.494877477056811,17.021627793059363,16.548378109061911,16.075128425064459,15.601878741067008,15.12862905706956],[23.322152209150349,22.848902525152898,22.375652841155446,21.902403157157995,21.429153473160543,20.955903789163091,20.48265410516564,20.009404421168195,19.536154737170744,19.062905053173292,18.589655369175841,18.116405685178389,17.643156001180937,17.169906317183489,16.696656633186038,16.22340694918859,15.750157265191138,15.276907581193687,14.803657897196235,14.330408213198787],[22.523931365279577,22.050681681282125,21.577431997284673,21.104182313287222,20.63093262928977,20.157682945292319,19.684433261294867,19.211183577297422,18.737933893299971,18.264684209302519,17.791434525305068,17.318184841307616,16.844935157310164,16.371685473312716,15.898435789315265,15.425186105317817,14.951936421320365,14.478686737322914,14.005437053325462,13.532187369328014],[21.7257105214088,21.252460837411348,20.779211153413897,20.305961469416445,19.832711785418994,19.359462101421542,18.88621241742409,18.412962733426646,17.939713049429194,17.466463365431743,16.993213681434291,16.51996399743684,16.046714313439388,15.573464629441942,15.10021494544449,14.626965261447042,14.15371557744959,13.680465893452139,13.207216209454687,12.733966525457239],[20.927489677538027,20.454239993540575,19.980990309543124,19.507740625545672,19.034490941548221,18.561241257550769,18.087991573553317,17.614741889555873,17.141492205558421,16.66824252156097,16.194992837563518,15.721743153566068,15.248493469568617,14.775243785571169,14.301994101573717,13.828744417576269,13.355494733578817,12.882245049581366,12.408995365583914,11.935745681586466],[20.129268833667254,19.656019149669802,19.182769465672351,18.709519781674899,18.236270097677448,17.763020413679996,17.289770729682544,16.8165210456851,16.343271361687648,15.870021677690199,15.396771993692747,14.923522309695295,14.450272625697844,13.977022941700396,13.503773257702944,13.030523573705496,12.557273889708044,12.084024205710593,11.610774521713141,11.137524837715693],[19.331047989796481,18.857798305799029,18.384548621801578,17.911298937804126,17.438049253806675,16.964799569809223,16.491549885811772,16.018300201814327,15.545050517816875,15.071800833819424,14.598551149821972,14.125301465824521,13.652051781827069,13.178802097829621,12.705552413832169,12.232302729834721,11.75905304583727,11.285803361839818,10.812553677842367,10.339303993844918],[18.532827145925705,18.059577461928253,17.586327777930801,17.11307809393335,16.639828409935898,16.166578725938447,15.693329041940995,15.22007935794355,14.746829673946099,14.273579989948647,13.800330305951196,13.327080621953744,12.853830937956293,12.380581253958844,11.907331569961393,11.434081885963945,10.960832201966493,10.487582517969042,10.01433283397159,9.541083149974142],[17.734606302054935,17.261356618057484,16.788106934060032,16.31485725006258,15.841607566065129,15.368357882067677,14.895108198070226,14.421858514072781,13.948608830075329,13.475359146077878,13.002109462080426,12.528859778082975,12.055610094085523,11.582360410088075,11.109110726090623,10.635861042093175,10.162611358095724,9.6893616740982722,9.2161119901008206,8.7428623061033726],[16.936385458184159,16.463135774186707,15.989886090189255,15.516636406191804,15.043386722194352,14.570137038196901,14.096887354199449,13.623637670202005,13.150387986204553,12.677138302207101,12.20388861820965,11.730638934212198,11.257389250214747,10.784139566217299,10.310889882219847,9.8376401982223989,9.3643905142249473,8.8911408302274957,8.4178911462300441,7.944641462232596],[16.138164614313389,15.664914930315938,15.191665246318486,14.718415562321034,14.245165878323583,13.771916194326131,13.29866651032868,12.825416826331235,12.352167142333784,11.878917458336332,11.40566777433888,10.932418090341429,10.459168406343977,9.9859187223465291,9.5126690383490775,9.0394193543516295,8.5661696703541779,8.0929199863567263,7.6196703023592747,7.1464206183618266],[15.339943770442613,14.866694086445161,14.39344440244771,13.920194718450258,13.446945034452806,12.973695350455355,12.500445666457903,12.027195982460459,11.553946298463007,11.080696614465555,10.607446930468104,10.134197246470652,9.6609475624732006,9.1876978784757526,8.714448194478301,8.2411985104808529,7.7679488264834013,7.2946991424859497,6.8214494584884982,6.3481997744910501],[14.54172292657184,14.068473242574388,13.595223558576937,13.121973874579485,12.648724190582033,12.175474506584582,11.70222482258713,11.228975138589686,10.755725454592234,10.282475770594782,9.8092260865973309,9.3359764025998793,8.8627267186024277,8.3894770346049796,7.916227350607528,7.44297766661008,6.9697279826126284,6.4964782986151768,6.0232286146177252,5.5499789306202771]],"type":"surface","x":[52,66.89473684210526,81.78947368421052,96.684210526315795,111.57894736842105,126.47368421052632,141.36842105263159,156.26315789473685,171.15789473684211,186.05263157894737,200.94736842105263,215.84210526315789,230.73684210526318,245.63157894736844,260.5263157894737,275.42105263157896,290.31578947368422,305.21052631578948,320.10526315789474,335],"y":[1.5129999999999999,1.7188421052631577,1.9246842105263158,2.1305263157894734,2.3363684210526316,2.5422105263157895,2.7480526315789473,2.9538947368421056,3.1597368421052634,3.3655789473684212,3.5714210526315791,3.7772631578947369,3.9831052631578947,4.1889473684210525,4.3947894736842112,4.6006315789473682,4.8064736842105269,5.0123157894736838,5.2181578947368426,5.4240000000000004],"opacity":0.5,"name":"Plano MCO","frame":null},{"x":[110,110,93,110,175,105,245,62,95,123,123,180,180,180,205,215,230,66,52,65,97,150,150,245,175,66,91,113,264,175,335,109],"y":[2.6200000000000001,2.875,2.3199999999999998,3.2149999999999999,3.4399999999999999,3.46,3.5699999999999998,3.1899999999999999,3.1499999999999999,3.4399999999999999,3.4399999999999999,4.0700000000000003,3.73,3.7799999999999998,5.25,5.4240000000000004,5.3449999999999998,2.2000000000000002,1.615,1.835,2.4649999999999999,3.52,3.4350000000000001,3.8399999999999999,3.8450000000000002,1.9350000000000001,2.1400000000000001,1.5129999999999999,3.1699999999999999,2.77,3.5699999999999998,2.7799999999999998],"z":[21,21,22.800000000000001,21.399999999999999,18.699999999999999,18.100000000000001,14.300000000000001,24.399999999999999,22.800000000000001,19.199999999999999,17.800000000000001,16.399999999999999,17.300000000000001,15.199999999999999,10.4,10.4,14.699999999999999,32.399999999999999,30.399999999999999,33.899999999999999,21.5,15.5,15.199999999999999,13.300000000000001,19.199999999999999,27.300000000000001,26,30.399999999999999,15.800000000000001,19.699999999999999,15,21.399999999999999],"type":"scatter3d","mode":"markers","marker":{"color":"black","size":4,"line":{"color":"rgba(255,127,14,1)"}},"name":"Observaciones","error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[110,110,null,110,110,null,93,93,null,110,110,null,175,175,null,105,105,null,245,245,null,62,62,null,95,95,null,123,123,null,123,123,null,180,180,null,180,180,null,180,180,null,205,205,null,215,215,null,230,230,null,66,66,null,52,52,null,65,65,null,97,97,null,150,150,null,150,150,null,245,245,null,175,175,null,66,66,null,91,91,null,113,113,null,264,264,null,175,175,null,335,335,null,109,109],"y":[2.6200000000000001,2.6200000000000001,null,2.875,2.875,null,2.3199999999999998,2.3199999999999998,null,3.2149999999999999,3.2149999999999999,null,3.4399999999999999,3.4399999999999999,null,3.46,3.46,null,3.5699999999999998,3.5699999999999998,null,3.1899999999999999,3.1899999999999999,null,3.1499999999999999,3.1499999999999999,null,3.4399999999999999,3.4399999999999999,null,3.4399999999999999,3.4399999999999999,null,4.0700000000000003,4.0700000000000003,null,3.73,3.73,null,3.7799999999999998,3.7799999999999998,null,5.25,5.25,null,5.4240000000000004,5.4240000000000004,null,5.3449999999999998,5.3449999999999998,null,2.2000000000000002,2.2000000000000002,null,1.615,1.615,null,1.835,1.835,null,2.4649999999999999,2.4649999999999999,null,3.52,3.52,null,3.4350000000000001,3.4350000000000001,null,3.8399999999999999,3.8399999999999999,null,3.8450000000000002,3.8450000000000002,null,1.9350000000000001,1.9350000000000001,null,2.1400000000000001,2.1400000000000001,null,1.5129999999999999,1.5129999999999999,null,3.1699999999999999,3.1699999999999999,null,2.77,2.77,null,3.5699999999999998,3.5699999999999998,null,2.7799999999999998,2.7799999999999998],"z":[21,23.572329403309286,null,21,22.583482563996032,null,22.800000000000001,25.275818724727365,null,21.399999999999999,21.265020111578441,null,18.699999999999999,18.327266640696923,null,18.100000000000001,20.4738163146001,null,14.300000000000001,15.599042355433046,null,24.399999999999999,22.887067335282286,null,22.800000000000001,21.993673314567157,null,19.199999999999999,19.979459883769294,null,17.800000000000001,19.979459883769294,null,16.399999999999999,15.725368538071168,null,17.300000000000001,17.043830990488761,null,15.199999999999999,16.849939453368528,null,10.4,10.355204587479623,null,10.4,9.362732568479597,null,14.699999999999999,9.1924869923971535,null,32.399999999999999,26.59902798233427,null,30.399999999999999,29.312380224391262,null,33.899999999999999,28.046209150294143,null,21.5,24.586441479150043,null,15.5,18.811363855858573,null,15.199999999999999,19.140979468962971,null,13.300000000000001,14.552028054983783,null,19.199999999999999,16.756745190023025,null,27.300000000000001,27.626653129071514,null,26,26.037374152324528,null,30.399999999999999,27.76976919420472,null,15.800000000000001,16.546488659733857,null,19.699999999999999,20.925413238108057,null,15,12.739477127038555,null,21.399999999999999,22.983649431506635],"type":"scatter3d","mode":"lines","line":{"color":"red","dash":"dot","width":3},"name":"Residuos","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="regresión-lineal-múltiple-ejemplo-mtcars-1" class="slide level2">
+<h2>Regresión Lineal Múltiple (Ejemplo mtcars)</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">summary</span>(modelo_multi)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = mpg ~ hp + wt, data = mtcars)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-3.941 -1.600 -0.182  1.050  5.854 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 37.22727    1.59879  23.285  &lt; 2e-16 ***
+hp          -0.03177    0.00903  -3.519  0.00145 ** 
+wt          -3.87783    0.63273  -6.129 1.12e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.593 on 29 degrees of freedom
+Multiple R-squared:  0.8268,    Adjusted R-squared:  0.8148 
+F-statistic: 69.21 on 2 and 29 DF,  p-value: 9.109e-12</code></pre>
+</div>
+</div>
+<p><strong>Interpretación:</strong></p>
+<div style="font-size: 70%;">
+<ul>
+<li><span class="math inline">\(\hat{\beta}_0\)</span> (Intercepto): El Rendimiento esperado es de 37.22 mpg si la potencia y el peso son cero (carece de sentido práctico).</li>
+<li><span class="math inline">\(\hat{\beta}_1\)</span> (Potencia): Por cada caballo de fuerza adicional habrá una reducción promedio de 0.03 mpg , manteniendo las demás variables constantes.</li>
+<li><span class="math inline">\(\hat{\beta}_2\)</span> (Peso): Por cada 1000 lbs adicionales habrá una reducción promedio de 3.88 mpg , manteniendo la potencia constante.</li>
+<li><span class="math inline">\(R^2\)</span>: El 81.47% de la variabilidad del rendimiento está siendo explicada por el modelo.</li>
+</ul>
+</div>
+</section>
+<section id="supuestos" class="slide level2">
+<h2>Supuestos</h2>
+<p><strong>En el enfoque clásico existen supuestos que se deben cumplir:</strong></p>
+<p>Linealidad entre la variable respuesta y las covariables.</p>
+<p>Normalidad de los errores <span class="math inline">\(\varepsilon_i \overset{i.i.d.}{\sim} N(0, \sigma^2)\)</span>.</p>
+<p>Homocedasticidad, varianza constante <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Ausencia de multicolinealidad (las covariables deben ser linealmente independientes), la correlacción entre las variables predictoras debe ser baja.</p>
+<p>Indepedencia de las observaciones.</p>
+</section>
+<section id="supuestos-1" class="slide level2">
+<h2>Supuestos</h2>
+<p><strong>Normalidad</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="co"># Prueba de normalidad de Shapiro-Wilk</span></span>
+<span id="cb8-2"><a href=""></a><span class="fu">shapiro.test</span>(modelo_multi<span class="sc">$</span>residuals)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  modelo_multi$residuals
+W = 0.92792, p-value = 0.03427</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">library</span>(car)</span>
+<span id="cb10-2"><a href=""></a><span class="co"># Gráfico Q-Q para análisis de residuos</span></span>
+<span id="cb10-3"><a href=""></a><span class="fu">qqPlot</span>(modelo_multi, <span class="at">id =</span> <span class="cn">FALSE</span>, <span class="at">main =</span> <span class="st">"QQ-plot"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="XS-0100_17_files/figure-revealjs/unnamed-chunk-9-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="supuestos-2" class="slide level2">
+<h2>Supuestos</h2>
+<p><strong>Homocedasticidad</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb11-2"><a href=""></a><span class="co">#Prueba Breusch Pagan</span></span>
+<span id="cb11-3"><a href=""></a><span class="fu">bptest</span>(modelo_multi)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  modelo_multi
+BP = 0.88072, df = 2, p-value = 0.6438</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="co"># Residuales estadarizados vs predichos</span></span>
+<span id="cb13-2"><a href=""></a><span class="fu">plot</span>(modelo_multi,<span class="dv">3</span>, <span class="at">main =</span> <span class="st">"Residuales estadarizados vs predichos"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="XS-0100_17_files/figure-revealjs/unnamed-chunk-11-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="supuestos-3" class="slide level2">
+<h2>Supuestos</h2>
+<p><strong>Linealidad Y vs X</strong></p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">crPlots</span>(modelo_multi, <span class="at">main =</span> <span class="st">"Residuales Parciales"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="XS-0100_17_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><p>Se espera una relación lineal entre las covariables y los residuales parciales.</p>
+</section>
+<section id="supuestos-4" class="slide level2">
+<h2>Supuestos</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Multicolinealidad</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">vif</span>(modelo_multi)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      hp       wt 
+1.766625 1.766625 </code></pre>
+</div>
+</div>
+<div style="font-size: 70%;">
+<p>Se espera que el factor de la inflación de la varianza (VIF) sea menor a 10, en caso contrario es un indicador de la existencia de multicolinealidad.</p>
+</div>
+<p><strong>Independencia</strong></p>
+<div style="font-size: 80%; color: blue">
+<p>En una regresión el supuesto de independencia está más relacionado al contexto y diseño de la investigación, por ejemplo observaciones medidas en el tiempo (mediciones del tipo de cambio), observaciones donde existe correlación espacial (mediciones de homidicios cantonales) incumplen por su naturaleza este supuesto e imposibilita el uso de la regresión. A su vez hay métodos para validar si por otras situaciones se presenta el incumplimiento de este supuesto.</p>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Independencia</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="co">#Autocorrelación de los residuos</span></span>
+<span id="cb17-2"><a href=""></a><span class="fu">acf</span>(modelo_multi<span class="sc">$</span>residuals, <span class="at">main =</span> <span class="st">"Función de Autocorrelación de los Residuos"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="XS-0100_17_files/figure-revealjs/unnamed-chunk-14-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="regresión-con-variables-cualitativas" class="slide level2">
+<h2>Regresión con variables cualitativas:</h2>
+<p>Ahora consideremos la variable “am” (Transmisión), donde 0 = automático y 1 = manual.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>mtcars<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>am)</span>
+<span id="cb18-2"><a href=""></a>modelo_multi2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>hp<span class="sc">+</span>wt<span class="sc">+</span>am, <span class="at">data=</span>mtcars)</span>
+<span id="cb18-3"><a href=""></a><span class="fu">summary</span>(modelo_multi2)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource small number-lines code-with-copy"><code class="sourceCode"><span id="cb19-1"><a href=""></a></span>
+<span id="cb19-2"><a href=""></a>Call:</span>
+<span id="cb19-3"><a href=""></a>lm(formula = mpg ~ hp + wt + am, data = mtcars)</span>
+<span id="cb19-4"><a href=""></a></span>
+<span id="cb19-5"><a href=""></a>Residuals:</span>
+<span id="cb19-6"><a href=""></a>    Min      1Q  Median      3Q     Max </span>
+<span id="cb19-7"><a href=""></a>-3.4221 -1.7924 -0.3788  1.2249  5.5317 </span>
+<span id="cb19-8"><a href=""></a></span>
+<span id="cb19-9"><a href=""></a>Coefficients:</span>
+<span id="cb19-10"><a href=""></a>             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span id="cb19-11"><a href=""></a>(Intercept) 34.002875   2.642659  12.867 2.82e-13 ***</span>
+<span id="cb19-12"><a href=""></a>hp          -0.037479   0.009605  -3.902 0.000546 ***</span>
+<span id="cb19-13"><a href=""></a>wt          -2.878575   0.904971  -3.181 0.003574 ** </span>
+<span id="cb19-14"><a href=""></a>am1          2.083710   1.376420   1.514 0.141268    </span>
+<span id="cb19-15"><a href=""></a>---</span>
+<span id="cb19-16"><a href=""></a>Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span id="cb19-17"><a href=""></a></span>
+<span id="cb19-18"><a href=""></a>Residual standard error: 2.538 on 28 degrees of freedom</span>
+<span id="cb19-19"><a href=""></a>Multiple R-squared:  0.8399,    Adjusted R-squared:  0.8227 </span>
+<span id="cb19-20"><a href=""></a>F-statistic: 48.96 on 3 and 28 DF,  p-value: 2.908e-11</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="regresión-con-variables-cualitativas-1" class="slide level2">
+<h2>Regresión con variables cualitativas:</h2>
+<p>El hiperplano de regresión es:</p>
+<p><span class="math display">\[\hat{mpg} = 34.002 - 0.037 Potencia - 2.88Peso + 2.084I_{T=manual}\]</span></p>
+<p><strong>Interpretación del coeficiente de transmisición:</strong></p>
+<ul>
+<li>Si el auto es de transmisión manual, el rendimiento aumenta en promedio 2.084 mpg.</li>
+</ul>
+<p>Esto en realidad implica la estimación de dos hiperplanos de manera conjunta.</p>
+</section>
+<section id="regresión-con-variables-cualitativas-2" class="slide level2">
+<h2>Regresión con variables cualitativas:</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="co">#Malla</span></span>
+<span id="cb20-2"><a href=""></a>eje_hp <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(mtcars<span class="sc">$</span>hp), <span class="fu">max</span>(mtcars<span class="sc">$</span>hp), <span class="at">length.out =</span> <span class="dv">20</span>)</span>
+<span id="cb20-3"><a href=""></a>eje_wt <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(mtcars<span class="sc">$</span>wt), <span class="fu">max</span>(mtcars<span class="sc">$</span>wt), <span class="at">length.out =</span> <span class="dv">20</span>)</span>
+<span id="cb20-4"><a href=""></a>grid_base <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">hp =</span> eje_hp, <span class="at">wt =</span> eje_wt)</span>
+<span id="cb20-5"><a href=""></a></span>
+<span id="cb20-6"><a href=""></a><span class="co">#Predicciones</span></span>
+<span id="cb20-7"><a href=""></a>grid_auto   <span class="ot">&lt;-</span> grid_base</span>
+<span id="cb20-8"><a href=""></a>grid_auto<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="dv">0</span>) <span class="co"># Transmisión automática</span></span>
+<span id="cb20-9"><a href=""></a>z_auto      <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">predict</span>(modelo_multi2, <span class="at">newdata =</span> grid_auto), </span>
+<span id="cb20-10"><a href=""></a>                      <span class="at">nrow =</span> <span class="fu">length</span>(eje_hp), <span class="at">ncol =</span> <span class="fu">length</span>(eje_wt))</span>
+<span id="cb20-11"><a href=""></a></span>
+<span id="cb20-12"><a href=""></a>grid_manual <span class="ot">&lt;-</span> grid_base</span>
+<span id="cb20-13"><a href=""></a>grid_manual<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="dv">1</span>) <span class="co"># Transmisión manual</span></span>
+<span id="cb20-14"><a href=""></a>z_manual    <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">predict</span>(modelo_multi2, <span class="at">newdata =</span> grid_manual), </span>
+<span id="cb20-15"><a href=""></a>                      <span class="at">nrow =</span> <span class="fu">length</span>(eje_hp), <span class="at">ncol =</span> <span class="fu">length</span>(eje_wt))</span>
+<span id="cb20-16"><a href=""></a></span>
+<span id="cb20-17"><a href=""></a><span class="co">#Gráfico</span></span>
+<span id="cb20-18"><a href=""></a><span class="fu">plot_ly</span>(<span class="at">height =</span> <span class="dv">550</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-19"><a href=""></a>  <span class="co"># Hiperplano para Transmisión Automática (am = 0) - Color Azul</span></span>
+<span id="cb20-20"><a href=""></a>  <span class="fu">add_surface</span>(<span class="at">x =</span> <span class="sc">~</span>eje_hp, <span class="at">y =</span> <span class="sc">~</span>eje_wt, <span class="at">z =</span> <span class="sc">~</span><span class="fu">t</span>(z_auto),</span>
+<span id="cb20-21"><a href=""></a>              <span class="at">opacity =</span> <span class="fl">0.4</span>, <span class="at">colorscale =</span> <span class="st">"Greens"</span>, <span class="at">showscale =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb20-22"><a href=""></a>              <span class="at">name =</span> <span class="st">"Auto (am=0)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-23"><a href=""></a>  </span>
+<span id="cb20-24"><a href=""></a>  <span class="co"># Hiperplano para Transmisión Manual (am = 1) - Color Rojo/Naranja</span></span>
+<span id="cb20-25"><a href=""></a>  <span class="fu">add_surface</span>(<span class="at">x =</span> <span class="sc">~</span>eje_hp, <span class="at">y =</span> <span class="sc">~</span>eje_wt, <span class="at">z =</span> <span class="sc">~</span><span class="fu">t</span>(z_manual),</span>
+<span id="cb20-26"><a href=""></a>              <span class="at">opacity =</span> <span class="fl">0.4</span>, <span class="at">colorscale =</span> <span class="st">"Blues"</span>, <span class="at">showscale =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb20-27"><a href=""></a>              <span class="at">name =</span> <span class="st">"Manual (am=1)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-28"><a href=""></a>  </span>
+<span id="cb20-29"><a href=""></a>  <span class="co"># Puntos observados coloreados según su tipo de transmisión real</span></span>
+<span id="cb20-30"><a href=""></a>  <span class="fu">add_markers</span>(<span class="at">data =</span> mtcars, <span class="at">x =</span> <span class="sc">~</span>hp, <span class="at">y =</span> <span class="sc">~</span>wt, <span class="at">z =</span> <span class="sc">~</span>mpg, </span>
+<span id="cb20-31"><a href=""></a>              <span class="at">color =</span> <span class="sc">~</span>am, <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#1f77b4"</span>, <span class="st">"#d62728"</span>), <span class="co"># 0 = Azul, 1 = Rojo</span></span>
+<span id="cb20-32"><a href=""></a>              <span class="at">size =</span> <span class="dv">4</span>, <span class="at">name =</span> <span class="sc">~</span><span class="fu">paste</span>(<span class="st">"Datos am ="</span>, am)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-33"><a href=""></a>  </span>
+<span id="cb20-34"><a href=""></a>  <span class="co"># Configuración estética de los ejes y leyendas</span></span>
+<span id="cb20-35"><a href=""></a>  <span class="fu">layout</span>(</span>
+<span id="cb20-36"><a href=""></a>    <span class="at">scene =</span> <span class="fu">list</span>(</span>
+<span id="cb20-37"><a href=""></a>      <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Potencia (hp)"</span>),</span>
+<span id="cb20-38"><a href=""></a>      <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Peso (wt)"</span>),</span>
+<span id="cb20-39"><a href=""></a>      <span class="at">zaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Rendimiento (mpg)"</span>),</span>
+<span id="cb20-40"><a href=""></a>      <span class="at">camera =</span> <span class="fu">list</span>(</span>
+<span id="cb20-41"><a href=""></a>        <span class="at">eye =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">1.95</span>, <span class="at">z =</span> <span class="dv">1</span>) <span class="co"># &lt;-- Ángulo </span></span>
+<span id="cb20-42"><a href=""></a>      )</span>
+<span id="cb20-43"><a href=""></a>    ),</span>
+<span id="cb20-44"><a href=""></a>    <span class="at">title =</span> <span class="st">"Hiperplanos Paralelos por Tipo de Transmisión"</span>,</span>
+<span id="cb20-45"><a href=""></a>    <span class="at">margin =</span> <span class="fu">list</span>(<span class="at">l =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">t =</span> <span class="dv">50</span>)</span>
+<span id="cb20-46"><a href=""></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="htmlwidget-ea72fd293c895a8dcae3" style="width:100%;height:550px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ea72fd293c895a8dcae3">{"x":{"visdat":{"6510a024990":["function () ","plotlyVisDat"],"6510a5738db":["function () ","data"]},"cur_data":"6510a5738db","attrs":{"6510a024990":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":{},"type":"surface","x":{},"y":{},"opacity":0.40000000000000002,"colorscale":"Greens","showscale":false,"name":"Auto (am=0)","inherit":true},"6510a024990.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":{},"type":"surface","x":{},"y":{},"opacity":0.40000000000000002,"colorscale":"Blues","showscale":false,"name":"Manual (am=1)","inherit":true},"6510a5738db":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","color":{},"colors":["#1f77b4","#d62728"],"size":4,"name":{},"inherit":true}},"layout":{"height":550,"margin":{"b":0,"l":0,"t":50,"r":0},"scene":{"xaxis":{"title":"Potencia (hp)"},"yaxis":{"title":"Peso (wt)"},"zaxis":{"title":"Rendimiento (mpg)"},"camera":{"eye":{"x":2,"y":-1.95,"z":1}}},"title":"Hiperplanos Paralelos por Tipo de Transmisión","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"t(z_auto)<br />t(z_manual)<br />am","ticklen":2},"colorscale":"Greens","showscale":false,"z":[[27.698696772247921,27.140461011994915,26.58222525174191,26.023989491488898,25.465753731235893,24.907517970982887,24.349282210729882,23.791046450476877,23.232810690223864,22.674574929970859,22.116339169717854,21.558103409464849,20.999867649211836,20.441631888958831,19.883396128705826,19.325160368452821,18.766924608199815,18.20868884794681,17.650453087693798,17.092217327440792],[27.106164748911084,26.547928988658075,25.98969322840507,25.431457468152061,24.873221707899056,24.314985947646051,23.756750187393042,23.198514427140037,22.640278666887028,22.082042906634022,21.523807146381017,20.965571386128012,20.407335625875,19.849099865621994,19.290864105368989,18.732628345115984,18.174392584862975,17.61615682460997,17.057921064356961,16.499685304103956],[26.513632725574247,25.955396965321238,25.397161205068233,24.838925444815224,24.280689684562219,23.722453924309214,23.164218164056205,22.6059824038032,22.047746643550191,21.489510883297186,20.93127512304418,20.373039362791175,19.814803602538163,19.256567842285158,18.698332082032152,18.140096321779147,17.581860561526138,17.023624801273133,16.465389041020124,15.907153280767119],[25.92110070223741,25.362864941984402,24.804629181731396,24.246393421478388,23.688157661225382,23.129921900972377,22.571686140719368,22.013450380466363,21.455214620213354,20.896978859960349,20.338743099707344,19.780507339454338,19.222271579201326,18.664035818948321,18.105800058695316,17.54756429844231,16.989328538189302,16.431092777936296,15.872857017683287,15.314621257430282],[25.328568678900574,24.770332918647561,24.212097158394556,23.653861398141551,23.095625637888546,22.53738987763554,21.979154117382528,21.420918357129523,20.862682596876517,20.304446836623512,19.746211076370507,19.187975316117502,18.629739555864489,18.071503795611484,17.513268035358479,16.955032275105474,16.396796514852461,15.838560754599458,15.280324994346449,14.722089234093444],[24.736036655563737,24.177800895310725,23.619565135057719,23.061329374804714,22.503093614551709,21.944857854298704,21.386622094045691,20.828386333792686,20.270150573539681,19.711914813286675,19.15367905303367,18.595443292780665,18.037207532527653,17.478971772274647,16.920736012021642,16.362500251768637,15.804264491515626,15.246028731262621,14.687792971009612,14.129557210756607],[24.143504632226897,23.585268871973888,23.027033111720883,22.468797351467874,21.910561591214869,21.352325830961863,20.794090070708855,20.235854310455849,19.67761855020284,19.119382789949835,18.56114702969683,18.002911269443825,17.444675509190812,16.886439748937807,16.328203988684802,15.769968228431797,15.211732468178788,14.653496707925783,14.095260947672774,13.537025187419768],[23.55097260889006,22.992736848637051,22.434501088384046,21.876265328131037,21.318029567878032,20.759793807625027,20.201558047372018,19.643322287119013,19.085086526866004,18.526850766612998,17.968615006359993,17.410379246106988,16.852143485853976,16.29390772560097,15.735671965347965,15.17743620509496,14.619200444841951,14.060964684588946,13.502728924335937,12.944493164082932],[22.958440585553223,22.400204825300214,21.841969065047209,21.2837333047942,20.725497544541195,20.16726178428819,19.609026024035181,19.050790263782176,18.492554503529167,17.934318743276162,17.376082983023156,16.817847222770151,16.259611462517139,15.701375702264134,15.143139942011128,14.584904181758123,14.026668421505114,13.468432661252109,12.9101969009991,12.351961140746095],[22.365908562216383,21.807672801963378,21.249437041710372,20.69120128145736,20.132965521204355,19.57472976095135,19.016494000698344,18.458258240445339,17.900022480192327,17.341786719939321,16.783550959686316,16.225315199433311,15.6670794391803,15.108843678927295,14.55060791867429,13.992372158421285,13.434136398168276,12.875900637915271,12.317664877662262,11.759429117409256],[21.773376538879546,21.215140778626541,20.656905018373536,20.098669258120523,19.540433497867518,18.982197737614513,18.423961977361508,17.865726217108502,17.30749045685549,16.749254696602485,16.191018936349479,15.632783176096476,15.074547415843464,14.516311655590458,13.958075895337453,13.399840135084448,12.841604374831439,12.283368614578434,11.725132854325425,11.16689709407242],[21.180844515542709,20.622608755289704,20.064372995036699,19.506137234783687,18.947901474530681,18.389665714277676,17.831429954024671,17.273194193771666,16.714958433518653,16.156722673265648,15.598486913012644,15.040251152759639,14.482015392506627,13.923779632253622,13.365543872000616,12.807308111747611,12.249072351494602,11.690836591241597,11.132600830988588,10.574365070735583],[20.588312492205873,20.030076731952867,19.471840971699862,18.91360521144685,18.355369451193845,17.797133690940839,17.238897930687834,16.680662170434829,16.122426410181816,15.564190649928813,15.005954889675808,14.447719129422802,13.88948336916979,13.331247608916785,12.77301184866378,12.214776088410774,11.656540328157766,11.09830456790476,10.540068807651751,9.9818330473987462],[19.995780468869036,19.437544708616027,18.879308948363022,18.321073188110013,17.762837427857008,17.204601667604003,16.646365907350994,16.088130147097988,15.52989438684498,14.971658626591974,14.413422866338969,13.855187106085964,13.296951345832952,12.738715585579946,12.180479825326941,11.622244065073936,11.064008304820927,10.505772544567922,9.9475367843149129,9.3893010240619077],[19.403248445532199,18.845012685279187,18.286776925026182,17.728541164773176,17.170305404520171,16.612069644267166,16.053833884014153,15.49559812376115,14.937362363508141,14.379126603255136,13.820890843002131,13.262655082749125,12.704419322496113,12.146183562243108,11.587947801990103,11.029712041737097,10.471476281484088,9.9132405212310832,9.3550047609780744,8.7967690007250692],[18.810716422195362,18.252480661942354,17.694244901689348,17.13600914143634,16.577773381183334,16.019537620930329,15.46130186067732,14.903066100424315,14.344830340171306,13.786594579918301,13.228358819665296,12.67012305941229,12.111887299159278,11.553651538906273,10.995415778653268,10.437180018400262,9.8789442581472535,9.3207084978942483,8.7624727376412395,8.2042369773882342],[18.218184398858522,17.659948638605513,17.101712878352508,16.543477118099499,15.985241357846494,15.427005597593489,14.86876983734048,14.310534077087475,13.752298316834466,13.194062556581461,12.635826796328455,12.07759103607545,11.519355275822438,10.961119515569433,10.402883755316427,9.844647995063422,9.2864122348104132,8.728176474557408,8.1699407143043992,7.6117049540513939],[17.625652375521689,17.06741661526868,16.509180855015675,15.950945094762666,15.392709334509661,14.834473574256656,14.276237814003647,13.718002053750642,13.159766293497633,12.601530533244627,12.043294772991622,11.485059012738617,10.926823252485605,10.368587492232599,9.8103517319795941,9.2521159717265888,8.69388021147358,8.1356444512205748,7.577408690967566,7.0191729307145607],[17.033120352184849,16.47488459193184,15.916648831678835,15.358413071425826,14.800177311172821,14.241941550919815,13.683705790666806,13.125470030413801,12.567234270160792,12.008998509907787,11.450762749654782,10.892526989401777,10.334291229148764,9.776055468895759,9.2178197086427538,8.6595839483897485,8.1013481881367397,7.5431124278837345,6.9848766676307257,6.4266409073777204],[16.440588328848012,15.882352568595003,15.324116808341998,14.765881048088989,14.207645287835984,13.649409527582979,13.09117376732997,12.532938007076964,11.974702246823956,11.41646648657095,10.858230726317945,10.29999496606494,9.7417592058119276,9.1835234455589223,8.6252876853059171,8.0670519250529118,7.508816164799903,6.9505804045468977,6.3923446442938889,5.8341088840408837]],"type":"surface","x":[52,66.89473684210526,81.78947368421052,96.684210526315795,111.57894736842105,126.47368421052632,141.36842105263159,156.26315789473685,171.15789473684211,186.05263157894737,200.94736842105263,215.84210526315789,230.73684210526318,245.63157894736844,260.5263157894737,275.42105263157896,290.31578947368422,305.21052631578948,320.10526315789474,335],"y":[1.5129999999999999,1.7188421052631577,1.9246842105263158,2.1305263157894734,2.3363684210526316,2.5422105263157895,2.7480526315789473,2.9538947368421056,3.1597368421052634,3.3655789473684212,3.5714210526315791,3.7772631578947369,3.9831052631578947,4.1889473684210525,4.3947894736842112,4.6006315789473682,4.8064736842105269,5.0123157894736838,5.2181578947368426,5.4240000000000004],"opacity":0.40000000000000002,"name":"Auto (am=0)","frame":null},{"colorbar":{"title":"t(z_auto)<br />t(z_manual)<br />am","ticklen":2},"colorscale":"Blues","showscale":false,"z":[[29.782406902571211,29.224171142318205,28.6659353820652,28.107699621812188,27.549463861559182,26.991228101306177,26.432992341053172,25.874756580800167,25.316520820547154,24.758285060294149,24.200049300041144,23.641813539788139,23.083577779535126,22.525342019282121,21.967106259029116,21.40887049877611,20.850634738523105,20.2923989782701,19.734163218017088,19.175927457764082],[29.189874879234374,28.631639118981365,28.07340335872836,27.515167598475351,26.956931838222346,26.39869607796934,25.840460317716332,25.282224557463326,24.723988797210318,24.165753036957312,23.607517276704307,23.049281516451302,22.491045756198289,21.932809995945284,21.374574235692279,20.816338475439274,20.258102715186265,19.69986695493326,19.141631194680251,18.583395434427246],[28.597342855897537,28.039107095644528,27.480871335391523,26.922635575138514,26.364399814885509,25.806164054632504,25.247928294379495,24.68969253412649,24.131456773873481,23.573221013620476,23.01498525336747,22.456749493114465,21.898513732861453,21.340277972608447,20.782042212355442,20.223806452102437,19.665570691849428,19.107334931596423,18.549099171343414,17.990863411090409],[28.0048108325607,27.446575072307692,26.888339312054686,26.330103551801677,25.771867791548672,25.213632031295667,24.655396271042658,24.097160510789653,23.538924750536644,22.980688990283639,22.422453230030634,21.864217469777628,21.305981709524616,20.747745949271611,20.189510189018606,19.6312744287656,19.073038668512591,18.514802908259586,17.956567148006577,17.398331387753572],[27.412278809223864,26.854043048970851,26.295807288717846,25.737571528464841,25.179335768211836,24.62110000795883,24.062864247705818,23.504628487452813,22.946392727199807,22.388156966946802,21.829921206693797,21.271685446440792,20.713449686187779,20.155213925934774,19.596978165681769,19.038742405428764,18.480506645175751,17.922270884922746,17.364035124669737,16.805799364416732],[26.819746785887027,26.261511025634015,25.703275265381009,25.145039505128004,24.586803744874999,24.028567984621994,23.470332224368981,22.912096464115976,22.353860703862971,21.795624943609965,21.23738918335696,20.679153423103955,20.120917662850943,19.562681902597937,19.004446142344932,18.446210382091927,17.887974621838914,17.329738861585909,16.7715031013329,16.213267341079895],[26.227214762550187,25.668979002297178,25.110743242044173,24.552507481791164,23.994271721538158,23.436035961285153,22.877800201032144,22.319564440779139,21.76132868052613,21.203092920273125,20.64485716002012,20.086621399767115,19.528385639514102,18.970149879261097,18.411914119008092,17.853678358755086,17.295442598502078,16.737206838249072,16.178971077996064,15.620735317743058],[25.63468273921335,25.076446978960341,24.518211218707336,23.959975458454327,23.401739698201322,22.843503937948316,22.285268177695308,21.727032417442302,21.168796657189294,20.610560896936288,20.052325136683283,19.494089376430278,18.935853616177265,18.37761785592426,17.819382095671255,17.26114633541825,16.702910575165241,16.144674814912236,15.586439054659227,15.028203294406222],[25.042150715876513,24.483914955623504,23.925679195370499,23.36744343511749,22.809207674864485,22.25097191461148,21.692736154358471,21.134500394105466,20.576264633852457,20.018028873599452,19.459793113346446,18.901557353093441,18.343321592840429,17.785085832587423,17.226850072334418,16.668614312081413,16.110378551828404,15.552142791575399,14.99390703132239,14.435671271069385],[24.449618692539673,23.891382932286668,23.333147172033662,22.77491141178065,22.216675651527645,21.658439891274639,21.100204131021634,20.541968370768629,19.983732610515617,19.425496850262611,18.867261090009606,18.309025329756601,17.750789569503588,17.192553809250583,16.634318048997578,16.076082288744573,15.517846528491564,14.959610768238559,14.40137500798555,13.843139247732545],[23.857086669202836,23.298850908949831,22.740615148696826,22.182379388443813,21.624143628190808,21.065907867937803,20.507672107684797,19.949436347431792,19.39120058717878,18.832964826925775,18.274729066672769,17.716493306419764,17.158257546166752,16.600021785913746,16.041786025660741,15.483550265407736,14.925314505154727,14.367078744901722,13.808842984648713,13.250607224395708],[23.264554645865999,22.706318885612994,22.148083125359989,21.589847365106976,21.031611604853971,20.473375844600966,19.915140084347961,19.356904324094955,18.798668563841943,18.240432803588938,17.682197043335933,17.123961283082927,16.565725522829915,16.00748976257691,15.449254002323904,14.891018242070899,14.33278248181789,13.774546721564885,13.216310961311876,12.658075201058871],[22.672022622529163,22.113786862276157,21.555551102023152,20.99731534177014,20.439079581517134,19.880843821264129,19.322608061011124,18.764372300758119,18.206136540505106,17.647900780252101,17.089665019999096,16.531429259746091,15.973193499493078,15.414957739240073,14.856721978987068,14.298486218734062,13.740250458481054,13.182014698228048,12.62377893797504,12.065543177722034],[22.079490599192326,21.521254838939317,20.963019078686312,20.404783318433303,19.846547558180298,19.288311797927292,18.730076037674284,18.171840277421278,17.61360451716827,17.055368756915264,16.497132996662259,15.938897236409254,15.380661476156241,14.822425715903236,14.264189955650231,13.705954195397226,13.147718435144217,12.589482674891212,12.031246914638203,11.473011154385198],[21.486958575855489,20.928722815602477,20.370487055349471,19.812251295096466,19.254015534843461,18.695779774590456,18.137544014337443,17.579308254084438,17.021072493831429,16.462836733578424,15.904600973325419,15.346365213072414,14.788129452819401,14.229893692566396,13.671657932313391,13.113422172060385,12.555186411807377,11.996950651554371,11.438714891301363,10.880479131048357],[20.894426552518652,20.336190792265644,19.777955032012638,19.219719271759629,18.661483511506624,18.103247751253619,17.54501199100061,16.986776230747605,16.428540470494596,15.870304710241591,15.312068949988586,14.75383318973558,14.195597429482568,13.637361669229563,13.079125908976557,12.520890148723552,11.962654388470543,11.404418628217538,10.846182867964529,10.287947107711524],[20.301894529181812,19.743658768928803,19.185423008675798,18.627187248422789,18.068951488169784,17.510715727916779,16.95247996766377,16.394244207410765,15.836008447157756,15.277772686904751,14.719536926651745,14.16130116639874,13.603065406145728,13.044829645892722,12.486593885639717,11.928358125386712,11.370122365133703,10.811886604880698,10.253650844627689,9.6954150843746838],[19.709362505844979,19.15112674559197,18.592890985338965,18.034655225085956,17.476419464832951,16.918183704579945,16.359947944326937,15.801712184073931,15.243476423820923,14.685240663567917,14.127004903314912,13.568769143061907,13.010533382808894,12.452297622555889,11.894061862302884,11.335826102049879,10.77759034179687,10.219354581543865,9.6611188212908559,9.1028830610378506],[19.116830482508139,18.55859472225513,18.000358962002124,17.442123201749116,16.88388744149611,16.325651681243105,15.767415920990096,15.209180160737091,14.650944400484082,14.092708640231077,13.534472879978072,12.976237119725067,12.418001359472054,11.859765599219049,11.301529838966044,10.743294078713038,10.18505831846003,9.6268225582070244,9.0685867979540156,8.5103510377010103],[18.524298459171302,17.966062698918293,17.407826938665288,16.849591178412279,16.291355418159274,15.733119657906268,15.17488389765326,14.616648137400254,14.058412377147246,13.50017661689424,12.941940856641235,12.38370509638823,11.825469336135217,11.267233575882212,10.708997815629207,10.150762055376202,9.5925262951231929,9.0342905348701876,8.4760547746171788,7.9178190143641727]],"type":"surface","x":[52,66.89473684210526,81.78947368421052,96.684210526315795,111.57894736842105,126.47368421052632,141.36842105263159,156.26315789473685,171.15789473684211,186.05263157894737,200.94736842105263,215.84210526315789,230.73684210526318,245.63157894736844,260.5263157894737,275.42105263157896,290.31578947368422,305.21052631578948,320.10526315789474,335],"y":[1.5129999999999999,1.7188421052631577,1.9246842105263158,2.1305263157894734,2.3363684210526316,2.5422105263157895,2.7480526315789473,2.9538947368421056,3.1597368421052634,3.3655789473684212,3.5714210526315791,3.7772631578947369,3.9831052631578947,4.1889473684210525,4.3947894736842112,4.6006315789473682,4.8064736842105269,5.0123157894736838,5.2181578947368426,5.4240000000000004],"opacity":0.40000000000000002,"name":"Manual (am=1)","frame":null},{"x":[110,175,105,245,62,95,123,123,180,180,180,205,215,230,97,150,150,245,175],"y":[3.2149999999999999,3.4399999999999999,3.46,3.5699999999999998,3.1899999999999999,3.1499999999999999,3.4399999999999999,3.4399999999999999,4.0700000000000003,3.73,3.7799999999999998,5.25,5.4240000000000004,5.3449999999999998,2.4649999999999999,3.52,3.4350000000000001,3.8399999999999999,3.8450000000000002],"z":[21.399999999999999,18.699999999999999,18.100000000000001,14.300000000000001,24.399999999999999,22.800000000000001,19.199999999999999,17.800000000000001,16.399999999999999,17.300000000000001,15.199999999999999,10.4,10.4,14.699999999999999,21.5,15.5,15.199999999999999,13.300000000000001,19.199999999999999],"type":"scatter3d","mode":"markers","name":"Datos am = 0","marker":{"color":"rgba(102,194,165,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)","size":55},"error_y":{"color":"rgba(102,194,165,1)","width":55},"error_x":{"color":"rgba(102,194,165,1)","width":55},"line":{"color":"rgba(102,194,165,1)","width":55},"frame":null},{"x":[110,110,93,66,52,65,66,91,113,264,175,335,109],"y":[2.6200000000000001,2.875,2.3199999999999998,2.2000000000000002,1.615,1.835,1.9350000000000001,2.1400000000000001,1.5129999999999999,3.1699999999999999,2.77,3.5699999999999998,2.7799999999999998],"z":[21,21,22.800000000000001,32.399999999999999,30.399999999999999,33.899999999999999,27.300000000000001,26,30.399999999999999,15.800000000000001,19.699999999999999,15,21.399999999999999],"type":"scatter3d","mode":"markers","name":"Datos am = 1","marker":{"color":"rgba(141,160,203,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)","size":55},"error_y":{"color":"rgba(141,160,203,1)","width":55},"error_x":{"color":"rgba(141,160,203,1)","width":55},"line":{"color":"rgba(141,160,203,1)","width":55},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="regresión-con-variables-cualitativas-3" class="slide level2">
+<h2>Regresión con variables cualitativas:</h2>
+<div style="style=&quot;font-size: 60%;">
+<p>Al usar una variable cualitativa es de importancia analizar si los hiperplanos generados dejan de ser paralelos, esto quiere decir que existe una interacción entre la variable cualitativa y algún (o varios) coeficientes de las demás covariables. Ejemplo:</p>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>mtcars<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(mtcars<span class="sc">$</span>am)</span>
+<span id="cb21-2"><a href=""></a>modelo_multi3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg<span class="sc">~</span>hp<span class="sc">+</span>wt<span class="sc">*</span>am, <span class="at">data=</span>mtcars)</span>
+<span id="cb21-3"><a href=""></a><span class="fu">summary</span>(modelo_multi3)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource small number-lines code-with-copy"><code class="sourceCode"><span id="cb22-1"><a href=""></a></span>
+<span id="cb22-2"><a href=""></a>Call:</span>
+<span id="cb22-3"><a href=""></a>lm(formula = mpg ~ hp + wt * am, data = mtcars)</span>
+<span id="cb22-4"><a href=""></a></span>
+<span id="cb22-5"><a href=""></a>Residuals:</span>
+<span id="cb22-6"><a href=""></a>    Min      1Q  Median      3Q     Max </span>
+<span id="cb22-7"><a href=""></a>-3.0639 -1.3315 -0.9347  1.2180  5.0822 </span>
+<span id="cb22-8"><a href=""></a></span>
+<span id="cb22-9"><a href=""></a>Coefficients:</span>
+<span id="cb22-10"><a href=""></a>             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span id="cb22-11"><a href=""></a>(Intercept) 30.947333   2.723411  11.363 8.55e-12 ***</span>
+<span id="cb22-12"><a href=""></a>hp          -0.026949   0.009796  -2.751  0.01048 *  </span>
+<span id="cb22-13"><a href=""></a>wt          -2.515586   0.844497  -2.979  0.00605 ** </span>
+<span id="cb22-14"><a href=""></a>am1         11.554813   4.023277   2.872  0.00784 ** </span>
+<span id="cb22-15"><a href=""></a>wt:am1      -3.577910   1.442796  -2.480  0.01968 *  </span>
+<span id="cb22-16"><a href=""></a>---</span>
+<span id="cb22-17"><a href=""></a>Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
+<span id="cb22-18"><a href=""></a></span>
+<span id="cb22-19"><a href=""></a>Residual standard error: 2.332 on 27 degrees of freedom</span>
+<span id="cb22-20"><a href=""></a>Multiple R-squared:  0.8696,    Adjusted R-squared:  0.8503 </span>
+<span id="cb22-21"><a href=""></a>F-statistic: 45.01 on 4 and 27 DF,  p-value: 1.451e-11</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="regresión-con-variables-cualitativas-4" class="slide level2">
+<h2>Regresión con variables cualitativas:</h2>
+<p>El hiperplano de regresión es:</p>
+<p><span class="math display">\[\small  \hat{mpg} = 30.947 - 0.027 Potencia - 2.516Peso + 11.555I_{T=manual} - 3.578Peso\cdot I_{T=manual}  \]</span></p>
+<div style="style=&quot;font-size: 60%;">
+<p><strong>Interpretación del coeficiente de transmisición:</strong></p>
+<ul>
+<li><p>Si el auto es de transmisión manual, el rendimiento aumenta en promedio 11.555 mpg.</p></li>
+<li><p>Por cada aumento de 1000 lbs (1 unidad) del peso en un <strong>auto manua</strong>l el rendimiento disminuirá 6.094 (2.516+3.578) mpg</p></li>
+<li><p>Por cada aumento de 1000 lbs (1 unidad) del peso en un <strong>auto automático</strong> el rendimiento disminuirá 2.516 mpg</p></li>
+</ul>
+<p>Esto en realidad implica la estimación de dos hiperplanos de manera conjunta.</p>
+</div>
+</section>
+<section id="regresión-con-variables-cualitativas-5" class="slide level2">
+<h2>Regresión con variables cualitativas:</h2>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="co">#Malla</span></span>
+<span id="cb23-2"><a href=""></a>eje_hp <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(mtcars<span class="sc">$</span>hp), <span class="fu">max</span>(mtcars<span class="sc">$</span>hp), <span class="at">length.out =</span> <span class="dv">20</span>)</span>
+<span id="cb23-3"><a href=""></a>eje_wt <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(mtcars<span class="sc">$</span>wt), <span class="fu">max</span>(mtcars<span class="sc">$</span>wt), <span class="at">length.out =</span> <span class="dv">20</span>)</span>
+<span id="cb23-4"><a href=""></a>grid_base <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">hp =</span> eje_hp, <span class="at">wt =</span> eje_wt)</span>
+<span id="cb23-5"><a href=""></a></span>
+<span id="cb23-6"><a href=""></a><span class="co">#Predicciones</span></span>
+<span id="cb23-7"><a href=""></a>grid_auto   <span class="ot">&lt;-</span> grid_base</span>
+<span id="cb23-8"><a href=""></a>grid_auto<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="dv">0</span>) <span class="co"># Transmisión automática</span></span>
+<span id="cb23-9"><a href=""></a>z_auto      <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">predict</span>(modelo_multi3, <span class="at">newdata =</span> grid_auto), </span>
+<span id="cb23-10"><a href=""></a>                      <span class="at">nrow =</span> <span class="fu">length</span>(eje_hp), <span class="at">ncol =</span> <span class="fu">length</span>(eje_wt))</span>
+<span id="cb23-11"><a href=""></a></span>
+<span id="cb23-12"><a href=""></a>grid_manual <span class="ot">&lt;-</span> grid_base</span>
+<span id="cb23-13"><a href=""></a>grid_manual<span class="sc">$</span>am <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="dv">1</span>) <span class="co"># Transmisión manual</span></span>
+<span id="cb23-14"><a href=""></a>z_manual    <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">predict</span>(modelo_multi3, <span class="at">newdata =</span> grid_manual), </span>
+<span id="cb23-15"><a href=""></a>                      <span class="at">nrow =</span> <span class="fu">length</span>(eje_hp), <span class="at">ncol =</span> <span class="fu">length</span>(eje_wt))</span>
+<span id="cb23-16"><a href=""></a></span>
+<span id="cb23-17"><a href=""></a><span class="co">#Gráfico</span></span>
+<span id="cb23-18"><a href=""></a><span class="fu">plot_ly</span>(<span class="at">height =</span> <span class="dv">550</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-19"><a href=""></a>  <span class="co"># Hiperplano para Transmisión Automática (am = 0) - Color Azul</span></span>
+<span id="cb23-20"><a href=""></a>  <span class="fu">add_surface</span>(<span class="at">x =</span> <span class="sc">~</span>eje_hp, <span class="at">y =</span> <span class="sc">~</span>eje_wt, <span class="at">z =</span> <span class="sc">~</span><span class="fu">t</span>(z_auto),</span>
+<span id="cb23-21"><a href=""></a>              <span class="at">opacity =</span> <span class="fl">0.4</span>, <span class="at">colorscale =</span> <span class="st">"Greens"</span>, <span class="at">showscale =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb23-22"><a href=""></a>              <span class="at">name =</span> <span class="st">"Auto (am=0)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-23"><a href=""></a>  </span>
+<span id="cb23-24"><a href=""></a>  <span class="co"># Hiperplano para Transmisión Manual (am = 1) - Color Rojo/Naranja</span></span>
+<span id="cb23-25"><a href=""></a>  <span class="fu">add_surface</span>(<span class="at">x =</span> <span class="sc">~</span>eje_hp, <span class="at">y =</span> <span class="sc">~</span>eje_wt, <span class="at">z =</span> <span class="sc">~</span><span class="fu">t</span>(z_manual),</span>
+<span id="cb23-26"><a href=""></a>              <span class="at">opacity =</span> <span class="fl">0.4</span>, <span class="at">colorscale =</span> <span class="st">"Blues"</span>, <span class="at">showscale =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb23-27"><a href=""></a>              <span class="at">name =</span> <span class="st">"Manual (am=1)"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-28"><a href=""></a>  </span>
+<span id="cb23-29"><a href=""></a>  <span class="co"># Puntos observados coloreados según su tipo de transmisión real</span></span>
+<span id="cb23-30"><a href=""></a>  <span class="fu">add_markers</span>(<span class="at">data =</span> mtcars, <span class="at">x =</span> <span class="sc">~</span>hp, <span class="at">y =</span> <span class="sc">~</span>wt, <span class="at">z =</span> <span class="sc">~</span>mpg, </span>
+<span id="cb23-31"><a href=""></a>              <span class="at">color =</span> <span class="sc">~</span>am, <span class="at">colors =</span> <span class="fu">c</span>(<span class="st">"#1f77b4"</span>, <span class="st">"#d62728"</span>), <span class="co"># 0 = Azul, 1 = Rojo</span></span>
+<span id="cb23-32"><a href=""></a>              <span class="at">size =</span> <span class="dv">5</span>, <span class="at">name =</span> <span class="sc">~</span><span class="fu">paste</span>(<span class="st">"Datos am ="</span>, am)) <span class="sc">%&gt;%</span></span>
+<span id="cb23-33"><a href=""></a>  </span>
+<span id="cb23-34"><a href=""></a>  <span class="co"># Configuración estética de los ejes y leyendas</span></span>
+<span id="cb23-35"><a href=""></a>  <span class="fu">layout</span>(</span>
+<span id="cb23-36"><a href=""></a>    <span class="at">scene =</span> <span class="fu">list</span>(</span>
+<span id="cb23-37"><a href=""></a>      <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Potencia (hp)"</span>),</span>
+<span id="cb23-38"><a href=""></a>      <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Peso (wt)"</span>),</span>
+<span id="cb23-39"><a href=""></a>      <span class="at">zaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Rendimiento (mpg)"</span>),</span>
+<span id="cb23-40"><a href=""></a>      <span class="at">camera =</span> <span class="fu">list</span>(</span>
+<span id="cb23-41"><a href=""></a>        <span class="at">eye =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="sc">-</span><span class="fl">1.95</span>, <span class="at">z =</span> <span class="dv">1</span>) <span class="co"># &lt;-- Ángulo </span></span>
+<span id="cb23-42"><a href=""></a>      )</span>
+<span id="cb23-43"><a href=""></a>    ),</span>
+<span id="cb23-44"><a href=""></a>    <span class="at">title =</span> <span class="st">"Hiperplanos Paralelos por Tipo de Transmisión"</span>,</span>
+<span id="cb23-45"><a href=""></a>    <span class="at">margin =</span> <span class="fu">list</span>(<span class="at">l =</span> <span class="dv">0</span>, <span class="at">r =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">t =</span> <span class="dv">50</span>)</span>
+<span id="cb23-46"><a href=""></a>  )</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="htmlwidget-24a30459a14546b35b97" style="width:100%;height:550px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-24a30459a14546b35b97">{"x":{"visdat":{"651035682633":["function () ","plotlyVisDat"],"651044b252c0":["function () ","data"]},"cur_data":"651044b252c0","attrs":{"651035682633":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":{},"type":"surface","x":{},"y":{},"opacity":0.40000000000000002,"colorscale":"Greens","showscale":false,"name":"Auto (am=0)","inherit":true},"651035682633.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"z":{},"type":"surface","x":{},"y":{},"opacity":0.40000000000000002,"colorscale":"Blues","showscale":false,"name":"Manual (am=1)","inherit":true},"651044b252c0":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":{},"y":{},"z":{},"type":"scatter3d","mode":"markers","color":{},"colors":["#1f77b4","#d62728"],"size":5,"name":{},"inherit":true}},"layout":{"height":550,"margin":{"b":0,"l":0,"t":50,"r":0},"scene":{"xaxis":{"title":"Potencia (hp)"},"yaxis":{"title":"Peso (wt)"},"zaxis":{"title":"Rendimiento (mpg)"},"camera":{"eye":{"x":2,"y":-1.95,"z":1}}},"title":"Hiperplanos Paralelos por Tipo de Transmisión","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"t(z_auto)<br />t(z_manual)<br />am","ticklen":2},"colorscale":"Greens","showscale":false,"z":[[25.739886168121487,25.338482703277535,24.937079238433583,24.535675773589634,24.134272308745683,23.732868843901731,23.331465379057782,22.93006191421383,22.528658449369878,22.127254984525926,21.725851519681978,21.324448054838026,20.923044589994074,20.521641125150126,20.120237660306174,19.718834195462222,19.317430730618273,18.916027265774321,18.514623800930373,18.113220336086421],[25.222072752219233,24.820669287375281,24.419265822531329,24.017862357687381,23.616458892843429,23.215055427999477,22.813651963155529,22.412248498311577,22.010845033467625,21.609441568623673,21.208038103779725,20.806634638935773,20.405231174091821,20.003827709247872,19.60242424440392,19.201020779559968,18.79961731471602,18.398213849872068,17.99681038502812,17.595406920184168],[24.70425933631698,24.302855871473028,23.901452406629076,23.500048941785128,23.098645476941176,22.697242012097224,22.295838547253275,21.894435082409323,21.493031617565372,21.09162815272142,20.690224687877471,20.288821223033519,19.887417758189567,19.486014293345619,19.084610828501667,18.683207363657715,18.281803898813767,17.880400433969815,17.478996969125866,17.077593504281914],[24.186445920414727,23.785042455570775,23.383638990726823,22.982235525882874,22.580832061038922,22.17942859619497,21.778025131351022,21.37662166650707,20.975218201663118,20.573814736819166,20.172411271975218,19.771007807131266,19.369604342287314,18.968200877443365,18.566797412599414,18.165393947755462,17.763990482911513,17.362587018067561,16.961183553223613,16.559780088379661],[23.668632504512473,23.267229039668521,22.865825574824569,22.464422109980621,22.063018645136669,21.661615180292717,21.260211715448769,20.858808250604817,20.457404785760865,20.056001320916913,19.654597856072964,19.253194391229012,18.85179092638506,18.450387461541112,18.04898399669716,17.647580531853208,17.24617706700926,16.844773602165308,16.443370137321359,16.041966672477407],[23.15081908861022,22.749415623766268,22.348012158922316,21.946608694078368,21.545205229234416,21.143801764390464,20.742398299546515,20.340994834702563,19.939591369858611,19.538187905014659,19.136784440170711,18.735380975326759,18.333977510482807,17.932574045638859,17.531170580794907,17.129767115950955,16.728363651107006,16.326960186263054,15.925556721419106,15.524153256575154],[22.633005672707966,22.231602207864015,21.830198743020063,21.428795278176114,21.027391813332162,20.62598834848821,20.224584883644262,19.82318141880031,19.421777953956358,19.020374489112406,18.618971024268458,18.217567559424506,17.816164094580554,17.414760629736605,17.013357164892653,16.611953700048701,16.210550235204753,15.809146770360801,15.407743305516853,15.006339840672901],[22.115192256805713,21.713788791961761,21.312385327117809,20.910981862273861,20.509578397429909,20.108174932585957,19.706771467742008,19.305368002898057,18.903964538054105,18.502561073210153,18.101157608366204,17.699754143522252,17.2983506786783,16.896947213834352,16.4955437489904,16.094140284146448,15.6927368193025,15.291333354458548,14.889929889614599,14.488526424770647],[21.59737884090346,21.195975376059508,20.794571911215556,20.393168446371607,19.991764981527655,19.590361516683704,19.188958051839755,18.787554586995803,18.386151122151851,17.984747657307899,17.583344192463951,17.181940727619999,16.780537262776047,16.379133797932099,15.977730333088147,15.576326868244195,15.174923403400246,14.773519938556294,14.372116473712346,13.970713008868394],[21.079565425001206,20.678161960157254,20.276758495313302,19.875355030469354,19.473951565625402,19.07254810078145,18.671144635937502,18.26974117109355,17.868337706249598,17.466934241405646,17.065530776561697,16.664127311717746,16.262723846873794,15.861320382029845,15.459916917185893,15.058513452341941,14.657109987497993,14.255706522654041,13.854303057810093,13.452899592966141],[20.561752009098953,20.160348544255001,19.758945079411049,19.357541614567101,18.956138149723149,18.554734684879197,18.153331220035248,17.751927755191296,17.350524290347344,16.949120825503392,16.547717360659444,16.146313895815492,15.74491043097154,15.343506966127592,14.94210350128364,14.540700036439688,14.139296571595739,13.737893106751788,13.336489641907839,12.935086177063887],[20.0439385931967,19.642535128352748,19.241131663508796,18.839728198664847,18.438324733820895,18.036921268976943,17.635517804132995,17.234114339289043,16.832710874445091,16.431307409601139,16.029903944757191,15.628500479913239,15.227097015069287,14.825693550225338,14.424290085381386,14.022886620537435,13.621483155693486,13.220079690849534,12.818676226005586,12.417272761161634],[19.526125177294446,19.124721712450494,18.723318247606542,18.321914782762594,17.920511317918642,17.51910785307469,17.117704388230742,16.71630092338679,16.314897458542838,15.913493993698886,15.512090528854937,15.110687064010985,14.709283599167033,14.307880134323085,13.906476669479133,13.505073204635181,13.103669739791233,12.702266274947281,12.300862810103332,11.89945934525938],[19.008311761392193,18.606908296548241,18.205504831704289,17.804101366860344,17.402697902016392,17.00129443717244,16.599890972328488,16.198487507484536,15.797084042640586,15.395680577796634,14.994277112952686,14.592873648108734,14.191470183264782,13.790066718420833,13.388663253576881,12.98725978873293,12.585856323888981,12.184452859045029,11.783049394201081,11.381645929357129],[18.490498345489939,18.089094880645987,17.687691415802036,17.286287950958084,16.884884486114132,16.48348102127018,16.082077556426235,15.680674091582281,15.279270626738329,14.877867161894377,14.476463697050429,14.075060232206477,13.673656767362525,13.272253302518576,12.870849837674625,12.469446372830673,12.068042907986724,11.666639443142772,11.265235978298824,10.863832513454872],[17.972684929587686,17.571281464743734,17.169877999899782,16.768474535055837,16.367071070211885,15.965667605367932,15.564264140523983,15.162860675680031,14.761457210836079,14.360053745992127,13.958650281148179,13.557246816304227,13.155843351460275,12.754439886616327,12.353036421772375,11.951632956928423,11.550229492084474,11.148826027240522,10.747422562396574,10.346019097552622],[17.454871513685433,17.053468048841481,16.652064583997529,16.25066111915358,15.849257654309628,15.447854189465676,15.046450724621728,14.645047259777776,14.243643794933824,13.842240330089872,13.440836865245924,13.039433400401972,12.63802993555802,12.236626470714072,11.83522300587012,11.433819541026168,11.032416076182219,10.631012611338267,10.229609146494319,9.8282056816503669],[16.937058097783179,16.535654632939227,16.134251168095275,15.732847703251329,15.331444238407377,14.930040773563425,14.528637308719476,14.127233843875524,13.725830379031573,13.324426914187621,12.923023449343672,12.52161998449972,12.120216519655768,11.71881305481182,11.317409589967868,10.916006125123916,10.514602660279968,10.113199195436016,9.7117957305920672,9.3103922657481153],[16.419244681880926,16.017841217036974,15.616437752193022,15.215034287349074,14.813630822505122,14.41222735766117,14.010823892817221,13.609420427973269,13.208016963129317,12.806613498285365,12.405210033441417,12.003806568597465,11.602403103753513,11.200999638909565,10.799596174065613,10.398192709221661,9.9967892443777124,9.5953857795337605,9.1939823146898121,8.7925788498458601],[15.901431265978673,15.500027801134721,15.098624336290769,14.69722087144682,14.295817406602868,13.894413941758916,13.493010476914968,13.091607012071016,12.690203547227064,12.288800082383112,11.887396617539164,11.485993152695212,11.08458968785126,10.683186223007311,10.281782758163359,9.8803792933194075,9.4789758284754591,9.0775723636315071,8.6761688987875587,8.2747654339436068]],"type":"surface","x":[52,66.89473684210526,81.78947368421052,96.684210526315795,111.57894736842105,126.47368421052632,141.36842105263159,156.26315789473685,171.15789473684211,186.05263157894737,200.94736842105263,215.84210526315789,230.73684210526318,245.63157894736844,260.5263157894737,275.42105263157896,290.31578947368422,305.21052631578948,320.10526315789474,335],"y":[1.5129999999999999,1.7188421052631577,1.9246842105263158,2.1305263157894734,2.3363684210526316,2.5422105263157895,2.7480526315789473,2.9538947368421056,3.1597368421052634,3.3655789473684212,3.5714210526315791,3.7772631578947369,3.9831052631578947,4.1889473684210525,4.3947894736842112,4.6006315789473682,4.8064736842105269,5.0123157894736838,5.2181578947368426,5.4240000000000004],"opacity":0.40000000000000002,"name":"Auto (am=0)","frame":null},{"colorbar":{"title":"t(z_auto)<br />t(z_manual)<br />am","ticklen":2},"colorscale":"Blues","showscale":false,"z":[[31.8813216098768,31.479918145032848,31.078514680188896,30.677111215344951,30.275707750500999,29.874304285657047,29.472900820813095,29.071497355969143,28.670093891125191,28.268690426281239,27.867286961437287,27.465883496593335,27.064480031749383,26.663076566905438,26.261673102061486,25.860269637217534,25.458866172373586,25.057462707529634,24.656059242685686,24.254655777841734],[30.627023708991274,30.225620244147322,29.82421677930337,29.422813314459425,29.021409849615473,28.620006384771521,28.218602919927569,27.817199455083617,27.415795990239666,27.014392525395714,26.612989060551762,26.21158559570781,25.810182130863858,25.408778666019913,25.007375201175961,24.605971736332009,24.204568271488057,23.803164806644105,23.40176134180016,23.000357876956208],[29.372725808105741,28.971322343261789,28.569918878417838,28.168515413573893,27.767111948729941,27.365708483885989,26.964305019042037,26.562901554198085,26.161498089354133,25.760094624510181,25.358691159666229,24.957287694822284,24.555884229978332,24.15448076513438,23.753077300290428,23.351673835446476,22.950270370602532,22.54886690575858,22.147463440914628,21.746059976070676],[28.118427907220216,27.717024442376264,27.315620977532312,26.914217512688367,26.512814047844415,26.111410583000463,25.710007118156511,25.308603653312559,24.907200188468607,24.505796723624655,24.104393258780707,23.702989793936755,23.301586329092803,22.900182864248855,22.498779399404903,22.097375934560951,21.695972469717002,21.29456900487305,20.893165540029102,20.49176207518515],[26.864130006334687,26.462726541490735,26.061323076646783,25.659919611802838,25.258516146958886,24.857112682114934,24.455709217270982,24.05430575242703,23.652902287583078,23.251498822739126,22.850095357895178,22.448691893051226,22.047288428207274,21.645884963363326,21.244481498519374,20.843078033675422,20.441674568831473,20.040271103987521,19.638867639143573,19.237464174299621],[25.609832105449158,25.208428640605206,24.807025175761254,24.405621710917309,24.004218246073357,23.602814781229405,23.201411316385453,22.800007851541501,22.398604386697549,21.997200921853597,21.595797457009649,21.194393992165697,20.792990527321745,20.391587062477797,19.990183597633845,19.588780132789893,19.187376667945944,18.785973203101992,18.384569738258044,17.983166273414092],[24.355534204563629,23.954130739719677,23.552727274875725,23.15132381003178,22.749920345187828,22.348516880343876,21.947113415499924,21.545709950655972,21.14430648581202,20.742903020968068,20.34149955612412,19.940096091280168,19.538692626436216,19.137289161592268,18.735885696748316,18.334482231904364,17.933078767060415,17.531675302216463,17.130271837372515,16.728868372528563],[23.1012363036781,22.699832838834148,22.298429373990196,21.897025909146251,21.495622444302299,21.094218979458343,20.692815514614395,20.291412049770443,19.890008584926491,19.488605120082539,19.087201655238591,18.685798190394639,18.284394725550687,17.882991260706739,17.481587795862787,17.080184331018835,16.678780866174886,16.277377401330934,15.875973936486986,15.474570471643034],[21.846938402792571,21.445534937948619,21.044131473104667,20.642728008260718,20.241324543416766,19.839921078572814,19.438517613728866,19.037114148884914,18.635710684040962,18.23430721919701,17.832903754353062,17.43150028950911,17.030096824665158,16.628693359821209,16.227289894977257,15.825886430133306,15.424482965289357,15.023079500445405,14.621676035601457,14.220272570757505],[20.592640501907042,20.19123703706309,19.789833572219138,19.388430107375193,18.987026642531241,18.585623177687289,18.184219712843337,17.782816247999385,17.381412783155433,16.980009318311481,16.578605853467536,16.177202388623584,15.775798923779631,15.374395458935682,14.97299199409173,14.571588529247778,14.17018506440383,13.768781599559878,13.36737813471593,12.965974669871978],[19.338342601021516,18.936939136177564,18.535535671333612,18.13413220648966,17.732728741645708,17.331325276801756,16.929921811957811,16.528518347113859,16.127114882269908,15.725711417425954,15.324307952582005,14.922904487738053,14.521501022894101,14.120097558050153,13.718694093206201,13.317290628362249,12.915887163518301,12.514483698674349,12.1130802338304,11.711676768986448],[18.084044700135987,17.682641235292035,17.281237770448083,16.879834305604135,16.478430840760183,16.077027375916231,15.675623911072282,15.27422044622833,14.872816981384378,14.471413516540427,14.070010051696478,13.668606586852526,13.267203122008574,12.865799657164626,12.464396192320674,12.062992727476722,11.661589262632774,11.260185797788822,10.858782332944873,10.457378868100921],[16.829746799250458,16.428343334406506,16.026939869562554,15.625536404718606,15.224132939874654,14.822729475030702,14.421326010186753,14.019922545342801,13.618519080498849,13.217115615654897,12.815712150810949,12.414308685966997,12.012905221123045,11.611501756279097,11.210098291435145,10.808694826591193,10.407291361747244,10.005887896903292,9.6044844320593441,9.2030809672153921],[15.575448898364931,15.174045433520979,14.772641968677027,14.371238503833082,13.96983503898913,13.568431574145178,13.167028109301226,12.765624644457274,12.364221179613322,11.96281771476937,11.561414249925425,11.160010785081473,10.758607320237521,10.357203855393569,9.9558003905496175,9.5543969257056656,9.1529934608617207,8.7515899960177688,8.3501865311738168,7.9487830663298649],[14.321150997479398,13.919747532635446,13.518344067791494,13.116940602947542,12.71553713810359,12.314133673259638,11.912730208415693,11.511326743571741,11.10992327872779,10.708519813883838,10.307116349039886,9.9057128841959337,9.5043094193519817,9.1029059545080369,8.7015024896640849,8.300099024820133,7.898695559976181,7.4972920951322291,7.0958886302882842,6.6944851654443323],[13.066853096593874,12.665449631749922,12.26404616690597,11.862642702062026,11.461239237218074,11.059835772374122,10.65843230753017,10.257028842686218,9.8556253778422658,9.4542219129983138,9.052818448154369,8.651414983310417,8.2500115184664651,7.8486080536225131,7.4472045887785612,7.0458011239346092,6.6443976590906644,6.2429941942467124,5.8415907294027605,5.4401872645588085],[11.812555195708342,11.41115173086439,11.009748266020438,10.608344801176489,10.206941336332537,9.8055378714885855,9.4041344066446371,9.0027309418006851,8.6013274769567332,8.1999240121127812,7.7985205472688328,7.3971170824248809,6.9957136175809289,6.5943101527369805,6.1929066878930286,5.7915032230490766,5.3900997582051282,4.9886962933611763,4.5872928285172279,4.1858893636732759],[10.558257294822816,10.156853829978864,9.7554503651349123,9.3540469002909674,8.9526434354470155,8.5512399706030635,8.1498365057591116,7.7484330409151596,7.3470295760712077,6.9456261112272557,6.5442226463833109,6.1428191815393589,5.741415716695407,5.340012251851455,4.9386087870075031,4.5372053221635511,4.1358018573196063,3.7343983924756543,3.3329949276317024,2.9315914627877504],[9.3039593939372871,8.9025559290933352,8.5011524642493832,8.0997489994054348,7.6983455345614829,7.2969420697175309,6.8955386048735825,6.4941351400296305,6.0927316751856786,5.6913282103417266,5.2899247454977782,4.8885212806538263,4.4871178158098743,4.0857143509659259,3.684310886121974,3.282907421278022,2.8815039564340736,2.4801004915901217,2.0786970267461733,1.6772935619022213],[8.049661493051758,7.6482580282078061,7.2468545633638541,6.8454510985199057,6.4440476336759538,6.0426441688320018,5.6412407039880534,5.2398372391441015,4.8384337743001495,4.4370303094561976,4.0356268446122492,3.6342233797682972,3.2328199149243453,2.8314164500803969,2.4300129852364449,2.028609520392493,1.6272060555485446,1.2258025907045926,0.82439912586064423,0.42299566101669228]],"type":"surface","x":[52,66.89473684210526,81.78947368421052,96.684210526315795,111.57894736842105,126.47368421052632,141.36842105263159,156.26315789473685,171.15789473684211,186.05263157894737,200.94736842105263,215.84210526315789,230.73684210526318,245.63157894736844,260.5263157894737,275.42105263157896,290.31578947368422,305.21052631578948,320.10526315789474,335],"y":[1.5129999999999999,1.7188421052631577,1.9246842105263158,2.1305263157894734,2.3363684210526316,2.5422105263157895,2.7480526315789473,2.9538947368421056,3.1597368421052634,3.3655789473684212,3.5714210526315791,3.7772631578947369,3.9831052631578947,4.1889473684210525,4.3947894736842112,4.6006315789473682,4.8064736842105269,5.0123157894736838,5.2181578947368426,5.4240000000000004],"opacity":0.40000000000000002,"name":"Manual (am=1)","frame":null},{"x":[110,175,105,245,62,95,123,123,180,180,180,205,215,230,97,150,150,245,175],"y":[3.2149999999999999,3.4399999999999999,3.46,3.5699999999999998,3.1899999999999999,3.1499999999999999,3.4399999999999999,3.4399999999999999,4.0700000000000003,3.73,3.7799999999999998,5.25,5.4240000000000004,5.3449999999999998,2.4649999999999999,3.52,3.4350000000000001,3.8399999999999999,3.8450000000000002],"z":[21.399999999999999,18.699999999999999,18.100000000000001,14.300000000000001,24.399999999999999,22.800000000000001,19.199999999999999,17.800000000000001,16.399999999999999,17.300000000000001,15.199999999999999,10.4,10.4,14.699999999999999,21.5,15.5,15.199999999999999,13.300000000000001,19.199999999999999],"type":"scatter3d","mode":"markers","name":"Datos am = 0","marker":{"color":"rgba(102,194,165,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)","size":55},"error_y":{"color":"rgba(102,194,165,1)","width":55},"error_x":{"color":"rgba(102,194,165,1)","width":55},"line":{"color":"rgba(102,194,165,1)","width":55},"frame":null},{"x":[110,110,93,66,52,65,66,91,113,264,175,335,109],"y":[2.6200000000000001,2.875,2.3199999999999998,2.2000000000000002,1.615,1.835,1.9350000000000001,2.1400000000000001,1.5129999999999999,3.1699999999999999,2.77,3.5699999999999998,2.7799999999999998],"z":[21,21,22.800000000000001,32.399999999999999,30.399999999999999,33.899999999999999,27.300000000000001,26,30.399999999999999,15.800000000000001,19.699999999999999,15,21.399999999999999],"type":"scatter3d","mode":"markers","name":"Datos am = 1","marker":{"color":"rgba(141,160,203,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)","size":55},"error_y":{"color":"rgba(141,160,203,1)","width":55},"error_x":{"color":"rgba(141,160,203,1)","width":55},"line":{"color":"rgba(141,160,203,1)","width":55},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="otros-métodos-de-regresión" class="slide level2">
+<h2>Otros métodos de Regresión:</h2>
+<ul>
+<li><p>Regresión Ridge.</p></li>
+<li><p>Regresión Lasso.</p></li>
+<li><p>Elastic Net.</p></li>
+<li><p>Regresión mediante árboles de decisión.</p></li>
+<li><p>Regresión mediante SVM.</p></li>
+</ul>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="XS-0100_17_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="XS-0100_17_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="XS-0100_17_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="XS-0100_17_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="XS-0100_17_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="XS-0100_17_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="XS-0100_17_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="XS-0100_17_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="XS-0100_17_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="XS-0100_17_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"right","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"width":"wide","numbers":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copiado");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copiado");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
