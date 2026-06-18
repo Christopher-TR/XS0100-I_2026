@@ -33,6 +33,8 @@ estudiante](https://christopher-tr.github.io/XS0100-I_2026/Programa%20XS-0100%20
 | Contraste de Hipótesis - Contraste de Verosimilitud y Wald | [Clase 14](XS-0100_14.html)  |
 | Estadística Bayesiana - Prob. Condicional, Teorema Bayes | [Clase 15](XS-0100_15.html)  |
 | Estadística Bayesiana - Distribución Posterior, Intervalos de Credibilidad y Prueba de Hipótesis | [Clase 16](XS-0100_16.html)  |
+| Regresión Clásica | [Clase 17](XS-0100_17.html)  |
+
 
 ## Videos
 
