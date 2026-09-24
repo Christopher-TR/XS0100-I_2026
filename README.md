@@ -20,9 +20,6 @@ El curso XS-0100 Fundamentos de la Teoría Estadística, es un curso de servicio
 | Estimación Puntual - Consistencia y Suficiencia    | [Clase 5](XS-0100_05.html)   |
 | Estimación Puntual - Suficiencia, Rao Blackwell y Lehmann Scheffé  | [Clase 6](XS-0100_06.html)   |
 | Estimación Puntual - Estimadores de Momentos, Máxima Verosimilitud y Principio de Invariancia  | [Clase 7](XS-0100_07.html)   |
-<!-- 
-| Clase Grabada - Simulación Lab 1  | [Enlace](https://6f33fa7f78ea46e2aaca-my.sharepoint.com/:v:/g/personal/christopher_torres_ucr_ac_cr/IQA-5Wpe3vSgQ6S1aRAtf6qtAZGpDlDc_76JYpjal8r6GXs?e=EleeKs&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D) - [Archivo R](lab01.qmd) - [Archivo Excel](Lab1.xlsx) |
--->
 | Estimación por Intervalo - Método Pivotal  | [Clase 8](XS-0100_08.html)   |
 | Estimación por Intervalo - Intervalos Clásicos (Población Normal) | [Clase 9](XS-0100_09.html)   |
 | Estimación por Intervalo - Método Delta e Intervalos Asintóticos | [Clase 10](XS-0100_10.html)  |
@@ -44,5 +41,7 @@ El curso XS-0100 Fundamentos de la Teoría Estadística, es un curso de servicio
 | Teoría - Estimación Intervalo | [Enlace](https://youtube.com/playlist?list=PLqFZp4O1OEOXiXMIhFPK5J-4b-rdSive4&si=-3ISdIobb71OJubT)|
 | Teoría - Contraste Hipótesis | [Enlace](https://youtube.com/playlist?list=PLqFZp4O1OEOXrvJcKIA5LwlF8hrVdWsPB&si=KyEAKfZk3NUmfyUg)|
 
-
+<!-- 
+| Clase Grabada - Simulación Lab 1  | [Enlace](https://6f33fa7f78ea46e2aaca-my.sharepoint.com/:v:/g/personal/christopher_torres_ucr_ac_cr/IQA-5Wpe3vSgQ6S1aRAtf6qtAZGpDlDc_76JYpjal8r6GXs?e=EleeKs&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D) - [Archivo R](lab01.qmd) - [Archivo Excel](Lab1.xlsx) |
+-->
 
