@@ -6,8 +6,8 @@
 <script src="XS-0100_14_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="XS-0100_14_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="XS-0100_14_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="XS-0100_14_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.25">
+<link href="XS-0100_14_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Christopher Torres">
   <title>Contraste de Verosimilitudes y Contraste de Wald</title>
@@ -17,10 +17,16 @@
   <link rel="stylesheet" href="XS-0100_14_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="XS-0100_14_files/libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -29,7 +35,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="XS-0100_14_files/libs/revealjs/dist/theme/quarto-829c66079de1ba6dba869a367cd4b667.css">
+  <link rel="stylesheet" href="XS-0100_14_files/libs/revealjs/dist/theme/quarto-9eb768afb8c6a1b6b3ca03240ed62dd7.css">
   <link href="XS-0100_14_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="XS-0100_14_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="XS-0100_14_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -128,13 +134,13 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Contraste de Verosimilitudes y Contraste de Wald</h1>
-  <p class="subtitle"></p><p><a href="https://christopher-tr.github.io/XS0100-I_2026/">XS-0122 Fundamentos de Teoría Estadística - I Semestre 2026</a></p>
-<p><small>Basada en las presentaciones de Shu Wei Cho</small></p><p></p>
+  <p class="subtitle"><a href="https://christopher-tr.github.io/XS0100-I_2026/">XS-0122 Fundamentos de Teoría Estadística - I Semestre 2026</a><br>
+<small>Basada en las presentaciones de Shu Wei Cho</small></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-<a href="https://shuwei325.github.io">Christopher Torres</a> 
+<a href="https://shuwei325.github.io">Christopher Torres</a>
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:christopher.torres@ucr.ac.cr">christopher.torres@ucr.ac.cr</a>
@@ -261,6 +267,46 @@ code {
 <p>Lo que es equivalente a:</p>
 <p><span class="math display">\[RC_{\delta^\ast} = \left\lbrace \mathbf{X} :  \mu_0 - t_{(1-\frac{\alpha_0}{2}),n-1}\cdot\frac{\sigma}{\sqrt{n}}  &lt;   \bar{X}  &lt; \mu_0 + t_{(1-\frac{\alpha_0}{2}), n-1}\cdot\frac{\sigma}{\sqrt{n}}  \right\rbrace\]</span></p>
 <p>El método de la razón de verosimilitudes tiene un inconveniente y es que en muchas ocasiones es imposible generar un estadístico con distribución conocida a partir de <span class="math inline">\(\lambda\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p><strong>Teorema 4.3:</strong> <em>Teorema de Wilks</em>. Suponga que <span class="math inline">\(X_{1}, X_{2}, ... , X_{n}\)</span> tiene una función de verosimilitud <span class="math inline">\(\mathcal{L}(\Theta)\)</span> con <span class="math inline">\(\Theta\)</span> el vector de parámetros, y se tienen las hipótesis <span class="math inline">\(H_{0}: \Theta \in \Omega_0\)</span> contra <span class="math inline">\(H_{1}: \Theta \in \Omega_1\)</span>. Sean <span class="math inline">\(d = \dim(\Omega)\)</span> y <span class="math inline">\(d_0 = \dim(\Omega_0)\)</span>. Si <span class="math inline">\(n \to \infty\)</span> entonces <span class="math display">\[G=-2\ln(\lambda)  \xrightarrow{\text{d}} \chi^{2}_{(d-d_0)}.\]</span></p>
+<ul>
+<li>El resultado de este teorema es inmediato pues podemos ver que para cualquier contraste de tamaño <span class="math inline">\(\alpha_0\)</span>, si <span class="math inline">\(n\)</span> es suficientemente grande, podemos construir un contraste que consiste en rechazar la hipótesis nula si <span class="math inline">\(G=-2\ln(\lambda) &gt; \chi^{2}_{1-\alpha_0,d-d_{0}}\)</span>.</li>
+<li>De esta forma tenemos una región crítica genérica que dependerá del tamaño del contraste y de <span class="math inline">\(d\)</span> y <span class="math inline">\(d_0\)</span>.</li>
+</ul>
+<p><strong>Ejemplo:</strong> Sean <span class="math inline">\(X_{1}, X_{2}, ... , X_{n}\)</span> y <span class="math inline">\(Y_{1}, Y_{2}, ... , Y_{n}\)</span> dos muestras aleatorias independientes tales que <span class="math inline">\(X_{j} \sim \operatorname{Poisson}(\theta_1)\)</span> y <span class="math inline">\(Y_{j} \sim \operatorname{Poisson}(\theta_2)\)</span>. Se desea contrastar las hipótesis <span class="math inline">\(H_{0}: \theta_1 = \theta_2\)</span> contra <span class="math inline">\(H_{1}: \theta_1 \neq \theta_2\)</span>. Encuentre un contraste para estas hipótesis utilizando el Teorema de Wilks.</p>
+<p><strong>Solución:</strong> Tenemos que <span class="math inline">\(\Theta=(\theta_1,\theta_2)\)</span>. En el caso de <span class="math inline">\(\Omega_{0}\)</span> tenemos que este se define como <span class="math inline">\(\Omega_{0} = \left\lbrace (\theta_1 , \theta_2) | \theta_1 = \theta_2 = \theta&gt;0 \right\rbrace\)</span>. Por otra parte, <span class="math inline">\(\Omega = \left\lbrace (\theta_1 , \theta_2) | \theta_1 , \theta_2 \in \mathbb{R}^{+}  \right\rbrace\)</span>. Por lo tanto tenemos que <span class="math inline">\(\Omega_{0}  = \left\lbrace \theta| \theta \in \mathbb{R}^+ \right\rbrace\)</span> y <span class="math inline">\(\Theta =\left\lbrace (\theta_1 , \theta_2) \in \mathbb{R}^+ \times \mathbb{R}^+  \right\rbrace\)</span> y sus dimensiones son 1 y 2, respectivamente. Procedamos a encontrar la verosimilitud:</p>
+<p><span class="math inline">\(\mathcal{L}(\Theta) = \mathcal{L}(\theta_1 , \theta_2) = \mathcal{L}(\theta_1) \mathcal{L}(\theta_2) = \frac{\theta_{1}^{\sum X_{j}} e^{-n\theta_{1}}}{\prod X_{j}!} \frac{\theta_{2}^{\sum Y_{j}} e^{-n\theta_{2}}}{\prod Y_{j}!} = \frac{\left( \theta_{1}^{\bar{X}} \theta_{2}^{\bar{Y}}  \right)^{n} e^{-n(\theta_{1}+\theta_{2})} }{\prod X_{j}! \prod Y_{j}!}\)</span></p>
+</section>
+<section class="slide level2">
+
+<p>Se puede demostrar que de esta expresión se obtiene <span class="math inline">\(\bar{X}\)</span> como EMV de <span class="math inline">\(\theta_1\)</span> y <span class="math inline">\(\bar{Y}\)</span> como EMV de <span class="math inline">\(\theta_2\)</span>. Ahora procedamos a encontrar la verosimilitud evaluada en <span class="math inline">\(\Theta_{0}\)</span>:</p>
+<p><span class="math inline">\(\mathcal{L}(\Theta_0) = \mathcal{L}(\theta) = \frac{\theta^{ n(\bar{X} + \bar{Y}) } e^{-2n\theta} }{\prod X_{j}! \prod Y_{j}!}\)</span></p>
+<p>Ahora debemos encontrar el EMV de <span class="math inline">\(\theta\)</span>. Para ello sacamos primero la log-verosimilitud:</p>
+<p><span class="math inline">\(\ell(\theta) = n(\bar{X} + \bar{Y})\ln(\theta) - 2n\theta - \ln\left( \prod X_{j}! \prod Y_{j}! \right)\)</span></p>
+<p><span class="math inline">\(\Rightarrow \frac{\partial \ell (\theta)}{\partial \theta} = \frac{ n(\bar{X} + \bar{Y}) }{\theta} - 2n = 0\)</span></p>
+<p><span class="math inline">\(\Rightarrow \hat{\theta} = \frac{\bar{X} + \bar{Y}}{2}\)</span></p>
+<p>La segunda derivada con respecto a <span class="math inline">\(\theta\)</span> sería negativa, por lo que <span class="math inline">\(\hat{\theta}\)</span> es el EMV.</p>
+</section>
+<section class="slide level2">
+
+<p>Ahora procedemos a encontrar <span class="math inline">\(\mathcal{L}(\hat{\Omega})\)</span> y <span class="math inline">\(\mathcal{L}(\hat{\Omega}_0)\)</span>.</p>
+<p><span class="math inline">\(\mathcal{L}(\hat{\Omega}_0) = \frac{ \left( \frac{\bar{X} + \bar{Y}}{2} \right) ^{ n(\bar{X} + \bar{Y}) } e^{-n(\bar{X} + \bar{Y})} }{\prod X_{j}! \prod Y_{j}!}\)</span></p>
+<p><span class="math inline">\(\mathcal{L}(\hat{\Omega}) = \frac{\left( \bar{X}^{\bar{X}} \bar{Y}^{\bar{Y}}  \right)^{n} e^{-n(\bar{X}+\bar{Y})} }{\prod X_{j}! \prod Y_{j}!}\)</span></p>
+<p>Por lo tanto, el estadístico <span class="math inline">\(\lambda\)</span> sería:</p>
+<p><span class="math inline">\(\lambda = \frac{\mathcal{L}(\hat{\Omega}_0)}{\mathcal{L}(\hat{\Omega})} = \left( \frac{\left( \frac{\bar{X} + \bar{Y}}{2} \right) ^{ (\bar{X} + \bar{Y}) }}{\bar{X}^{\bar{X}} \bar{Y}^{\bar{Y}}} \right)^{n}\)</span></p>
+</section>
+<section class="slide level2">
+
+<p>Ya con esto podemos encontrar una expresión para la estadística <span class="math inline">\(G\)</span>:</p>
+<p><span class="math inline">\(G = -2\ln(\lambda) = -2\ln \left( \frac{\left( \frac{\bar{X} + \bar{Y}}{2} \right) ^{ (\bar{X} + \bar{Y}) }}{\bar{X}^{\bar{X}} \bar{Y}^{\bar{Y}}} \right)^{n}\)</span></p>
+<p><span class="math inline">\(= -2n\left[ (\bar{X} + \bar{Y}) \ln\left( \frac{\bar{X} + \bar{Y}}{2}\right)  - \bar{X} \ln(\bar{X}) - \bar{Y} \ln(\bar{Y}) \right]\)</span></p>
+<p>Por el Teorema de Wilks, rechazamos la hipótesis nula si este valor es mayor a <span class="math inline">\(\chi^{2}_{1-\alpha_0,1}\)</span>.</p>
+</section>
+<section class="slide level2">
+
+<p>Como parte adicional del ejemplo, supongamos que <span class="math inline">\(n=100\)</span>, <span class="math inline">\(\bar{x} = 20\)</span>, <span class="math inline">\(\bar{y} = 22\)</span> y <span class="math inline">\(\alpha_0 = 0.01\)</span>. Utilicemos estos valores para contrastar las hipótesis del ejemplo. Con estos valores se tiene que <span class="math inline">\(G \approx 9.53\)</span> y que <span class="math inline">\(\chi^{2}_{0.99,1} = 6.635\)</span>. Tenemos que <span class="math inline">\(G &gt; \chi^{2}_{0.99,1}=6.635\)</span> por lo que rechazamos la hipótesis nula.</p>
 </section>
 <section id="contraste-de-wald" class="slide level2">
 <h2>Contraste de Wald</h2>
