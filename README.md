@@ -30,7 +30,7 @@ El curso XS-0100 Fundamentos de la Teoría Estadística, es un curso de servicio
 | Estadística Bayesiana - Prob. Condicional, Teorema Bayes | [Clase 15](XS-0100_15.html)  |
 | Estadística Bayesiana - Distribución Posterior, Intervalos de Credibilidad y Prueba de Hipótesis | [Clase 16](XS-0100_16.html)  |
 | Regresión Clásica | [Clase 17](XS-0100_17.html)  |
-|                   | [Lab](Laboratorio.html) |
+|                   | [Lab](Laboratorio.html) - [Datos](<a href="https://christopher-tr.github.io/XS0100-I_2026/Datos/empleo.csv" download>empleo.csv</a>)|
 
 ## Videos
 
