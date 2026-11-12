@@ -6,8 +6,8 @@
 <script src="XS-0100_16_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="XS-0100_16_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="XS-0100_16_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="XS-0100_16_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+<link href="XS-0100_16_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Christopher Torres Rojas">
   <title>Estadística Bayesiana</title>
@@ -20,10 +20,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -136,7 +139,7 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Christopher Torres Rojas 
+Christopher Torres Rojas
 </div>
 <div class="quarto-title-author-email">
 <a href="mailto:christopher.torres@ucr.ac.cr">christopher.torres@ucr.ac.cr</a>
@@ -158,13 +161,14 @@ Christopher Torres Rojas
 <li><p>Previas Informativas vs.&nbsp;No Informativas</p></li>
 <li><p>Previa de Jeffreys</p></li>
 <li><p>Intervalos de Credibilidad</p></li>
+<li><p>Factor de Bayes</p></li>
 </ul>
 </section>
 <section id="enfoque-bayesiano" class="slide level2">
 <h2>Enfoque Bayesiano</h2>
 <p>En el paradigma bayesiano, los parámetros <span class="math inline">\(\theta\)</span> de un modelo probabilístico se tratan como <strong><em>variables aleatorias</em></strong>, en contraste con el enfoque frecuentista clásico, donde se asumen como valores fijos.<br>
 <br>
-Por lo tanto, la esencia del enfoque bayesiado radica en actualizar nuestra incertidumbre combinando la información previa del parámetro <strong>(distribución <em>a priori</em>)</strong> con la evidencia empírica contenida en la muestra <strong>(función de verosimilitud)</strong> para obtener una distribución actualizada <strong>(distribución <em>a posteriori</em>).</strong></p>
+Por lo tanto, la esencia del enfoque bayesiano radica en actualizar nuestra incertidumbre combinando la información previa del parámetro <strong>(distribución <em>a priori</em>)</strong> con la evidencia empírica contenida en la muestra <strong>(función de verosimilitud)</strong> para obtener una distribución actualizada <strong>(distribución <em>a posteriori</em>).</strong></p>
 </section>
 <section id="el-teorema-de-bayes-continuo" class="slide level2">
 <h2>El Teorema de Bayes continuo</h2>
@@ -207,7 +211,7 @@ f(p \mid Y) &amp;\propto p^Y (1-p)^{n-Y} \cdot p^{\alpha-1} (1-p)^{\beta-1} \\
 </section>
 <section id="ejemplo-1" class="slide level2">
 <h2>Ejemplo:</h2>
-<p>Sea <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> una m.a que sigue una distribución <span class="math inline">\(Exp(\theta)\)</span>, suponiendo que <span class="math inline">\(\theta \sim Gamma(\alpha, \beta)\)</span>, encuentre la distribución posterior.</p>
+<p>Sea <span class="math inline">\(X_1, X_2, \cdots, X_n\)</span> una m.a que sigue una distribución <span class="math inline">\(Exp(\frac{1}{\theta})\)</span>, suponiendo que <span class="math inline">\(\theta \sim Gamma(\alpha, \beta)\)</span>, encuentre la distribución posterior.</p>
 <p><span class="math display">\[f(\theta \mid X) \propto f(X \mid \theta) f(\theta)\]</span></p>
 <ul>
 <li><p><strong>Densidad de la muestra (Verosimilitud Exponencial):</strong> <span class="math display">\[f(\mathbb{X} \mid \theta) = \prod_{i=1}^{n} \theta e^{-\theta X_i} = \theta^n e^{-\theta \sum_{i=1}^{n} X_i}\]</span></p></li>
@@ -237,8 +241,8 @@ Figura&nbsp;1: Ejemplo - Actualización Bayesiana.
 <p><strong>Ejemplos clásicos:</strong></p>
 <table class="caption-top">
 <colgroup>
-<col style="width: 45%">
-<col style="width: 54%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -314,16 +318,47 @@ Figura&nbsp;1: Ejemplo - Actualización Bayesiana.
 </section>
 <section id="intervalos-de-credibilidad" class="slide level2">
 <h2>Intervalos de Credibilidad</h2>
-<p>A diferencia de los intervalos de confianza frecuentistas (donde el parámetro se considera fijo y el intervalo es el aleatorio), en el enfoque bayesiano el parámetro <span class="math inline">\(\theta\)</span> se trata como una variable aleatoria. Porende, aquí sí es válido afirmar que existe una probabilidad de<span class="math inline">\(1-\alpha\)</span> de que el verdadero valor del parámetro se encuentre dentro del intervalo, condicionado a los datos observado.</p>
+<p>A diferencia de los intervalos de confianza frecuentistas (donde el parámetro se considera fijo y el intervalo es el aleatorio), en el enfoque bayesiano el parámetro <span class="math inline">\(\theta\)</span> se trata como una variable aleatoria. Por ende, aquí sí es válido afirmar que existe una probabilidad de<span class="math inline">\(1-\alpha\)</span> de que el verdadero valor del parámetro se encuentre dentro del intervalo, condicionado a los datos observado.</p>
 <p><strong>Intervalo de Credibilidad</strong> (Basado en Cuantiles de la distribución posterior)</p>
 <p><span class="math display">\[P(a \le \theta \le b \mid X_1, X_2, \cdots , X_n) = \int_{a}^{b} \pi(\theta \mid x_1, x_2, \cdots, x_n) \, d\theta = 1 - \alpha\]</span></p>
 <p>Para un intervalo bilateral, se acumula una probabilidad de <span class="math inline">\(\alpha/2\)</span> en cada extremo. Donde <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> corresponden a los cuantiles <span class="math inline">\(\alpha/2\)</span> y <span class="math inline">\(1 - \alpha/2\)</span> de la distribución posterior. En caso de requerirse un intervalo unilateral, se asigna la probabilidad <span class="math inline">\(\alpha\)</span> a la cola respectiva.</p>
 <p><strong>Otro tipo de intervalo usado son los intervalos de alta densidad.</strong></p>
 </section>
+<section id="ejercicio-intervalo-de-credibilidad" class="slide level2">
+<h2>Ejercicio: Intervalo de Credibilidad</h2>
+<p>En un estudio piloto de la terapia se trató a <span class="math inline">\(n = 9\)</span> pacientes y <strong>todos</strong> respondieron (<span class="math inline">\(y = 9\)</span>). Suponga <span class="math inline">\(Y \mid p \sim \text{Binomial}(9, p)\)</span> y una previa uniforme <span class="math inline">\(p \sim \text{Beta}(1, 1)\)</span>.</p>
+<ol type="a">
+<li><p>Obtenga la distribución posterior de <span class="math inline">\(p\)</span> y su función de distribución acumulada.</p></li>
+<li><p>Calcule un intervalo de credibilidad <strong>bilateral</strong> del 95% para <span class="math inline">\(p\)</span>.</p></li>
+<li><p>Calcule un intervalo de credibilidad <strong>unilateral</strong> del 95% para <span class="math inline">\(p\)</span>.</p></li>
+</ol>
+</section>
+<section id="solución-distribución-posterior" class="slide level2">
+<h2>Solución: Distribución Posterior</h2>
+<p><strong>a)</strong> Por el resultado Beta–Binomial:</p>
+<p><span class="math display">\[p \mid Y \sim \text{Beta}(\alpha+Y, \beta+n-Y)\]</span></p>
+<p><span class="math display">\[p \mid y \sim \text{Beta}(1 + 9,\ 1 + 9 - 9) = \text{Beta}(10, 1)\]</span></p>
+<p>Como <span class="math inline">\(B(10, 1) = \frac{\Gamma(10)\,\Gamma(1)}{\Gamma(11)} = \frac{9!}{10!} = \frac{1}{10}\)</span>, la densidad posterior es:</p>
+<p><span class="math display">\[\pi(p \mid y) = 10\,p^{9}, \qquad 0 &lt; p &lt; 1\]</span></p>
+<p>Con la densidad ahora se obtienen los cuantiles <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span>.</p>
+</section>
+<section id="solución-intervalos-de-credibilidad" class="slide level2">
+<h2>Solución: Intervalos de Credibilidad</h2>
+<p><strong>b) Bilateral:</strong> se acumula <span class="math inline">\(\alpha/2 = 0.025\)</span> en cada extremo.</p>
+<p><span class="math display">\[
+\int_{0}^a 10p^9 dp = 0.025 \quad y\quad \int_{0}^b 10p^9 dp = 0.975
+\]</span></p>
+<p><span class="math display">\[a^{10} = 0.025 \Rightarrow a = 0.025^{1/10} \approx 0.692 \qquad b^{10} = 0.975 \Rightarrow b = 0.975^{1/10} \approx 0.997\]</span></p>
+<p><span class="math display">\[P(0.692 \le p \le 0.997 \mid y) = 0.95\]</span></p>
+<p>El intervalo de credibilidad del 95% para <span class="math inline">\(p\)</span> es <span class="math inline">\([0.692\, , \, 0.997]\)</span>.</p>
+<p><strong>c) Unilateral</strong> <span class="math inline">\([a, 1]\)</span>: toda la probabilidad <span class="math inline">\(\alpha = 0.05\)</span> se asigna a la cola inferior.</p>
+<p><span class="math display">\[P(p \ge a \mid y) = 1 - a^{10} = 0.95 \Rightarrow a = 0.05^{1/10} \approx 0.741\]</span></p>
+<p><span class="math display">\[P(0.741 \le p \le 1 \mid y) = 0.95\]</span></p>
+</section>
 <section id="pruebas-de-hipótesis-de-bayes" class="slide level2">
 <h2>Pruebas de Hipótesis de Bayes</h2>
 <p>Para evaluar un contraste de hipótesis clásico entre dos regiones del espacio paramétrico:</p>
-<p><span class="math display">\[H_0: \theta \in \Omega_0 \quad \text{contra} \quad H_a: \theta \in \Omega_a\]</span></p>
+<p><span class="math display">\[H_0: \theta \in \Omega_0 \quad \text{contra} \quad H_1: \theta \in \Omega_1\]</span></p>
 <p>Un criterio de decisión directo consiste en calcular las probabilidades <em>a posteriori</em> de cada espacio dado los datos (<span class="math inline">\(\mathbb{X}\)</span>), y seleccionar aquella hipótesis que acumule la mayor probabilidad.</p>
 <p><strong>Regla de decisión:</strong></p>
 <ul>
@@ -340,6 +375,150 @@ Figura&nbsp;1: Ejemplo - Actualización Bayesiana.
 por ende</p>
 <p><span class="math display">\[P(H_1 \mid \mathbb{X}) = P(\theta &gt; 1 \mid \mathbb{X})  \approx 0.955\]</span></p>
 <p>Como <span class="math inline">\(P(\theta \in \Omega_1 \mid \mathbb{X}) &gt; P(\theta \in \Omega_0 \mid \mathbb{X})\)</span> se rechaza <span class="math inline">\(H_0\)</span>.</p>
+</section>
+<section id="factor-de-bayes" class="slide level2">
+<h2>Factor de Bayes</h2>
+<p>La regla anterior compara probabilidades <em>a posteriori</em>, que mezclan dos fuentes de información: los <strong>datos</strong> y las <strong>probabilidades <em>a priori</em></strong> <span class="math inline">\(P(H_0)\)</span> y <span class="math inline">\(P(H_1)\)</span>.</p>
+<p>El factor de Bayes aisla lo que aporta los datos de las probabilidades a priori.</p>
+<p>Aplicando el teorema de Bayes a cada hipótesis y dividiendo ambos términos se tiene:</p>
+<p><span class="math display">\[\underbrace{\frac{P(H_0 \mid \mathbb{X})}{P(H_1 \mid \mathbb{X})}}_{\text{odds posteriores}} = \underbrace{\frac{f(\mathbb{X} \mid H_0)}{f(\mathbb{X} \mid H_1)}}_{BF_{01}} \times \underbrace{\frac{P(H_0)}{P(H_1)}}_{\text{odds previos}}\]</span></p>
+<p>El <strong>factor de Bayes</strong> <span class="math inline">\(BF_{01}\)</span> es el factor por el cual los datos multiplican la razón de probabilidades (<em>odds</em>) de <span class="math inline">\(H_0\)</span> frente a <span class="math inline">\(H_1\)</span>.</p>
+<ul>
+<li><span class="math inline">\(BF_{10} = 1 / BF_{01}\)</span>.</li>
+<li><span class="math inline">\(BF_{10} &lt; 1\)</span>: los datos favorecen a <span class="math inline">\(H_0\)</span>.</li>
+<li><span class="math inline">\(BF_{10} &gt; 1\)</span>: los datos favorecen a <span class="math inline">\(H_1\)</span>.</li>
+</ul>
+</section>
+<section id="verosimilitud-marginal" class="slide level2">
+<h2>Verosimilitud marginal</h2>
+<p><span class="math inline">\(f(\mathbb{X} \mid H_i)\)</span> es la verosimilitud marginal (o evidencia) de cada hipótesis: qué tan probables eran los datos observados según <span class="math inline">\(H_i\)</span>, antes de verlos.</p>
+<ul>
+<li><p><strong>Hipótesis simple</strong> <span class="math inline">\(H_i: \theta = \theta_i\)</span>: <span class="math display">\[f(\mathbb{X} \mid H_i) = L(\mathbb{X} \mid \theta_i)\]</span></p></li>
+<li><p><strong>Hipótesis compuesta</strong> <span class="math inline">\(H_i: \theta \in \Omega_i\)</span>, con una previa <span class="math inline">\(\pi_i(\theta)\)</span> sobre <span class="math inline">\(\Omega_i\)</span>: <span class="math display">\[f(\mathbb{X} \mid H_i) = \int_{\Omega_i} L(\mathbb{X} \mid \theta)\, \pi_i(\theta)\, d\theta\]</span></p></li>
+</ul>
+<p>Este valor es justamente la constante <span class="math inline">\(\int f(y\mid x)f(x)\,dx\)</span> del teorema de Bayes que ignorábamos con <span class="math inline">\(\propto\)</span>.</p>
+</section>
+<section id="interpretación-del-factor-de-bayes" class="slide level2">
+<h2>Interpretación del Factor de Bayes</h2>
+<p>Escala de evidencia (adaptada de Jeffreys, 1961):</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(BF_{10}\)</span></th>
+<th style="text-align: left;">Evidencia a favor de <span class="math inline">\(H_1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(1\)</span> a <span class="math inline">\(3\)</span></td>
+<td style="text-align: left;">Apenas digna de mención</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(3\)</span> a <span class="math inline">\(10\)</span></td>
+<td style="text-align: left;">Sustancial</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(10\)</span> a <span class="math inline">\(30\)</span></td>
+<td style="text-align: left;">Fuerte</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(30\)</span> a <span class="math inline">\(100\)</span></td>
+<td style="text-align: left;">Muy fuerte</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(&gt; 100\)</span></td>
+<td style="text-align: left;">Decisiva</td>
+</tr>
+</tbody>
+</table>
+<p>Si <span class="math inline">\(BF_{10} &lt; 1\)</span>, se usa la misma escala “invertida” como evidencia a favor de <span class="math inline">\(H_0\)</span>, es decir, si <span class="math inline">\(BF_{10} = \frac{1}{15} \approx 0.067\)</span> hay evidencia fuerte a favor de <span class="math inline">\(H_0\)</span>.</p>
+<p>Con previas iguales, <span class="math inline">\(P(H_0) = P(H_1) = 1/2\)</span>, se obtiene directamente:</p>
+<p><span class="math display">\[P(H_1 \mid \mathbb{X}) = \frac{BF_{10}}{1 + BF_{10}}\]</span></p>
+</section>
+<section id="ejemplo-1-dos-hipótesis-simples" class="slide level2">
+<h2>Ejemplo 1: Dos hipótesis simples</h2>
+<p>Retomemos la terapia: de <span class="math inline">\(n = 20\)</span> pacientes, <span class="math inline">\(y = 15\)</span> responden. Contrastamos</p>
+<p><span class="math display">\[H_0: p = 0.5 \quad \text{contra} \quad H_1: p = 0.7\]</span></p>
+<p>Como ambas hipótesis son simples, el factor de Bayes es el cociente de verosimilitudes:</p>
+<p><span class="math display">\[
+\small BF_{10} = \frac{\binom{n}{y}p_{1}^{y}(1-p_{1})^{n-y} }{\binom{n}{y}p_{0}^{y}(1-p_{0})^{n-y} }
+\]</span></p>
+<p><span class="math display">\[\small BF_{10} = \frac{\binom{20}{15}(0.7)^{15}(0.3)^{5}}{\binom{20}{15}(0.5)^{20}} = \left(\frac{0.7}{0.5}\right)^{15}\left(\frac{0.3}{0.5}\right)^{5} \approx 12.1\]</span></p>
+<ul>
+<li><strong>Evidencia fuerte a favor de</strong> <span class="math inline">\(H_1\)</span>.</li>
+<li>Si ponemos previas iguales <span class="math inline">\(P(H_0) = P(H_1) = 1/2\)</span>, entonces<span class="math inline">\(P(H_1 \mid \mathbb{X}) = \frac{BF_{10}}{1 + BF_{10}}\)</span></li>
+<li><span class="math inline">\(12.1/13.1 \approx 0.92\)</span>, es decir hay un 92% de que <span class="math inline">\(H_1\)</span> sea verdadera (Por ende a su vez existe un 8% de que <span class="math inline">\(H_0\)</span> sea cierta).</li>
+</ul>
+</section>
+<section id="ejemplo-2-hipótesis-puntual-contra-compuesta" class="slide level2 smaller">
+<h2>Ejemplo 2: Hipótesis puntual contra compuesta</h2>
+<p>Sea <span class="math inline">\(H_0: p = 0.5\)</span> contra <span class="math inline">\(H_1: p \neq 0.5\)</span>. Bajo <span class="math inline">\(H_1\)</span> hay que especificar <strong>cómo</strong> se distribuye <span class="math inline">\(p\)</span>; usamos <span class="math inline">\(p \sim \text{Beta}(\alpha, \beta)\)</span>:</p>
+<p><span class="math display">\[f(y \mid H_1) = \int_0^1 \binom{n}{y} p^{y}(1-p)^{n-y}\,\frac{p^{\alpha-1}(1-p)^{\beta-1}}{B(\alpha,\beta)}\,dp = \binom{n}{y}\frac{B(\alpha+y,\ \beta+n-y)}{B(\alpha,\beta)}\]</span></p>
+<p>El integrando es el núcleo de la posterior <span class="math inline">\(\text{Beta}(\alpha + y, \beta + n - y)\)</span> que ya obtuvimos.</p>
+<p>Con la previa uniforme <span class="math inline">\(\alpha = \beta = 1\)</span>, como <span class="math inline">\(B(1,1) = 1\)</span> y <span class="math inline">\(B(y+1, n-y+1) = \frac{y!\,(n-y)!}{(n+1)!}\)</span>:</p>
+<p><span class="math display">\[f(y \mid H_1) = \binom{n}{y}\frac{y!\,(n-y)!}{(n+1)!} = \frac{1}{n+1}\]</span></p>
+<p>Por lo tanto:</p>
+<p><span class="math display">\[BF_{10} = \frac{f(y \mid H_1)}{f(y \mid H_0)} = \frac{1/(n+1)}{\binom{n}{y}(0.5)^n}\]</span></p>
+</section>
+<section id="ejemplo-2-cálculo" class="slide level2">
+<h2>Ejemplo 2: Cálculo</h2>
+<p>Con <span class="math inline">\(n = 20\)</span> y <span class="math inline">\(y = 15\)</span>:</p>
+<p><span class="math display">\[f(y \mid H_0) = \binom{20}{15}(0.5)^{20} \approx 0.0148, \qquad f(y \mid H_1) = \frac{1}{21} \approx 0.0476\]</span></p>
+<p><span class="math display">\[BF_{10} \approx \frac{0.0476}{0.0148} \approx 3.22\]</span></p>
+<ul>
+<li>Evidencia apenas <strong>sustancial</strong> a favor de <span class="math inline">\(H_1\)</span>.</li>
+<li>Si se compara <span class="math inline">\(BF_{10} \approx 12.1\)</span> del Ejemplo 1, se evidencia que el factor de Bayes depende de cómo se especifica <span class="math inline">\(H_1\)</span>.</li>
+<li>Con previas iguales: <span class="math inline">\(P(H_1 \mid y) \approx 0.76\)</span>.</li>
+</ul>
+<p>Con <span class="math inline">\(H_1: p \sim \text{Beta}(1,1)\)</span>, los valores de <span class="math inline">\(y\)</span> cercanos a 10 dan <span class="math inline">\(BF_{10} &lt; 1\)</span>: el factor de Bayes <strong>sí puede acumular evidencia a favor de</strong> <span class="math inline">\(H_0\)</span>, algo que el valor p no hace.</p>
+</section>
+<section id="ejemplo-2-interpretación" class="slide level2 smaller">
+<h2>Ejemplo 2: Interpretación</h2>
+<p>Con los mismos datos (<span class="math inline">\(BF_{10} \approx 3.22\)</span>, es decir, <span class="math inline">\(BF_{01} \approx 0.31\)</span>), comparemos a dos investigadores con distinta probabilidad previa para <span class="math inline">\(H_0\)</span>. Un investigador escéptico cree, por experiencia, que la mayoría de terapias nuevas no funcionan.</p>
+<p><span class="math display">\[\textit{Odds} \text{ posteriores de } H_0 = \textit{Odds} \text{ previos de } H_0 \times BF_{01}\]</span></p>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(P(H_0)\)</span></th>
+<th style="text-align: center;"><em>Odds</em> previos</th>
+<th style="text-align: center;"><em>Odds</em> posteriores</th>
+<th style="text-align: center;"><span class="math inline">\(P(H_0 \mid y)\)</span></th>
+<th style="text-align: left;">Decisión</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Neutral</td>
+<td style="text-align: center;">0.50</td>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">0.31</td>
+<td style="text-align: center;">0.24</td>
+<td style="text-align: left;">Acepta <span class="math inline">\(H_1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Escéptico</td>
+<td style="text-align: center;">0.80</td>
+<td style="text-align: center;">4.00</td>
+<td style="text-align: center;">1.24</td>
+<td style="text-align: center;">0.55</td>
+<td style="text-align: left;">Acepta <span class="math inline">\(H_0\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>En ambos casos los datos <strong>dividen</strong> los <em>odds</em> de <span class="math inline">\(H_0\)</span> entre 3.22: la evidencia muestral apunta hacia <span class="math inline">\(H_1\)</span> por igual.</p></li>
+<li><p>Aun así, el escéptico acepta <span class="math inline">\(H_0\)</span> porque partía de un 80% a su favor: su decisión la determina principalmente la previa, no los datos.</p></li>
+</ul>
+<p><strong>El factor de Bayes separa lo que aportan los datos de lo que aporta la previa. Por eso es útil reportarlo junto con las probabilidades posteriores.</strong></p>
 
 </section>
     </div>
